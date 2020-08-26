@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bookingTour.entity.Tour" table="tours">
+        <id name="id" column="id" type="long">
+            <generator class="native"></generator>
+        </id>
+
+        <property name="name" column="name" type="java.lang.String"></property>
+        <property name="description" column="description" type="java.lang.String"></property>
+        <property name="averageRate" column="average_rate" type="java.lang.Double"></property>
+        <many-to-one name="category" class="com.bookingTour.entity.Category"
+                     column="category_id" not-null="true" insert="false" update="false"/>
+        <list name="tourDetails" cascade="all" lazy="true" inverse="true">
+            <key column="tour_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.TourDetail"/>
+        </list>
+
+        <list name="ratings" cascade="all" lazy="true" inverse="true">
+            <key column="tour_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.Rating"/>
+        </list>
+
+        <list name="reviews" cascade="all" lazy="true" inverse="true">
+            <key column="tour_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.Review"/>
+        </list>
+        <property name="createTime" column="create_time" type="timestamp"></property>
+        <property name="updateTime" column="update_time" type="timestamp"></property>
+
+    </class>
+</hibernate-mapping>

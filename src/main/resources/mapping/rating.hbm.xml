@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bookingTour.entity.Rating" table="ratings">
+        <id name="id" column="id" type="long">
+            <generator class="native"></generator>
+        </id>
+
+        <many-to-one name="user" class="com.bookingTour.entity.User"
+                     column="user_id" not-null="true" insert="false" update="false"/>
+        <many-to-one name="tour" class="com.bookingTour.entity.Tour"
+                     column="tour_id" not-null="true" insert="false" update="false"/>
+        <property name="point" column="point" type="java.lang.Integer"></property>
+        <property name="createTime" column="create_time" type="timestamp"></property>
+        <property name="updateTime" column="update_time" type="timestamp"></property>
+
+    </class>
+</hibernate-mapping>

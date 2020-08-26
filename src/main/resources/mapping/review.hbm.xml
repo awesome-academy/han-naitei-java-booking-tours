@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bookingTour.entity.Review" table="reviews">
+        <id name="id" column="id" type="long">
+            <generator class="native"></generator>
+        </id>
+
+        <property name="content" column="content" type="java.lang.String" length="1023"></property>
+        <many-to-one name="user" class="com.bookingTour.entity.User"
+                     column="user_id" not-null="true" insert="false" update="false"/>
+        <many-to-one name="tour" class="com.bookingTour.entity.Tour"
+                     column="tour_id" not-null="true" insert="false" update="false"/>
+
+        <list name="likes" cascade="all" lazy="true" inverse="true">
+            <key column="review_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.Like"/>
+        </list>
+
+        <list name="comments" cascade="all" lazy="true" inverse="true">
+            <key column="review_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.Comment"/>
+        </list>
+        <property name="createTime" column="create_time" type="timestamp"></property>
+        <property name="updateTime" column="update_time" type="timestamp"></property>
+
+    </class>
+
+</hibernate-mapping>

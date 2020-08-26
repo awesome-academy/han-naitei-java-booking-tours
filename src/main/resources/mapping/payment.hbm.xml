@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bookingTour.entity.Payment" table="payments">
+        <id name="id" column="id" type="long">
+            <generator class="native"></generator>
+        </id>
+
+        <property name="bankNumber" column="bank_number" type="java.lang.String" length="20"></property>
+        <property name="expiryDate" column="expiry_date" type="java.util.Date"></property>
+        <property name="balance" column="balance" type="java.lang.Double"></property>
+        <many-to-one name="user" class="com.bookingTour.entity.User"
+                     column="user_id" not-null="true" insert="false" update="false"/>
+
+        <property name="createTime" column="create_time" type="timestamp"></property>
+        <property name="updateTime" column="update_time" type="timestamp"></property>
+    </class>
+</hibernate-mapping>

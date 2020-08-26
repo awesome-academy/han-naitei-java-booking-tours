@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bookingTour.entity.User" table="users">
+        <id name="id" column="id" type="long">
+            <generator class="native"></generator>
+        </id>
+
+        <property name="userName" column="user_name" type="java.lang.String"></property>
+        <property name="email" column="email" type="java.lang.String"></property>
+        <property name="password" column="password" type="java.lang.String"></property>
+        <property name="name" column="name" type="java.lang.String"></property>
+        <property name="avatar" column="avatar" type="java.lang.String"></property>
+        <property name="phoneNumber" column="phone_number" type="java.lang.String" length="11"></property>
+        <property name="role" column="role" type="java.lang.Integer"></property>
+        <property name="createTime" column="create_time" type="timestamp"></property>
+        <property name="updateTime" column="update_time" type="timestamp"></property>
+
+        <list name="payments" cascade="all" lazy="true" inverse="true">
+            <key column="user_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.Payment"/>
+        </list>
+
+        <list name="bookingRequests" cascade="all" lazy="true" inverse="true">
+            <key column="user_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.BookingRequest"/>
+        </list>
+
+        <list name="ratings" cascade="all" lazy="true" inverse="true">
+            <key column="user_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.Rating"/>
+        </list>
+
+        <list name="reviews" cascade="all" lazy="true" inverse="true">
+            <key column="user_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.Review"/>
+        </list>
+
+        <list name="likes" cascade="all" lazy="true" inverse="true">
+            <key column="user_id"/>
+            <list-index column="id" base="1"/>
+            <one-to-many class="com.bookingTour.entity.Like"/>
+        </list>
+
+    </class>
+</hibernate-mapping>

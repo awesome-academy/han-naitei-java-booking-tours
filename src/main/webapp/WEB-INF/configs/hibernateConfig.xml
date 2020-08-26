@@ -25,6 +25,20 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>mapping/bookingRequest.hbm.xml</value>
+				<value>mapping/category.hbm.xml</value>
+				<value>mapping/comment.hbm.xml</value>
+				<value>mapping/like.hbm.xml</value>
+				<value>mapping/payment.hbm.xml</value>
+				<value>mapping/rating.hbm.xml</value>
+				<value>mapping/review.hbm.xml</value>
+				<value>mapping/tour.hbm.xml</value>
+				<value>mapping/tourDetail.hbm.xml</value>
+				<value>mapping/user.hbm.xml</value>
+			</list>
+		</property>
 
 		<!-- Set hibernate's properties -->
 		<property name="hibernateProperties">

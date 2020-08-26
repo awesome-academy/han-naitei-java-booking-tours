@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="UTF-8">
+<meta name="description" content="">
+
+<!-- Title -->
+<title>Booking Tour</title>
+
+<!-- Favicon -->
+<link rel="icon" th:href="@{/assets/img/core-img/favicon.png}">
+
+<!-- Stylesheet -->
+<link rel="stylesheet" th:href="@{/assets/style.css}">
+</head>
+
+<body>
+	<header>
+		<div th:replace="../layout/header :: header"></div>
+	</header>
+
+
+	<div layout:fragment="body"></div>
+
+	<footer>
+		<div th:replace="../layout/footer :: footer"></div>
+	</footer>
+
+</body>
+<!-- **** All JS Files ***** -->
+<!-- jQuery 2.2.4 -->
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<!-- Popper -->
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- All Plugins -->
+<script th:src="@{/assets/js/roberto.bundle.js}"></script>
+<!-- Active -->
+<script th:src="@{/assets/js/default-assets/active.js}"></script>
+</html>

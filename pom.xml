@@ -23,7 +23,7 @@
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <java.version>1.8</java.version>
         <lombok-version>1.18.12</lombok-version>
-
+        <spring.data.version>2.3.3.RELEASE</spring.data.version>
     </properties>
 
     <dependencies>
@@ -52,6 +52,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>${spring.data.version}</version>
         </dependency>
 
         <!-- Spring -->
@@ -162,6 +169,11 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.0</version>
         </dependency>
     </dependencies>
     <build>

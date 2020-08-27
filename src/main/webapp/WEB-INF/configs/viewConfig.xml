@@ -7,7 +7,7 @@
 
     <bean id="templateResolver"
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
-        <property name="prefix" value="/views/user/"/>
+        <property name="prefix" value="/views/"/>
         <property name="suffix" value=".html"/>
         <property name="templateMode" value="HTML5"/>
         <property name="cacheable" value="false"/>
@@ -21,6 +21,14 @@
             <set>
                 <bean class="nz.net.ultraq.thymeleaf.LayoutDialect"/>
             </set>
+        </property>
+    </bean>
+
+    <!-- Localization of hibernate messages during validation! -->
+    <bean name="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource">
+            <ref bean="messageSource"/>
         </property>
     </bean>
 
@@ -45,7 +53,7 @@
 
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-            <property name="paramName" value="lang"/>
+            <property name="paramName" value="locale"/>
         </bean>
     </mvc:interceptors>
 </beans>

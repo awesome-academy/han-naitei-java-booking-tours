@@ -1,118 +1,101 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 </head>
 <body>
-	<div th:fragment="header">
-		<header class="header-area">
-			<!-- Search Form -->
-			<div class="search-form d-flex align-items-center">
-				<div class="container">
-					<form th:action="@{/page/home}" method="get">
-						<input type="search" name="search-form-input" id="searchFormInput"
-							placeholder="Type your keyword ...">
-						<button type="submit">
-							<i class="icon_search"></i>
-						</button>
-					</form>
-				</div>
-			</div>
+<div th:fragment="header">
+    <header class="header-area">
+        <!-- Search Form -->
+        <div class="search-form d-flex align-items-center">
+            <div class="container">
+                <form th:action="@{/page/home}" method="get">
+                    <input type="search" name="search-form-input" id="searchFormInput"
+                           placeholder="Type your keyword ...">
+                    <button type="submit">
+                        <i class="icon_search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
 
-			<!-- Top Header Area Start -->
-			<div class="top-header-area">
-				<div class="container">
-					<div class="row justify-content-end">
-						<div class="col-8">
-							<div class="top-header-content">
-								<div class="top-social-area ml-auto">
-									<a th:href="@{'/login'}" th:text="#{signIn}">Sign in</a> 
-									<a th:href="@{'/signup'}" th:text="#{signUp}">Sign up</a>
-									<a th:href="@{?lang=en}"><img alt="EN" width="34"
-										th:src="@{https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/259/flag-united-states_1f1fa-1f1f8.png}" /></a>
-										<a th:href="@{?lang=vi}"><img alt="VI" width="34"
-											th:src="@{https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/259/flag-vietnam_1f1fb-1f1f3.png}" /></a>
-								</div>
-							</div>
-						</div>
+        <!-- Top Header Area Start -->
+        <div class="top-header-area">
+            <div class="container">
+                <div class="row justify-content-end">
+                    <div class="col-8">
+                        <div class="top-header-content">
+                            <div class="top-social-area ml-auto">
+                                <a th:href="@{'/users/signin'}" th:text="#{user.signin}">Sign in</a>
+                                <a th:href="@{'/users/signup'}" th:text="#{user.signup}">Sign up</a>
+                                <a th:href="@{?locale=en}"><img alt="EN" width="34"
+                                                                th:src="@{https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/259/flag-united-states_1f1fa-1f1f8.png}"/></a>
+                                <a th:href="@{?locale=vi}"><img alt="VI" width="34"
+                                                                th:src="@{https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/259/flag-vietnam_1f1fb-1f1f3.png}"/></a>
+                            </div>
+                        </div>
+                    </div>
 
-					</div>
-				</div>
-			</div>
-			<!-- Top Header Area End -->
+                </div>
+            </div>
+        </div>
+        <!-- Top Header Area End -->
 
-			<!-- Main Header Start -->
-			<div class="main-header-area">
-				<div class="classy-nav-container breakpoint-off">
-					<div class="container">
-						<!-- Classy Menu -->
-						<nav class="classy-navbar justify-content-between" id="robertoNav">
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between" id="robertoNav">
 
-							<!-- Logo -->
-							<a class="nav-brand" th:href="@{/}"><img
-								th:src="@{/assets/img/core-img/logo.png}" alt=""></a>
+                        <!-- Logo -->
+                        <a class="nav-brand" th:href="@{/}"><img
+                                th:src="@{/assets/img/core-img/logo.png}" alt=""></a>
 
-							<!-- Navbar Toggler -->
-							<div class="classy-navbar-toggler">
-								<span class="navbarToggler"><span></span><span></span><span></span></span>
-							</div>
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
 
-							<!-- Menu -->
-							<div class="classy-menu">
-								<!-- Menu Close Button -->
-								<div class="classycloseIcon">
-									<div class="cross-wrap">
-										<span class="top"></span><span class="bottom"></span>
-									</div>
-								</div>
-								<!-- Nav Start -->
-								<div class="classynav">
-									<ul id="nav">
-										<li class="active"><a th:href="@{/page/home}">Home</a></li>
-										<li><a th:href="@{/page/room}">Tours</a></li>
-										<li><a th:href="@{/page/blog}">Destinations</a></li>
-										<li><a th:href="@{/page/blog}">Reviews</a></li>
-										<li><a th:href="@{#}">About us</a>
-										<li><a th:href="@{/page/contact}">Contact</a></li>
-											<!-- <ul class="dropdown">
-												<li><a th:href="@{/page/home}">- Home</a></li>
-												<li><a th:href="@{/page/room}">- Rooms</a></li>
-												<li><a th:href="@{/page/singleroom}">- Single Rooms</a></li>
-												<li><a th:href="@{/page/about}">- About Us</a></li>
-												<li><a th:href="@{/page/blog}">- Blog</a></li>
-												<li><a th:href="@{/page/singleblog}">- Single Blog</a></li>
-												<li><a th:href="@{/page/contact}">- Contact</a></li>
-												<li><a th:href="@{#}">- Dropdown</a>
-													<ul class="dropdown">
-														<li><a th:href="@{#}">- Dropdown Item</a></li>
-														<li><a th:href="@{#}">- Dropdown Item</a></li>
-														<li><a th:href="@{#}">- Dropdown Item</a></li>
-														<li><a th:href="@{#}">- Dropdown Item</a></li>
-													</ul></li>
-											</ul></li> -->
-									
-									
-									</ul>
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Menu Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap">
+                                    <span class="top"></span><span class="bottom"></span>
+                                </div>
+                            </div>
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul id="nav">
+                                    <li class="active"><a th:href="@{/page/home}">Home</a></li>
+                                    <li><a th:href="@{/page/room}">Tours</a></li>
+                                    <li><a th:href="@{/page/blog}">Destinations</a></li>
+                                    <li><a th:href="@{/page/blog}">Reviews</a></li>
+                                    <li><a th:href="@{#}">About us</a>
+                                    <li><a th:href="@{/page/contact}">Contact</a></li>
 
-									<!-- Search -->
-									<div class="search-btn ml-4">
-										<i class="fa fa-search" aria-hidden="true"></i>
-									</div>
+                                </ul>
 
-									<!-- Book Now -->
-									<div class="book-now-btn ml-3 ml-lg-5">
-										<a th:href="@{#}">Book Now <i
-											class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-									</div>
-								</div>
-								<!-- Nav End -->
-							</div>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</header>
-		<!-- Header Area End -->
-	</div>
+                                <!-- Search -->
+                                <div class="search-btn ml-4">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </div>
+
+                                <!-- Book Now -->
+                                <div class="book-now-btn ml-3 ml-lg-5">
+                                    <a th:href="@{#}">Book Now <i
+                                            class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header Area End -->
+</div>
 </body>
 </html>

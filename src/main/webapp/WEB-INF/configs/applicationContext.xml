@@ -20,11 +20,7 @@
     <context:component-scan base-package="com.bookingTour.service"/>
     <context:component-scan base-package="com.bookingTour.dao"/>
 
-    <!-- Use for json response -->
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
+    <!-- Validator in file viewConfig -->
+    <mvc:annotation-driven validator="validator"/>
 
 </beans>

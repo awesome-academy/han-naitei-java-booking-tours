@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+	th:fragment="layout (title, content, links)" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta charset="UTF-8">
-<meta name="description" content="">
-
-<!-- Title -->
-<title>Booking Tour</title>
-
-<!-- Favicon -->
-<link rel="icon" th:href="@{/assets/img/core-img/favicon.png}">
-
-<!-- Stylesheet -->
-<link rel="stylesheet" th:href="@{/assets/style.css}">
+	<!-- Title -->
+	<title th:replace="${title}">[[#{meta.title}]]</title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	
+	<!-- Favicon -->
+	<link rel="icon" th:href="@{/img/core-img/favicon.png}">
+	
+	<!-- Stylesheet -->
+	<link rel="stylesheet" th:href="@{/assets/style.css}">
 </head>
 
 <body>
-	<header>
-		<div th:replace="/layout/header :: header"></div>
+	<header th:replace="layout/header :: header">
 	</header>
 
-
-	<div layout:fragment="body"></div>
-
-	<footer>
-		<div th:replace="/layout/footer :: footer"></div>
+	<div th:replace="${content}">
+    </div>
+	<footer th:replace="layout/footer :: footer">
 	</footer>
 
 </body>
@@ -41,4 +40,5 @@
 <script th:src="@{/assets/js/roberto.bundle.js}"></script>
 <!-- Active -->
 <script th:src="@{/assets/js/default-assets/active.js}"></script>
+<script th:src="@{/assets/js/previewImage.js}"></script>
 </html>

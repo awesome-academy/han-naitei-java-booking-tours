@@ -7,6 +7,7 @@ import com.bookingTour.service.TourService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Min;
 import java.util.Locale;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/tours/{tour_id}/tour-details/")
+@RequestMapping("/tours/{tour_id}/tour-details")
 public class TourDetailsController {
 
     private static final Logger logger = LoggerFactory.getLogger(TourDetailsController.class);
@@ -55,8 +57,21 @@ public class TourDetailsController {
             model.addAttribute("errorMsg", "Create Tour Failed");
             return "templates/error";
         }
-        return "redirect: " + request.getContextPath() + "/tour-details?tourId="+ tourDetailInfo.getTourId();
+        return "redirect: " + request.getContextPath() + "/tours/"+ tourDetailInfo.getTourId()+"/tour-details";
     }
 
+    @GetMapping(value = {"","/index"})
+    public String index(@RequestParam(name = "page", required = false) Optional<Integer> page,
+                        @PathVariable(name = "tour_id", required = true) Long tourId,
+                        Locale locale, Model model, HttpServletRequest request) {
+        TourDetailInfo tourDetailInfo = new TourDetailInfo();
+        tourDetailInfo.setPage(page.orElse(1));
+        tourDetailInfo.setTourId(tourId);
+        Page<TourDetailInfo> tourDetails = tourDetailService.paginate(tourDetailInfo);
+        model.addAttribute("tourDetails", tourDetails);
+        model.addAttribute("tourInfo", tourService.findTour(tourId));
+        model.addAttribute("tourDetailSearch", tourDetailInfo);
+        return "tour-details/index";
+    }
 
 }

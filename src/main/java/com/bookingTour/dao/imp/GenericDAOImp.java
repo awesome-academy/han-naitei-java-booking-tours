@@ -158,6 +158,12 @@ public abstract class GenericDAOImp<E extends BaseEntity, Id extends Serializabl
         return new PageImpl<>(results, page, count);
     }
 
+    public Page<E> paginate(Pageable pageable) {
+        String sql = "FROM " + getPersistentClass().getName();
+        String countSql = "SELECT COUNT(*) FROM " + getPersistentClass().getName();
+        return paginate(new SearchQueryTemplate(sql, countSql, pageable));
+    }
+
     protected Page<E> paginate(SearchQueryTemplate searchQueryTemplate) {
         List<E> results = null;
         results = getHibernateTemplate().execute(new HibernateCallback<List<E>>() {

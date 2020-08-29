@@ -15,4 +15,8 @@
     <bean id="categoryDAO" class="com.bookingTour.dao.imp.CategoryDAOImp">
         <property name="hibernateTemplate" ref="hibernateTemplate" />
     </bean>
+
+    <bean id="tourDetailDAO" class="com.bookingTour.dao.imp.TourDetailDAOImp">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
 </beans>

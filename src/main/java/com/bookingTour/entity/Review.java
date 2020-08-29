@@ -58,4 +58,5 @@ public class Review extends BaseEntity {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
 }

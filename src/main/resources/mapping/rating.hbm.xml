@@ -12,7 +12,6 @@
                      column="user_id" not-null="true" insert="false" update="false"/>
         <many-to-one name="tour" class="com.bookingTour.entity.Tour"
                      column="tour_id" not-null="true" insert="false" update="false"/>
-        <property name="tourId" column="tour_id" type="java.lang.Long"></property>
         <property name="point" column="point" type="java.lang.Integer"></property>
         <property name="createTime" column="create_time" type="timestamp"></property>
         <property name="updateTime" column="update_time" type="timestamp"></property>

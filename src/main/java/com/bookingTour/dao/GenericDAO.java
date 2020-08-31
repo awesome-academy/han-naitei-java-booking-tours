@@ -1,5 +1,6 @@
 package com.bookingTour.dao;
 
+import com.bookingTour.entity.BaseEntity;
 import com.bookingTour.util.SearchQueryTemplate;
 import org.hibernate.criterion.Criterion;
 import org.springframework.data.domain.Page;
@@ -8,10 +9,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-/**
- * @author ducda referenced from CaveatEmptor project tm JBoss Hibernate version
- */
-public interface GenericDAO<E, Id extends Serializable> {
+public interface GenericDAO<E extends BaseEntity, Id extends Serializable> {
 
     public E find(Id id) throws Exception;
 

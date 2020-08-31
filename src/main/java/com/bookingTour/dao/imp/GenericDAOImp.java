@@ -1,6 +1,7 @@
 package com.bookingTour.dao.imp;
 
 import com.bookingTour.dao.GenericDAO;
+import com.bookingTour.entity.BaseEntity;
 import com.bookingTour.util.SearchQueryTemplate;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
@@ -18,10 +19,7 @@ import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author ducda referenced from CaveatEmptor project tm JBoss Hibernate version
- */
-public abstract class GenericDAOImp<E, Id extends Serializable> extends HibernateDaoSupport
+public abstract class GenericDAOImp<E extends BaseEntity, Id extends Serializable> extends HibernateDaoSupport
         implements GenericDAO<E, Id> {
 
     private Class<E> persistentClass;
@@ -98,6 +96,11 @@ public abstract class GenericDAOImp<E, Id extends Serializable> extends Hibernat
     }
 
     public E makePersistent(E entity) throws Exception {
+        Timestamp currentDate = getSystemTimestamp();
+        if (entity.getCreateTime() == null) {
+            entity.setCreateTime(currentDate);
+        }
+        entity.setUpdateTime(currentDate);
         getHibernateTemplate().saveOrUpdate(entity);
         getHibernateTemplate().flush();
         return entity;
@@ -153,6 +156,34 @@ public abstract class GenericDAOImp<E, Id extends Serializable> extends Hibernat
             results = Collections.emptyList();
         }
         return new PageImpl<>(results, page, count);
+    }
+
+    public Page<E> paginate(Pageable pageable) {
+        String sql = "FROM " + getPersistentClass().getName();
+        String countSql = "SELECT COUNT(*) FROM " + getPersistentClass().getName();
+        return paginate(new SearchQueryTemplate(sql, countSql, pageable));
+    }
+
+    protected Page<E> paginate(SearchQueryTemplate searchQueryTemplate) {
+        List<E> results = null;
+        results = getHibernateTemplate().execute(new HibernateCallback<List<E>>() {
+            public List<E> doInHibernate(Session session) {
+                Query<E> query = session.createQuery(searchQueryTemplate.getSql(true), getPersistentClass());
+                searchQueryTemplate.setPageable(query);
+                searchQueryTemplate.setParameters(query);
+                return query.list();
+            }
+        });
+
+        Long count = getHibernateTemplate().execute(new HibernateCallback<Long>() {
+            public Long doInHibernate(Session session) {
+                Query<Long> query = session.createQuery(searchQueryTemplate.getCountSql(), Long.class);
+                searchQueryTemplate.setParameters(query);
+                return query.uniqueResult();
+            }
+        });
+
+        return wrapResult(results, searchQueryTemplate.getPageable(), count);
     }
 
 }

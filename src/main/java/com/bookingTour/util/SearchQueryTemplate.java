@@ -2,8 +2,10 @@ package com.bookingTour.util;
 
 import org.hibernate.query.Query;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 public class SearchQueryTemplate {
@@ -11,9 +13,16 @@ public class SearchQueryTemplate {
     private String countSql;
     private Map<String, Object> parameterMap;
     private Pageable pageable;
+    private Sort sort;
 
     public SearchQueryTemplate() {
+    }
 
+    public SearchQueryTemplate(String sql, String countSql, Pageable pageable) {
+        this.sql = sql;
+        this.countSql = countSql;
+        this.pageable = pageable;
+        this.sort = pageable.getSort();
     }
 
     public String getSql() {
@@ -66,6 +75,35 @@ public class SearchQueryTemplate {
     public <E> void setPageable(Query<E> query) {
         query.setFirstResult((int) pageable.getOffset());
         query.setMaxResults(pageable.getPageSize());
+    }
+
+    public String getSql(boolean sortable) {
+        if (sortable && sort != null) {
+            final StringBuilder orderString = new StringBuilder();
+            sort.forEach(order -> {
+                orderString.append(order.getProperty() + " " + order.getDirection().name() + ",");
+            });
+            if (orderString.length() > 0) {
+                sql = sql + " ORDER BY " + orderString.substring(0, orderString.length() - 1);
+            }
+        }
+        return sql;
+    }
+
+    public void addParameters(Map<String, Object> params) {
+        if (parameterMap == null) {
+            parameterMap = new HashMap<String, Object>();
+        }
+        for (String key: params.keySet()) {
+            parameterMap.put(key, params.get(key));
+        }
+    }
+
+    public void addOrder(Sort.Direction value, String... properties) {
+        if (sort == null) {
+            return;
+        }
+        sort = sort.and(Sort.by(value, properties));
     }
 
 }

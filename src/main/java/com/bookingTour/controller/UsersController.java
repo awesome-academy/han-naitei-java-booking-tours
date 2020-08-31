@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,5 +36,45 @@ public class UsersController {
         }
         userServiceImp.addUser(userModel);
         return "redirect:/users/signin";
+    }
+
+    @GetMapping(value = "/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userServiceImp.findUser(id));
+        return "users/show";
+    }
+
+    @GetMapping(value = "/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userServiceImp.findUser(id));
+        return "users/edit";
+    }
+
+    @PutMapping(value = "/{id}/edit")
+    public String update(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
+                         Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+        logger.info("result" + bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "users/edit";
+        }
+        UserModel user = userServiceImp.editUser(userModel);
+        return "redirect:/users/" + user.getId();
+    }
+
+    @GetMapping(value = "/{id}/password")
+    public String changePassword(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userServiceImp.findUser(id));
+        return "users/password";
+    }
+
+    @PutMapping(value = "/{id}/password")
+    public String updatePassword(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
+                                 Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+        logger.info("result" + bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "users/password";
+        }
+        UserModel user = userServiceImp.changePassword(userModel);
+        return "redirect:/users/" + user.getId();
     }
 }

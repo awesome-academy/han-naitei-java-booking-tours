@@ -62,6 +62,39 @@ public class UserServiceImp implements UserService {
         }
     }
 
+    @Override
+    public boolean existingUserName(String userName, Long id) {
+        log.info("Checking the user by username in the database");
+        try {
+            return userDAOImp.existingUserName(userName, id);
+        } catch (Exception e) {
+            log.error("An error occurred while checking the user details by username from the database", e);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean existingEmail(String email, Long id) {
+        log.info("Checking the user by email in the database");
+        try {
+            return userDAOImp.existingEmail(email, id);
+        } catch (Exception e) {
+            log.error("An error occurred while checking the user details by email from the database", e);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean checkPassword(String password, Long id) {
+        log.info("Checking the password of the user in the database");
+        try {
+            return userDAOImp.checkPassword(password, id);
+        } catch (Exception e) {
+            log.error("An error occurred while checking the password of the user from the database", e);
+            return true;
+        }
+    }
+
     @Transactional
     public UserModel addUser(UserModel userModel) throws Exception {
         log.info("Adding the user in the database");
@@ -90,16 +123,29 @@ public class UserServiceImp implements UserService {
             if (StringUtils.hasText(userModel.getName())) {
                 user.setName(userModel.getName());
             }
-            if (StringUtils.hasText(userModel.getEmail())) {
-                user.setEmail(userModel.getEmail());
+            if (StringUtils.hasText(userModel.getPhoneNumber())) {
+                user.setPhoneNumber(userModel.getPhoneNumber());
             }
+            userDAOImp.makePersistent(user);
+            return userModel;
+        } catch (Exception e) {
+            log.error("An error occurred while updating the user details to the database", e);
+            throw e;
+        }
+    }
+
+    @Transactional
+    public UserModel changePassword(UserModel userModel) throws Exception {
+        log.info("Change password in the database");
+        try {
+            User user = userDAOImp.find(userModel.getId(), true);
             if (StringUtils.hasText(userModel.getPassword())) {
                 user.setPassword(userModel.getPassword());
             }
             userDAOImp.makePersistent(user);
             return userModel;
         } catch (Exception e) {
-            log.error("An error occurred while updating the user details to the database", e);
+            log.error("An error occurred while changing password to the database", e);
             throw e;
         }
     }

@@ -57,6 +57,53 @@ public class UserDAOImp extends GenericDAOImp<User, Long> implements UserDAO {
         });
     }
 
+    public boolean existingUserName(String userName, Long id) {
+        log.info("Finding the user by username in the database");
+        return getHibernateTemplate().execute(new HibernateCallback<Long>() {
+            public Long doInHibernate(Session session) throws HibernateException {
+                String sql = "SELECT COUNT(*) FROM User WHERE user_name = :user_name";
+                if (id != null) {
+                    sql += " AND id <> :id";
+                }
+                Query<Long> query = session.createQuery(sql, Long.class);
+                query.setParameter("user_name", userName);
+                if (id != null) {
+                    query.setParameter("id", id);
+                }
+                return query.uniqueResult();
+            }
+        }) > 0;
+    }
+
+    public boolean existingEmail(String email, Long id) {
+        log.info("Finding the user by email in the database");
+        return getHibernateTemplate().execute(new HibernateCallback<Long>() {
+            public Long doInHibernate(Session session) throws HibernateException {
+                String sql = "SELECT COUNT(*) FROM User WHERE email = :email";
+                if (id != null) {
+                    sql += " AND id <> :id";
+                }
+                Query<Long> query = session.createQuery(sql, Long.class);
+                query.setParameter("email", email);
+                if (id != null) {
+                    query.setParameter("id", id);
+                }
+                return query.uniqueResult();
+            }
+        }) > 0;
+    }
+
+    public boolean checkPassword(String password, Long id) {
+        log.info("Checking the password of the user in the database");
+        return getHibernateTemplate().execute(new HibernateCallback<User>() {
+            public User doInHibernate(Session session) throws HibernateException {
+                Query<User> query = session.createQuery("FROM User u WHERE u.id = :id", User.class);
+                query.setParameter("id", id);
+                return query.uniqueResult();
+            }
+        }).getPassword().equals(password);
+    }
+
     @Override
     public Page<UserModel> paginate(UserModel userModel) throws Exception {
         log.info("Paging the users in the database");

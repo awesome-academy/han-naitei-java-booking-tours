@@ -1,58 +1,60 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="/layout/base-layout">
-<div layout:fragment="body">
-    <div class="welcome-slides owl-carousel">
-        <div class="single-welcome-slide bg-img bg-overlay mb-0"
-             th:style=" 'background-image:url(' + @{/assets/img/bg-img/17.jpg} +');' "
-             th:data-img-url="@{/assets/img/bg-img/16.jpg}">
-            <div class="row pt-5">
-                <div class="col-lg-9 col-xl-6 mx-auto">
-                    <div class="card card-signin flex-row my-4 mt-100">
+<html
+        th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Sign In</title>
+</head>
 
-                        <div class="card-body">
+<body>
+<div class="welcome-slides owl-carousel">
+    <div class="single-welcome-slide bg-img bg-overlay mb-0"
+         th:style=" 'background-image:url(' + @{/assets/img/bg-img/17.jpg} +');' "
+         th:data-img-url="@{/assets/img/bg-img/16.jpg}">
+        <div class="row pt-5">
+            <div class="col-lg-9 col-xl-6 mx-auto">
+                <div class="card card-signin flex-row my-4 mt-100">
 
-                            <h4 class="card-title text-center text-uppercase" th:text="#{user.signin}">Sign in</h4>
-                            <form action="#" th:action="@{/users/signin}" class="form-horizontal"
-                                  method="post" th:object="${user}">
+                    <div class="card-body">
 
+                        <h4 class="card-title text-center text-uppercase" th:text="#{user.signin}">Sign in</h4>
+                        <form class="form-horizontal" th:action="@{/users/signin}" th:method="POST" th:object="${user}">
 
-                                <div class="form-group">
-                                    <input type="text" th:field="*{userName}" class="form-control"
-                                           required autofocus/>
+                            <div class="form-group">
+                                <input type="text" th:field="*{userName}" class="form-control"
+                                       required autofocus/>
+                            </div>
 
+                            <div class="form-group">
+                                <input type="password" th:field="*{password}"
+                                       class="form-control" required autofocus/>
+                            </div>
+
+                            <div class="form-group row justify-content-between mx-auto">
+                                <label for="remember-me" class="text-info">
+                                    <span>Remember me</span> 
+                                    <span> <input id="remember-me" name="remember-me" type="checkbox"></span>
+                                </label>
+                                <a th:href="@{/users/signup}" th:text="#{user.signup}" class="text-info">Sign up</a>
+                            </div>
+                            <div id="register-link" class="text-right"></div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2">
+                                    <button
+                                            class="btn btn-lg btn-primary btn-block"
+                                            type="submit" th:text="#{user.signin}">Sign in
+                                    </button>
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <input type="password" th:field="*{password}"
-                                           class="form-control" required autofocus/>
-                                </div>
-
-                                <div class="form-group row justify-content-between mx-auto">
-                                    <label for="remember-me" class="text-info">
-                                        <span>Remember me</span> 
-                                        <span> <input id="remember-me" name="remember-me" type="checkbox"></span>
-                                    </label>
-                                    <a th:href="@{/users/signup}" th:text="#{user.signup}" class="text-info">Sign up</a>
-                                </div>
-                                <div id="register-link" class="text-right"></div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2">
-                                        <button
-                                                class="btn btn-lg btn-primary btn-block"
-                                                type="submit" th:text="#{user.signin}">Sign in
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</body>
 </html>

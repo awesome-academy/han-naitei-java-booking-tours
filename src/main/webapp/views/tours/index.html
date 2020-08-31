@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html
+	th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title th:text="Tour">Tour</title>
+</head>
+<body>
+	<!-- Breadcrumb Area Start -->
+	<div class="breadcrumb-area bg-img bg-overlay jarallax"
+		th:style=" 'background-image:url(' + @{/img/bg-img/16.jpg} +');' ">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-12">
+					<div class="breadcrumb-content text-center">
+						<h2 class="page-title">Our BigCity Tour</h2>
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb justify-content-center">
+								<li class="breadcrumb-item"><a th:href="@{/page/home}">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Tours</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcrumb Area End -->
+
+	<!-- About Us Area Start -->
+	<section class="roberto-about-area section-padding-100-0">
+		<!-- Hotel Search Form Area -->
+		<div class="hotel-search-form-area">
+			<div class="container-fluid">
+				<div class="hotel-search-form">
+					<form th:action="@{#}" method="post">
+						<div class="row justify-content-between align-items-end">
+							<div class="col-8 col-md-3 col-lg-4">
+								<label for="checkOut">Your Tour name: </label> <input
+									type="text" class="form-control" id="tourname" name="tourname">
+							</div>
+							<div class="col-8 col-md-4">
+								<label for="room">Category</label> <select name="room" id="room"
+									class="form-control">
+									<option value="01">Family Tours</option>
+									<option value="02">Couple Tours</option>
+									<option value="03">Single Tours</option>
+									<option value="04">Religious Tours</option>
+									<option value="05">National Parks Tours</option>
+								</select>
+							</div>
+							<div class="col-4 col-md-1">
+								<label for="adults">Rating</label> <select name="adults"
+									id="adults" class="form-control">
+									<option value="01">01</option>
+									<option value="02">02</option>
+									<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+								</select>
+							</div>
+							<div class="col-12 col-md-3">
+								<button type="submit" class="form-control btn roberto-btn w-100">Find
+									tours</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- About Us Area End -->
+
+	<!-- Rooms Area Start -->
+	<div class="roberto-rooms-area section-padding-100-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-8">
+					<!-- Single Room Area -->
+					<div
+						class="single-room-area d-flex align-items-center mb-50 wow fadeInUp"
+						data-wow-delay="100ms">
+						<!-- Room Thumbnail -->
+						<div class="room-thumbnail">
+							<img th:src="@{/img/bg-img/43.jpg}" alt="">
+						</div>
+						<!-- Room Content -->
+						<div class="room-content">
+							<h2>Phu Quoc - Hon Thom Natural Park</h2>
+							<h4>Family Tour</h4>
+							<div class="room-feature">
+								<h6>
+									Duration: <span>3-7 days</span>
+								</h6>
+								<h6>
+									Capacity: <span>Max person 5</span>
+								</h6>
+								<h6>
+									Starting Point: <span>Da Nang</span>
+								</h6>
+								<h6>
+									Services: <span>Wifi, television ...</span>
+								</h6>
+							</div>
+							<a th:href="@{/tours/1}" class="btn view-detail-btn">View
+								Details <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+
+					<!-- Single Room Area -->
+					<div
+						class="single-room-area d-flex align-items-center mb-50 wow fadeInUp"
+						data-wow-delay="300ms">
+						<!-- Room Thumbnail -->
+						<div class="room-thumbnail">
+							<img th:src="@{/img/bg-img/44.jpg}" alt="">
+						</div>
+						<!-- Room Content -->
+						<div class="room-content">
+							<h2>Phu Quoc - Hon Thom Natural Park</h2>
+							<h4>Family Tour</h4>
+							<div class="room-feature">
+								<h6>
+									Duration: <span>3-7 days</span>
+								</h6>
+								<h6>
+									Capacity: <span>Max person 5</span>
+								</h6>
+								<h6>
+									Starting Point: <span>Da Nang</span>
+								</h6>
+								<h6>
+									Services: <span>Wifi, television ...</span>
+								</h6>
+							</div>
+							<a th:href="@{/tours/1}" class="btn view-detail-btn">View
+								Details <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+
+					<!-- Single Room Area -->
+					<div
+						class="single-room-area d-flex align-items-center mb-50 wow fadeInUp"
+						data-wow-delay="500ms">
+						<!-- Room Thumbnail -->
+						<div class="room-thumbnail">
+							<img th:src="@{/img/bg-img/45.jpg}" alt="">
+						</div>
+						<!-- Room Content -->
+						<div class="room-content">
+							<h2>Phu Quoc - Hon Thom Natural Park</h2>
+							<h4>Family Tour</h4>
+							<div class="room-feature">
+								<h6>
+									Duration: <span>3-7 days</span>
+								</h6>
+								<h6>
+									Capacity: <span>Max person 5</span>
+								</h6>
+								<h6>
+									Starting point: <span>Da Nang</span>
+								</h6>
+								<h6>
+									Services: <span>Wifi, television ...</span>
+								</h6>
+							</div>
+							<a th:href="@{/tours/1}" class="btn view-detail-btn">View
+								Details <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+
+					<!-- Single Room Area -->
+					<div
+						class="single-room-area d-flex align-items-center mb-50 wow fadeInUp"
+						data-wow-delay="700ms">
+						<!-- Room Thumbnail -->
+						<div class="room-thumbnail">
+							<img th:src="@{/img/bg-img/46.jpg}" alt="">
+						</div>
+						<!-- Room Content -->
+						<div class="room-content">
+							<h2>Phu Quoc - Hon Thom Natural Park</h2>
+							<h4>Family Tour</h4>
+							<div class="room-feature">
+								<h6>
+									Duration: <span>3-7 days</span>
+								</h6>
+								<h6>
+									Capacity: <span>Max person 5</span>
+								</h6>
+								<h6>
+									Starting Point: <span>Da Nang</span>
+								</h6>
+								<h6>
+									Services: <span>Wifi, television ...</span>
+								</h6>
+							</div>
+							<a th:href="@{/tours/1}" class="btn view-detail-btn">View
+								Details <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+
+					<!-- Single Room Area -->
+					<div
+						class="single-room-area d-flex align-items-center mb-50 wow fadeInUp"
+						data-wow-delay="900ms">
+						<!-- Room Thumbnail -->
+						<div class="room-thumbnail">
+							<img th:src="@{/img/bg-img/47.jpg}" alt="">
+						</div>
+						<!-- Room Content -->
+						<div class="room-content">
+							<h2>Phu Quoc - Hon Thom Natural Park</h2>
+							<h4>Family Tour</h4>
+							<div class="room-feature">
+								<h6>
+									Duration: <span>3-7 days</span>
+								</h6>
+								<h6>
+									Capacity: <span>Max person 5</span>
+								</h6>
+								<h6>
+									Starting Point: <span>Da Nang</span>
+								</h6>
+								<h6>
+									Services: <span>Wifi, television ...</span>
+								</h6>
+							</div>
+							<a th:href="@{/tours/1}" class="btn view-detail-btn">View
+								Details <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+
+					<!-- Pagination -->
+					<nav class="roberto-pagination wow fadeInUp mb-100"
+						data-wow-delay="1000ms">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" th:href="@{#}">1</a></li>
+							<li class="page-item"><a class="page-link" th:href="@{#}">2</a></li>
+							<li class="page-item"><a class="page-link" th:href="@{#}">3</a></li>
+							<li class="page-item"><a class="page-link" th:href="@{#}">Next
+									<i class="fa fa-angle-right"></i>
+							</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -46,6 +46,9 @@ Last Update: Feb 9, 2019
 @import url(css/bootstrap-datepicker.min.css);
 @import url(css/jquery-ui.min.css);
 /* :: 01.0 Reboot Area CSS */
+.avatar-uploader__file-input {
+    display: none;
+}
 * {
     margin: 0;
     padding: 0;

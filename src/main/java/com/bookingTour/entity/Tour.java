@@ -12,6 +12,10 @@ public class Tour extends BaseEntity {
     private List<TourDetail> tourDetails;
     private List<Rating> ratings;
     private List<Review> reviews;
+    private Integer capacity;
+    private String startPoint;
+    private Integer expectedDurationMin;
+    private Integer expectedDurationMax;
 
     public Long getId() {
         return id;
@@ -75,5 +79,37 @@ public class Tour extends BaseEntity {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getStartPoint() {
+        return startPoint;
+    }
+
+    public void setStartPoint(String startPoint) {
+        this.startPoint = startPoint;
+    }
+
+    public Integer getExpectedDurationMin() {
+        return expectedDurationMin;
+    }
+
+    public void setExpectedDurationMin(Integer expectedDurationMin) {
+        this.expectedDurationMin = expectedDurationMin;
+    }
+
+    public Integer getExpectedDurationMax() {
+        return expectedDurationMax;
+    }
+
+    public void setExpectedDurationMax(Integer expectedDurationMax) {
+        this.expectedDurationMax = expectedDurationMax;
     }
 }

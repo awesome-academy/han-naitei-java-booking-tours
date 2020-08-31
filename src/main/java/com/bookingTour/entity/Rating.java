@@ -38,4 +38,5 @@ public class Rating extends BaseEntity {
     public void setPoint(Integer point) {
         this.point = point;
     }
+
 }

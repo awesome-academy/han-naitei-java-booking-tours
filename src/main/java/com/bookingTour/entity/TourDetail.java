@@ -1,13 +1,11 @@
 package com.bookingTour.entity;
 
-import java.sql.Date;
 import java.util.List;
 
 public class TourDetail extends BaseEntity {
 
     private Long id;
     private Tour tour;
-    private Date startDate;
     private Integer duration;
     private Double price;
     private List<BookingRequest> bookingRequests;
@@ -26,14 +24,6 @@ public class TourDetail extends BaseEntity {
 
     public void setTour(Tour tour) {
         this.tour = tour;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
     }
 
     public Integer getDuration() {
@@ -59,4 +49,5 @@ public class TourDetail extends BaseEntity {
     public void setBookingRequests(List<BookingRequest> bookingRequests) {
         this.bookingRequests = bookingRequests;
     }
+
 }

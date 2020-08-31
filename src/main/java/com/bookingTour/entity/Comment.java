@@ -58,4 +58,5 @@ public class Comment extends BaseEntity {
     public void setSubComments(List<Comment> subComments) {
         this.subComments = subComments;
     }
+
 }

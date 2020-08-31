@@ -7,4 +7,9 @@
     <bean id="userServiceImp" class="com.bookingTour.service.imp.UserServiceImp">
         <property name="userDAOImp" ref="userDAOImp"/>
     </bean>
+
+    <bean id="tourService" class="com.bookingTour.service.imp.TourServiceImp">
+        <property name="tourDAO" ref="tourDAO" />
+        <property name="categoryDAO" ref="categoryDAO" />
+    </bean>
 </beans>

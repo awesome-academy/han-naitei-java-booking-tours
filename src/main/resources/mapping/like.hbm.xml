@@ -12,7 +12,6 @@
                      column="user_id" not-null="true" insert="false" update="false"/>
         <many-to-one name="review" class="com.bookingTour.entity.Review"
                      column="review_id" not-null="true" insert="false" update="false"/>
-        <property name="reviewId" column="review_id" type="java.lang.Long"></property>
         <property name="createTime" column="create_time" type="timestamp"></property>
         <property name="updateTime" column="update_time" type="timestamp"></property>
     </class>

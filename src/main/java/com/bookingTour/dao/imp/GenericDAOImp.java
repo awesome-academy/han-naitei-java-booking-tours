@@ -18,9 +18,6 @@ import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author ducda referenced from CaveatEmptor project tm JBoss Hibernate version
- */
 public abstract class GenericDAOImp<E, Id extends Serializable> extends HibernateDaoSupport
         implements GenericDAO<E, Id> {
 
@@ -154,5 +151,28 @@ public abstract class GenericDAOImp<E, Id extends Serializable> extends Hibernat
         }
         return new PageImpl<>(results, page, count);
     }
+
+    protected Page<E> paginate(SearchQueryTemplate searchQueryTemplate) {
+        List<E> results = null;
+        results = getHibernateTemplate().execute(new HibernateCallback<List<E>>() {
+            public List<E> doInHibernate(Session session) {
+                Query<E> query = session.createQuery(searchQueryTemplate.getSql(true), getPersistentClass());
+                searchQueryTemplate.setPageable(query);
+                searchQueryTemplate.setParameters(query);
+                return query.list();
+            }
+        });
+
+        Long count = getHibernateTemplate().execute(new HibernateCallback<Long>() {
+            public Long doInHibernate(Session session) {
+                Query<Long> query = session.createQuery(searchQueryTemplate.getCountSql(), Long.class);
+                searchQueryTemplate.setParameters(query);
+                return query.uniqueResult();
+            }
+        });
+
+        return wrapResult(results, searchQueryTemplate.getPageable(), count);
+    }
+
 
 }

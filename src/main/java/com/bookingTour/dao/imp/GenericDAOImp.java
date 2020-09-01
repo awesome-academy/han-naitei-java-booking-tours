@@ -1,6 +1,7 @@
 package com.bookingTour.dao.imp;
 
 import com.bookingTour.dao.GenericDAO;
+import com.bookingTour.entity.BaseEntity;
 import com.bookingTour.util.SearchQueryTemplate;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
@@ -18,7 +19,7 @@ import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class GenericDAOImp<E, Id extends Serializable> extends HibernateDaoSupport
+public abstract class GenericDAOImp<E extends BaseEntity, Id extends Serializable> extends HibernateDaoSupport
         implements GenericDAO<E, Id> {
 
     private Class<E> persistentClass;
@@ -95,6 +96,11 @@ public abstract class GenericDAOImp<E, Id extends Serializable> extends Hibernat
     }
 
     public E makePersistent(E entity) throws Exception {
+        Timestamp currentDate = getSystemTimestamp();
+        if (entity.getCreateTime() == null) {
+            entity.setCreateTime(currentDate);
+        }
+        entity.setUpdateTime(currentDate);
         getHibernateTemplate().saveOrUpdate(entity);
         getHibernateTemplate().flush();
         return entity;

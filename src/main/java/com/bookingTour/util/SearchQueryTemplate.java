@@ -106,4 +106,11 @@ public class SearchQueryTemplate {
         sort = sort.and(Sort.by(value, properties));
     }
 
+    public void addParameter(String property, Object value) {
+        if (parameterMap == null) {
+            parameterMap = new HashMap<String, Object>();
+        }
+        parameterMap.put(property, value);
+    }
+
 }

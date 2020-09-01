@@ -1,63 +1,93 @@
 <!DOCTYPE html>
 <html
-	th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+        th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title th:text="Signup">Signup</title>
+    <title>Sign Up</title>
 </head>
+
 <body>
-	<div class="single-welcome-slide bg-img bg-overlay mb-0"
-				th:style=" 'background-image:url(' + @{/img/bg-img/16.jpg} +');' "
-				th:data-img-url="@{/img/bg-img/16.jpg}">
-				<div class="container">
-		<div class="row">
-			<div class="col-lg-10 col-xl-9 mx-auto">
-				<div class="card card-signin flex-row my-5">
-					
-					<div class="card-body">
-						<h5 class="card-title text-center">Register</h5>
-						<form class="form-signin">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Username"
-									required autofocus />
-							</div>
+<div class="single-welcome-slide bg-img bg-overlay mb-0"
+     th:style=" 'background-image:url(' + @{/assets/img/bg-img/16.jpg} +');' "
+     th:data-img-url="@{/assets/img/bg-img/16.jpg}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card card-signin flex-row my-5">
 
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Email"
-									required autofocus />
-							</div>
+                    <div class="card-body">
+                        <h4 class="card-title text-center text-uppercase" th:text="#{user.signup}">Sign up</h4>
+                        <form class="form-signin" th:method="POST" th:action="@{/users/signup}" th:object="${user}">
+                            <div class="form-group">
+                                <input type="text" class="form-control" th:field="*{userName}"
+                                       th:placeholder="#{user.form.userName}" autofocus
+                                       th:classappend="${#fields.hasErrors('userName')}? 'fieldError'"/>
+                                <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="error">
+                                    Incorrect username</p>
+                            </div>
 
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Password"
-									required autofocus />
-							</div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" th:field="*{email}"
+                                       th:placeholder="#{user.form.email}" autofocus
+                                       th:classappend="${#fields.hasErrors('email')}? 'fieldError'"/>
+                                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">
+                                    Incorrect email</p>
+                            </div>
 
-							<div class="form-group">
-								<input type="text" class="form-control"
-									placeholder="Confirm Password" required autofocus />
-							</div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" th:field="*{name}"
+                                       th:placeholder="#{user.form.name}" autofocus
+                                       th:classappend="${#fields.hasErrors('name')}? 'fieldError'"/>
+                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">
+                                    Incorrect name</p>
+                            </div>
 
+                            <div class="form-group">
+                                <input type="password" class="form-control" th:field="*{password}"
+                                       th:placeholder="#{user.form.password}" autofocus
+                                       th:classappend="${#fields.hasErrors('password')}? 'fieldError'"/>
+                                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">
+                                    Incorrect password</p>
+                            </div>
 
-							<button class="btn btn-lg btn-primary btn-block text-uppercase"
-								type="submit">Register</button>
-							<a class="d-block text-center mt-2 medium" th:href="@{/login}">Sign
-								In</a>
-							<hr class="my-4">
-							<button class="btn btn-lg btn-google btn-block text-uppercase"
-								type="submit">
-								<i class="fa fa-google mr-2"></i> Sign up with Google
-							</button>
-							<button class="btn btn-lg btn-facebook btn-block text-uppercase"
-								type="submit">
-								<i class="fa fa-facebook-f mr-2"></i> Sign up with Facebook
-							</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" th:field="*{confirmPassword}"
+                                       th:placeholder="#{user.form.confirmPassword}" autofocus
+                                       th:classappend="${#fields.hasErrors('confirmPassword')}? 'fieldError'"/>
+                                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+                                   class="error">Incorrect confirm password</p>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="number" class="form-control" th:field="*{phoneNumber}"
+                                       th:placeholder="#{user.form.phoneNumber}" autofocus
+                                       th:classappend="${#fields.hasErrors('phoneNumber')}? 'fieldError'"/>
+                                <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
+                                   class="error">
+                                    Incorrect phone number</p>
+                            </div>
+
+                            <button class="btn btn-lg btn-primary btn-block"
+                                    type="submit" th:text="#{user.signup}">Sign up
+                            </button>
+                            <a class="d-block text-center mt-2 medium" th:href="@{/users/signin}"
+                               th:text="#{user.signin}">Sign in</a>
+                            <hr class="my-4">
+                            <button class="btn btn-lg btn-google btn-block" type="submit">
+                                <i class="fa fa-google mr-2"></i>
+                                <span th:text="#{user.signup.google}">Sign up with Google</span>
+                            </button>
+                            <button class="btn btn-lg btn-facebook btn-block" type="submit">
+                                <i class="fa fa-facebook-f mr-2"></i>
+                                <span th:text="#{user.signup.facebook}">Sign up with Facebook</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

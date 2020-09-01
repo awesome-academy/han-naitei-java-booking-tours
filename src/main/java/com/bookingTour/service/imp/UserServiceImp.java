@@ -116,6 +116,25 @@ public class UserServiceImp implements UserService {
     }
 
     @Transactional
+    public UserModel editUser(UserModel userModel) throws Exception {
+        log.info("Updating the user in the database");
+        try {
+            User user = userDAOImp.find(userModel.getId(), true);
+            if (StringUtils.hasText(userModel.getName())) {
+                user.setName(userModel.getName());
+            }
+            if (StringUtils.hasText(userModel.getPhoneNumber())) {
+                user.setPhoneNumber(userModel.getPhoneNumber());
+            }
+            userDAOImp.makePersistent(user);
+            return userModel;
+        } catch (Exception e) {
+            log.error("An error occurred while updating the user details to the database", e);
+            throw e;
+        }
+    }
+
+    @Transactional
     public boolean deleteUser(UserModel userModel) throws Exception {
         log.info("Deleting the user in the database");
         try {

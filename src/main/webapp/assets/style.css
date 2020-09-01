@@ -66,6 +66,7 @@ Last Update: Feb 9, 2019
 
 .title-username {
     border: none;
+    margin-bottom: 8px; !important;
     font-weight: bold;
     text-align: center;
     font-size: large;

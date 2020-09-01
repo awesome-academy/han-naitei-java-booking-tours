@@ -20,6 +20,8 @@ public interface UserService {
 
     public UserModel addUser(UserModel user) throws Exception;
 
+    public UserModel editUser(UserModel userModel) throws Exception;
+
     public boolean deleteUser(UserModel userModel) throws Exception;
 
     public List<UserModel> findAll();

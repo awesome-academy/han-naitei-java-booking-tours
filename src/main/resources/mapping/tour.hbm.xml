@@ -15,8 +15,8 @@
         <property name="startPoint" column="start_point" type="java.lang.String"></property>
         <property name="expectedDurationMin" column="expected_duration_min" type="java.lang.Integer"></property>
         <property name="expectedDurationMax" column="expected_duration_max" type="java.lang.Integer"></property>
-        <many-to-one name="category" class="com.bookingTour.entity.Category"
-                     column="category_id" not-null="true" insert="false" update="false"/>
+        <many-to-one name="category" class="com.bookingTour.entity.Category" lazy="false"
+                     column="category_id" not-null="true" />
         <list name="tourDetails" cascade="all" lazy="true" inverse="true">
             <key column="tour_id"/>
             <list-index column="id" base="1"/>

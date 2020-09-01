@@ -7,4 +7,12 @@
     <bean id="userDAOImp" class="com.bookingTour.dao.imp.UserDAOImp">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
+
+    <bean id="tourDAO" class="com.bookingTour.dao.imp.TourDAOImp">
+        <property name="hibernateTemplate" ref="hibernateTemplate" />
+    </bean>
+
+    <bean id="categoryDAO" class="com.bookingTour.dao.imp.CategoryDAOImp">
+        <property name="hibernateTemplate" ref="hibernateTemplate" />
+    </bean>
 </beans>

@@ -1,7 +1,7 @@
 package com.bookingTour.validator;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
@@ -13,7 +13,7 @@ import javax.validation.Payload;
 
 @Constraint(validatedBy = UniqueUserNameValidator.class)
 @Documented
-@Target({METHOD, FIELD})
+@Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 public @interface UniqueUserName {
     String message() default "The username is already registered";
@@ -21,4 +21,6 @@ public @interface UniqueUserName {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+    String name();
 }

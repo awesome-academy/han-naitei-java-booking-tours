@@ -8,13 +8,12 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserName, Object> {
+public class CorrectPasswordValidator implements ConstraintValidator<CorrectPassword, Object> {
 
-    private static final Logger log = LoggerFactory.getLogger(UniqueUserNameValidator.class);
+    private static final Logger log = LoggerFactory.getLogger(CorrectPasswordValidator.class);
 
     private String name;
     private String message;
@@ -23,7 +22,7 @@ public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserNa
     UserServiceImp userServiceImp;
 
     @Override
-    public void initialize(final UniqueUserName constraintAnnotation) {
+    public void initialize(final CorrectPassword constraintAnnotation) {
         this.name = constraintAnnotation.name();
         this.message = constraintAnnotation.message();
     }
@@ -32,17 +31,12 @@ public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserNa
     public boolean isValid(final Object user, final ConstraintValidatorContext context) {
         boolean valid = true;
         try {
-            String userName = BeanUtils.getProperty(user, name);
+            String oldPassword = BeanUtils.getProperty(user, name);
+            if (oldPassword == null)
+                return true;
             String ids = BeanUtils.getProperty(user, "id");
-            if (StringUtils.isEmpty(userName)) {
-                valid = false;
-            } else {
-                Long id = null;
-                if (ids != null) {
-                    id = Long.parseLong(ids);
-                }
-                valid = !userServiceImp.existingUserName(userName, id);
-            }
+            Long id = Long.parseLong(ids);
+            valid = userServiceImp.checkPassword(oldPassword, id);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             log.error(e.getMessage(), e);
         }

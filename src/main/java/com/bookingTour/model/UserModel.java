@@ -8,21 +8,24 @@ import javax.validation.constraints.Size;
 
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "{user.validation.password.notmatch}")})
+@UniqueEmail(name = "email", message = "{user.validation.email.exist}")
+@UniqueUserName(name = "userName", message = "{user.validation.userName.exist}")
+@CorrectPassword(name = "oldPassword", message = "{user.validation.oldPassword.incorrect}")
 public class UserModel extends BaseModel {
+
     private Long id;
     @NotEmpty(message = "{user.validation.email.required}")
     @Email(message = "{pattern.email}")
-    @UniqueEmail(message = "{user.validation.email.exist}")
     private String email;
     @NotEmpty(message = "{user.validation.userName.required}")
     @Size(max = 64, message = "{user.validation.userName.max}")
-    @UniqueUserName(message = "{user.validation.userName.exist}")
     private String userName;
     @NullOrNotBlank(message = "{user.validation.password.required}")
     @Size(max = 32, min = 8, message = "{user.validation.password.length}")
     private String password;
     @NullOrNotBlank(message = "{user.validation.confirmPassword.required}")
     private String confirmPassword;
+    private String oldPassword;
     @NullOrNotBlank(message = "{user.validation.name.required}")
     private String name;
     private String avatar;
@@ -69,6 +72,14 @@ public class UserModel extends BaseModel {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 
     public String getName() {

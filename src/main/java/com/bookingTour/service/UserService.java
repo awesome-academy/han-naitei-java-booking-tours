@@ -22,6 +22,8 @@ public interface UserService {
 
     public UserModel editUser(UserModel userModel) throws Exception;
 
+    public UserModel changePassword(UserModel userModel) throws Exception;
+
     public boolean deleteUser(UserModel userModel) throws Exception;
 
     public List<UserModel> findAll();

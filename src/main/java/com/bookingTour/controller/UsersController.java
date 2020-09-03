@@ -67,4 +67,23 @@ public class UsersController {
         return "redirect:/users/" + user.getId();
     }
 
+    @GetMapping(value = "/{id}/password")
+    public String changePassword(@PathVariable Long id, Model model) {
+        UserModel user = userServiceImp.findUser(id);
+        if (user == null)
+            return "error";
+        model.addAttribute("user", user);
+        return "users/password";
+    }
+
+    @PutMapping(value = "/{id}/password")
+    public String updatePassword(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
+                                 Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+        logger.info("result" + bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "users/password";
+        }
+        UserModel user = userServiceImp.changePassword(userModel);
+        return "redirect:/users/" + user.getId();
+    }
 }

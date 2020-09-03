@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html
+	th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>Reviews</title>
+</head>
+<body>
+	<!-- Breadcrumb Area Start -->
+    <div class="breadcrumb-area bg-img bg-overlay jarallax" th:style=" 'background-image:url(' + @{/img/bg-img/17.jpg} +');' ">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-content text-center">
+                        <h2 class="page-title">Reviews Pages</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-center">
+                                <li class="breadcrumb-item"><a th:href="@{#}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Review</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Area End -->
+    
+    <section class="roberto-about-area section-padding-100-0">
+		<!-- Hotel Search Form Area -->
+		<div class="hotel-search-form-area">
+			<div class="container-fluid">
+				<div class="hotel-search-form">
+					<form method="post" th:action="@{/reviews/search}" th:object="${reviewSearch}">
+						<div class="row justify-content-between align-items-end">
+							<div class="col-8 col-md-3 col-lg-4">
+								<label for="tourName">Search by Tour name: </label>
+								<input th:field="${reviewSearch.tour.name}" type="text" class="form-control" id="tourName"
+									   name="tourName">
+							</div>
+							<div class="col-12 col-md-3">
+								<button type="submit"
+										class="form-control btn roberto-btn w-100">Find reviews
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <!-- Blog Area Start -->
+    <div class="roberto-news-area section-padding-100-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+
+                    <!-- Single Blog Post Area -->
+                    <div class="single-blog-post d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="100ms">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <a th:href="@{#}"><img th:src="@{/img/bg-img/24.jpg}" alt=""></a>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a th:href="@{#}" class="post-author">Jan 02, 2019</a>
+                                <a th:href="@{#}" class="post-tutorial">Event</a>
+                            </div>
+                            <!-- Post Title -->
+                            <a th:href="@{#}" class="post-title">Cdc Issues Health Alert Notice For Travelers To Usa From Hon</a>
+                            <p>A round-the-world trip remains the world’s greatest journey. For two out of every three people, this is the ultimate travel experience, according to recent research...</p>
+                            <a th:href="@{#}" class="btn continue-btn">Read More</a>
+                        </div>
+                    </div>
+
+                    <!-- Single Blog Post Area -->
+                    <div class="single-blog-post d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <a th:href="@{#}"><img th:src="@{/img/bg-img/25.jpg}" alt=""></a>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a th:href="@{#}" class="post-author">Jan 04, 2019</a>
+                                <a th:href="@{#}" class="post-tutorial">Event</a>
+                            </div>
+                            <!-- Post Title -->
+                            <a th:href="@{#}" class="post-title">How To Boost Your Traffic Of Your Blog And Destroy The Competition</a>
+                            <p>Businesses such as GuideMeGreen and the co-op offer a real alternative for people concerned with these issues and with businesses that combine a strong ethical dimension in tandem with making profits...</p>
+                            <a th:href="@{#}" class="btn continue-btn">Read More</a>
+                        </div>
+                    </div>
+
+                    <!-- Single Blog Post Area -->
+                    <div class="single-blog-post d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="300ms">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <a th:href="@{#}"><img th:src="@{/img/bg-img/26.jpg}" alt=""></a>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a th:href="@{#}" class="post-author">Jan 09, 2019</a>
+                                <a th:href="@{#}" class="post-tutorial">Event</a>
+                            </div>
+                            <!-- Post Title -->
+                            <a th:href="@{#}" class="post-title">Global Travel And Vacations Luxury Travel On A Tight Budget</a>
+                            <p>Life is hectic; it’s true. There are so many things that demand your time and attention. Between work, kids, family and household chores, there is precious little time left over for you.</p>
+                            <a th:href="@{#}" class="btn continue-btn">Read More</a>
+                        </div>
+                    </div>
+
+                    <!-- Single Blog Post Area -->
+                    <div class="single-blog-post d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="400ms">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <a th:href="@{#}"><img th:src="@{/img/bg-img/27.jpg}" alt=""></a>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a th:href="@{#}" class="post-author">Jan 22, 2019</a>
+                                <a th:href="@{#}" class="post-tutorial">Event</a>
+                            </div>
+                            <!-- Post Title -->
+                            <a th:href="@{#}" class="post-title">Will The Democrats Be Able To Reverse The Online Gambling Ban</a>
+                            <p>Everyone loves good, old fashioned charcoal grilling. Aside from being cheaper than other grilling methods, it adds a raw, distinctive taste to your sausages, burgers, ribs, and other grilled items.</p>
+                            <a th:href="@{#}" class="btn continue-btn">Read More</a>
+                        </div>
+                    </div>
+
+                    <!-- Single Blog Post Area -->
+                    <div class="single-blog-post d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="500ms">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <a th:href="@{#}"><img th:src="@{/img/bg-img/28.jpg}" alt=""></a>
+                            
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a th:href="@{#}" class="post-author">Jan 29, 2019</a>
+                                <a th:href="@{#}" class="post-tutorial">Event</a>
+                            </div>
+                            <!-- Post Title -->
+                            <a th:href="@{#}" class="post-title">Les Houches The Hidden Gem Of The Chamonix Valley</a>
+                            <p>Las Vegas has more than 100,000 hotel rooms to choose from. There is something for every budget, and enough entertainment within walking distance to keep anyone occupied for months.</p>
+                            <a th:href="@{#}" class="btn continue-btn">Read More</a>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav class="roberto-pagination wow fadeInUp mb-100" data-wow-delay="600ms">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" th:href="@{#}">1</a></li>
+                            <li class="page-item"><a class="page-link" th:href="@{#}">2</a></li>
+                            <li class="page-item"><a class="page-link" th:href="@{#}">3</a></li>
+                            <li class="page-item"><a class="page-link" th:href="@{#}">Next <i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                    <div class="roberto-sidebar-area pl-md-4">
+
+                        <!-- Newsletter -->
+                        <div class="single-widget-area mb-100">
+                            <div class="newsletter-form">
+                                <h5>Newsletter</h5>
+                                <p>Subscribe our newsletter gor get notification new updates.</p>
+                                
+                                <form th:action="@{#}" method="post">
+                                    <input type="email" name="nl-email" id="nlEmail" class="form-control" placeholder="Enter your email...">
+                                    <button type="submit" class="btn roberto-btn w-100">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Recent Post -->
+                        <div class="single-widget-area mb-100">
+                            <h4 class="widget-title mb-30">Recent News</h4>
+
+                            <!-- Single Recent Post -->
+                            <div class="single-recent-post d-flex">
+                                <!-- Thumb -->
+                                <div class="post-thumb">
+                                    <a th:href="single-blog.html"><img th:src="@{/img/bg-img/29.jpg}" alt=""></a>
+                                </div>
+                                <!-- Content -->
+                                <div class="post-content">
+                                    <!-- Post Meta -->
+                                    <div class="post-meta">
+                                        <a th:href="@{#}" class="post-author">Jan 29, 2019</a>
+                                        <a th:href="@{#}" class="post-tutorial">Event</a>
+                                    </div>
+                                    <a th:href="single-blog.html" class="post-title">Proven Techniques Help You Herbal Breast</a>
+                                </div>
+                            </div>
+
+                            <!-- Single Recent Post -->
+                            <div class="single-recent-post d-flex">
+                                <!-- Thumb -->
+                                <div class="post-thumb">
+                                    <a th:href="single-blog.html"><img th:src="@{/img/bg-img/30.jpg}" alt=""></a>
+                                </div>
+                                <!-- Content -->
+                                <div class="post-content">
+                                    <!-- Post Meta -->
+                                    <div class="post-meta">
+                                        <a th:href="@{#}" class="post-author">Jan 29, 2019</a>
+                                        <a th:href="@{#}" class="post-tutorial">Event</a>
+                                    </div>
+                                    <a th:href="single-blog.html" class="post-title">Cooking On A George Foreman Grill</a>
+                                </div>
+                            </div>
+
+                            <!-- Single Recent Post -->
+                            <div class="single-recent-post d-flex">
+                                <!-- Thumb -->
+                                <div class="post-thumb">
+                                    <a th:href="single-blog.html"><img th:src="@{/img/bg-img/31.jpg}" alt=""></a>
+                                </div>
+                                <!-- Content -->
+                                <div class="post-content">
+                                    <!-- Post Meta -->
+                                    <div class="post-meta">
+                                        <a th:href="@{#}" class="post-author">Jan 29, 2019</a>
+                                        <a th:href="@{#}" class="post-tutorial">Event</a>
+                                    </div>
+                                    <a th:href="single-blog.html" class="post-title">Selecting The Right Hotel</a>
+                                </div>
+                            </div>
+
+                            <!-- Single Recent Post -->
+                            <div class="single-recent-post d-flex">
+                                <!-- Thumb -->
+                                <div class="post-thumb">
+                                    <a th:href="single-blog.html"><img th:src="@{/img/bg-img/32.jpg}" alt=""></a>
+                                </div>
+                                <!-- Content -->
+                                <div class="post-content">
+                                    <!-- Post Meta -->
+                                    <div class="post-meta">
+                                        <a th:href="@{#}" class="post-author">Jan 29, 2019</a>
+                                        <a th:href="@{#}" class="post-tutorial">Event</a>
+                                    </div>
+                                    <a th:href="single-blog.html" class="post-title">Comment Importance Of Human Life</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Popular Tags -->
+                        <div class="single-widget-area mb-100 clearfix">
+                            <h4 class="widget-title mb-30">Tags</h4>
+                            <!-- Popular Tags -->
+                            <ul class="popular-tags">
+                                <li><a th:href="@{#}">Bed,</a></li>
+                                <li><a th:href="@{#}">Hotel,</a></li>
+                                <li><a th:href="@{#}">Travel,</a></li>
+                                <li><a th:href="@{#}">Restaurant,</a></li>
+                                <li><a th:href="@{#}">Sport,</a></li>
+                                <li><a th:href="@{#}">Trip,</a></li>
+                                <li><a th:href="@{#}">Music,</a></li>
+                                <li><a th:href="@{#}">Holiday,</a></li>
+                                <li><a th:href="@{#}">Tourist,</a></li>
+                                <li><a th:href="@{#}">Foody,</a></li>
+                                <li><a th:href="@{#}">Resorts.</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Instagram -->
+                        <div class="single-widget-area mb-100 clearfix">
+                            <h4 class="widget-title mb-30">Instagram</h4>
+                            <!-- Instagram Feeds -->
+                            <ul class="instagram-feeds">
+                                <li><a th:href="@{#}"><img th:src="@{/img/bg-img/33.jpg}" alt=""></a></li>
+                                <li><a th:href="@{#}"><img th:src="@{/img/bg-img/34.jpg}" alt=""></a></li>
+                                <li><a th:href="@{#}"><img th:src="@{/img/bg-img/35.jpg}" alt=""></a></li>
+                                <li><a th:href="@{#}"><img th:src="@{/img/bg-img/36.jpg}" alt=""></a></li>
+                                <li><a th:href="@{#}"><img th:src="@{/img/bg-img/37.jpg}" alt=""></a></li>
+                                <li><a th:href="@{#}"><img th:src="@{/img/bg-img/38.jpg}" alt=""></a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog Area End -->
+</body>
+</html>

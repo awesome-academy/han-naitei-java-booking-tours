@@ -21,4 +21,10 @@
     <bean id="categoryService" class="com.bookingTour.service.imp.CategoryServiceImp">
         <property name="categoryDAO" ref="categoryDAO"/>
     </bean>
+    
+    <bean id="reviewService" class="com.bookingTour.service.imp.ReviewServiceImp">
+        <property name="reviewDAO" ref="reviewDAO" />
+        <property name="tourDAO" ref="tourDAO" />
+        <property name="userDAO" ref="userDAOImp" />
+    </bean>
 </beans>

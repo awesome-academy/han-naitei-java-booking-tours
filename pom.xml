@@ -24,6 +24,7 @@
         <java.version>1.8</java.version>
         <lombok-version>1.18.12</lombok-version>
         <spring.data.version>2.3.3.RELEASE</spring.data.version>
+        <spring.security.version>5.3.4.RELEASE</spring.security.version>
     </properties>
 
     <dependencies>
@@ -34,7 +35,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Hiberante -->
+        <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -140,6 +141,26 @@
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>2.4.1</version>
+        </dependency>
+
+        <!-- Security -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <dependency>

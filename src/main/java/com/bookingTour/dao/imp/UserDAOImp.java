@@ -12,8 +12,10 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.orm.hibernate5.HibernateCallback;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,6 +23,9 @@ import java.util.List;
 @Repository
 public class UserDAOImp extends GenericDAOImp<User, Long> implements UserDAO {
     private static Logger log = LoggerFactory.getLogger(UserServiceImp.class);
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserDAOImp() {
         super(User.class);
@@ -95,13 +100,14 @@ public class UserDAOImp extends GenericDAOImp<User, Long> implements UserDAO {
 
     public boolean checkPassword(String password, Long id) {
         log.info("Checking the password of the user in the database");
-        return getHibernateTemplate().execute(new HibernateCallback<User>() {
+        String encodePassword = getHibernateTemplate().execute(new HibernateCallback<User>() {
             public User doInHibernate(Session session) throws HibernateException {
                 Query<User> query = session.createQuery("FROM User u WHERE u.id = :id", User.class);
                 query.setParameter("id", id);
                 return query.uniqueResult();
             }
-        }).getPassword().equals(password);
+        }).getPassword();
+        return passwordEncoder.matches(password, encodePassword);
     }
 
     @Override

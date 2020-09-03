@@ -8,7 +8,9 @@ import com.bookingTour.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -21,6 +23,9 @@ public class UserServiceImp implements UserService {
     private static Logger log = LoggerFactory.getLogger(UserServiceImp.class);
 
     private UserDAOImp userDAOImp;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void setUserDAOImp(UserDAOImp userDAOImp) {
         this.userDAOImp = userDAOImp;
@@ -103,8 +108,8 @@ public class UserServiceImp implements UserService {
             user.setId(userModel.getId());
             user.setEmail(userModel.getEmail());
             user.setUserName(userModel.getUserName());
-            user.setPassword(userModel.getPassword());
-            user.setName(userModel.getName());
+            user.setPassword(passwordEncoder.encode(userModel.getPassword()));
+            user.setName(userModel.getName().trim().replaceAll("\\s+", " "));
             user.setPhoneNumber(userModel.getPhoneNumber());
             user.setRole(Role.USER_ROLE);
             user = userDAOImp.makePersistent(user);
@@ -121,7 +126,7 @@ public class UserServiceImp implements UserService {
         try {
             User user = userDAOImp.find(userModel.getId(), true);
             if (StringUtils.hasText(userModel.getName())) {
-                user.setName(userModel.getName());
+                user.setName(userModel.getName().trim().replaceAll("\\s+", " "));
             }
             if (StringUtils.hasText(userModel.getPhoneNumber())) {
                 user.setPhoneNumber(userModel.getPhoneNumber());
@@ -130,6 +135,22 @@ public class UserServiceImp implements UserService {
             return userModel;
         } catch (Exception e) {
             log.error("An error occurred while updating the user details to the database", e);
+            throw e;
+        }
+    }
+
+    @Transactional
+    public UserModel changePassword(UserModel userModel) throws Exception {
+        log.info("Changing the password of the user in the database");
+        try {
+            User user = userDAOImp.find(userModel.getId(), true);
+            if (StringUtils.hasText(userModel.getPassword())) {
+                user.setPassword(passwordEncoder.encode(userModel.getPassword()));
+            }
+            userDAOImp.makePersistent(user);
+            return userModel;
+        } catch (Exception e) {
+            log.error("An error occurred while changing the password to the database", e);
             throw e;
         }
     }

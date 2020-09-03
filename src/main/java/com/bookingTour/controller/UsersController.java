@@ -38,4 +38,33 @@ public class UsersController {
         return "redirect:/users/signin";
     }
 
+    @GetMapping(value = "/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        UserModel user = userServiceImp.findUser(id);
+        if (user == null)
+            return "error";
+        model.addAttribute("user", user);
+        return "users/show";
+    }
+
+    @GetMapping(value = "/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        UserModel user = userServiceImp.findUser(id);
+        if (user == null)
+            return "error";
+        model.addAttribute("user", user);
+        return "users/edit";
+    }
+
+    @PutMapping(value = "/{id}/edit")
+    public String update(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
+                         Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+        logger.info("result" + bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "users/edit";
+        }
+        UserModel user = userServiceImp.editUser(userModel);
+        return "redirect:/users/" + user.getId();
+    }
+
 }

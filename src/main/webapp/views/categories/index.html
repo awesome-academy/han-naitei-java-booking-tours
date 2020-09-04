@@ -27,7 +27,18 @@
 								<th scope="row" th:text="${iter.index + 1}"></th>
 								<td th:text="${category.name}"></td>
 								<td th:text="${category.createTime}"></td>
+								<td>
+
+									<div class="align-content-center">
+										<a th:href="@{'/categories/' + ${category.id} +'/edit'}" class="btn btn-primary"
+										   th:data-id="${category.id}">Edit
+
+										</a>
+								    </div>
+								</td>
+
 							</tr>
+
 						</th:block>
 					</tbody>
 				</table>

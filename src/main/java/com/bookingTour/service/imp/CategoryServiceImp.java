@@ -93,7 +93,7 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public List<CategoryInfo> findAll(CategoryInfo categoryInfo) {
+    public List<CategoryInfo> findAll() {
         logger.info("Fetching all microposts in the database");
         List<CategoryInfo> categoryInfos = new ArrayList<CategoryInfo>();
         try {

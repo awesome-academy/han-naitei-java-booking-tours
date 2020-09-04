@@ -15,7 +15,7 @@ public interface CategoryService {
 
     public boolean deleteCategory(CategoryInfo CategoryInfo) throws Exception;
 
-    public List<CategoryInfo> findAll(CategoryInfo CategoryInfo);
+    public List<CategoryInfo> findAll();
 
     public Page<CategoryInfo> paginate(CategoryInfo CategoryInfo);
 

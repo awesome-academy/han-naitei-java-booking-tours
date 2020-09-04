@@ -12,9 +12,7 @@ public interface UserService {
 
     public UserModel findUserByEmail(String email);
 
-    public boolean existingUserName(String userName, Long id);
-
-    public boolean existingEmail(String email, Long id);
+    public boolean checkExisted(Long id, String field, String value, String column);
 
     public boolean checkPassword(String password, Long id);
 

@@ -11,16 +11,27 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = UniqueEmailValidator.class)
+@Constraint(validatedBy = UniqueFieldValidator.class)
 @Documented
 @Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-public @interface UniqueEmail {
-    String message() default "The email is already registered";
+public @interface UniqueField {
+    String message() default "This field is already existed";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
-    String name();
+    String field();
+
+    String column();
+
+    String table();
+
+    @Target({TYPE, ANNOTATION_TYPE})
+    @Retention(RUNTIME)
+    @Documented
+    @interface List {
+        UniqueField[] value();
+    }
 }

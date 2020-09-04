@@ -3,6 +3,7 @@ package com.bookingTour.dao.imp;
 import com.bookingTour.dao.GenericDAO;
 import com.bookingTour.entity.BaseEntity;
 import com.bookingTour.util.SearchQueryTemplate;
+import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
@@ -65,6 +66,23 @@ public abstract class GenericDAOImp<E extends BaseEntity, Id extends Serializabl
         }
         criteria.add(example);
         return (List<E>) getHibernateTemplate().findByCriteria(criteria);
+    }
+
+    public boolean checkExisted(Long id, String field, String value, String column, String table) {
+        return getHibernateTemplate().execute(new HibernateCallback<Long>() {
+            public Long doInHibernate(Session session) throws HibernateException {
+                String sql = "SELECT COUNT(*) FROM " + table + " WHERE " + column + " = :" + column;
+                if (id != null) {
+                    sql += " AND id <> :id";
+                }
+                Query<Long> query = session.createQuery(sql, Long.class);
+                query.setParameter(column, value);
+                if (id != null) {
+                    query.setParameter("id", id);
+                }
+                return query.uniqueResult();
+            }
+        }) > 0;
     }
 
     public int count(E exampleInstance, String[] excludeProperty, boolean isLike) throws Exception {

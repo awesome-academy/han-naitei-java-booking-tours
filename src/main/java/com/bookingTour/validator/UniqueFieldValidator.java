@@ -12,42 +12,46 @@ import org.springframework.util.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserName, Object> {
+public class UniqueFieldValidator implements ConstraintValidator<UniqueField, Object> {
 
-    private static final Logger log = LoggerFactory.getLogger(UniqueUserNameValidator.class);
+    private static final Logger log = LoggerFactory.getLogger(UniqueFieldValidator.class);
 
-    private String name;
+    private String field;
+    private String column;
+    private String table;
     private String message;
 
     @Autowired
     UserServiceImp userServiceImp;
 
     @Override
-    public void initialize(final UniqueUserName constraintAnnotation) {
-        this.name = constraintAnnotation.name();
+    public void initialize(final UniqueField constraintAnnotation) {
+        this.field = constraintAnnotation.field();
+        this.column = constraintAnnotation.column();
+        this.table = constraintAnnotation.table();
         this.message = constraintAnnotation.message();
     }
 
     @Override
-    public boolean isValid(final Object user, final ConstraintValidatorContext context) {
+    public boolean isValid(final Object object, final ConstraintValidatorContext context) {
         boolean valid = true;
         try {
-            String userName = BeanUtils.getProperty(user, name);
-            String ids = BeanUtils.getProperty(user, "id");
-            if (StringUtils.isEmpty(userName)) {
+            String value = BeanUtils.getProperty(object, field);
+            String ids = BeanUtils.getProperty(object, "id");
+            if (StringUtils.isEmpty(value)) {
                 valid = false;
             } else {
                 Long id = null;
                 if (ids != null) {
                     id = Long.parseLong(ids);
                 }
-                valid = !userServiceImp.existingUserName(userName, id);
+                valid = !userServiceImp.checkExisted(id, field, value, column);
             }
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             log.error(e.getMessage(), e);
         }
         if (!valid) {
-            context.buildConstraintViolationWithTemplate(message).addPropertyNode(name).addConstraintViolation()
+            context.buildConstraintViolationWithTemplate(message).addPropertyNode(field).addConstraintViolation()
                     .disableDefaultConstraintViolation();
         }
         return valid;

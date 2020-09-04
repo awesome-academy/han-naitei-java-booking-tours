@@ -62,40 +62,8 @@ public class UserDAOImp extends GenericDAOImp<User, Long> implements UserDAO {
         });
     }
 
-    public boolean existingUserName(String userName, Long id) {
-        log.info("Finding the user by username in the database");
-        return getHibernateTemplate().execute(new HibernateCallback<Long>() {
-            public Long doInHibernate(Session session) throws HibernateException {
-                String sql = "SELECT COUNT(*) FROM User WHERE user_name = :user_name";
-                if (id != null) {
-                    sql += " AND id <> :id";
-                }
-                Query<Long> query = session.createQuery(sql, Long.class);
-                query.setParameter("user_name", userName);
-                if (id != null) {
-                    query.setParameter("id", id);
-                }
-                return query.uniqueResult();
-            }
-        }) > 0;
-    }
-
-    public boolean existingEmail(String email, Long id) {
-        log.info("Finding the user by email in the database");
-        return getHibernateTemplate().execute(new HibernateCallback<Long>() {
-            public Long doInHibernate(Session session) throws HibernateException {
-                String sql = "SELECT COUNT(*) FROM User WHERE email = :email";
-                if (id != null) {
-                    sql += " AND id <> :id";
-                }
-                Query<Long> query = session.createQuery(sql, Long.class);
-                query.setParameter("email", email);
-                if (id != null) {
-                    query.setParameter("id", id);
-                }
-                return query.uniqueResult();
-            }
-        }) > 0;
+    public boolean checkExisted(Long id, String field, String value, String column) {
+        return checkExisted(id, field, value, column, "User");
     }
 
     public boolean checkPassword(String password, Long id) {

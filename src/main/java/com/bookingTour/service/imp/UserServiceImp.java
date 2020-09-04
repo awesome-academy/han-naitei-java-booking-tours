@@ -68,23 +68,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public boolean existingUserName(String userName, Long id) {
-        log.info("Checking the user by username in the database");
+    public boolean checkExisted(Long id, String field, String value, String column) {
+        log.info("Checking " + field + " in the database");
         try {
-            return userDAOImp.existingUserName(userName, id);
+            return userDAOImp.checkExisted(id, field, value, column, "User");
         } catch (Exception e) {
-            log.error("An error occurred while checking the user details by username from the database", e);
-            return true;
-        }
-    }
-
-    @Override
-    public boolean existingEmail(String email, Long id) {
-        log.info("Checking the user by email in the database");
-        try {
-            return userDAOImp.existingEmail(email, id);
-        } catch (Exception e) {
-            log.error("An error occurred while checking the user details by email from the database", e);
+            log.error("An error occurred while checking " + field + " from the database", e);
             return true;
         }
     }

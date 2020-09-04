@@ -11,10 +11,6 @@ public interface UserDAO extends GenericDAO<User, Long> {
 
     public User findUserByEmail(String email);
 
-    public boolean existingUserName(String userName, Long id);
-
-    public boolean existingEmail(String email, Long id);
-
     public boolean checkPassword(String password, Long id);
 
     public Page<UserModel> paginate(UserModel userModel) throws Exception;

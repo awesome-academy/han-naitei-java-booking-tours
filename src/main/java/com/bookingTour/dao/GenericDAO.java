@@ -23,6 +23,8 @@ public interface GenericDAO<E, Id extends Serializable> {
 
     public List<E> findByExample(E exampleInstance, String[] excludeProperty) throws Exception;
 
+    public boolean checkExisted(Long id, String field, String value, String column, String table);
+
     public int count(E exampleInstance, String[] excludeProperty, boolean isLike) throws Exception;
 
     public int count() throws Exception;

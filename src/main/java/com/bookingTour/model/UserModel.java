@@ -7,9 +7,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @FieldMatch.List({
-        @FieldMatch(first = "password", second = "confirmPassword", message = "{user.validation.password.notmatch}")})
-@UniqueEmail(name = "email", message = "{user.validation.email.exist}")
-@UniqueUserName(name = "userName", message = "{user.validation.userName.exist}")
+        @FieldMatch(first = "password", second = "confirmPassword", message = "{user.validation.password.notmatch}")
+})
+@UniqueField.List({
+        @UniqueField(field = "email", column = "email", table = "User", message = "{user.validation.email.exist}"),
+        @UniqueField(field = "userName", column = "user_name", table = "User", message = "{user.validation.userName.exist}")
+})
 @CorrectPassword(name = "oldPassword", message = "{user.validation.oldPassword.incorrect}")
 public class UserModel extends BaseModel {
 

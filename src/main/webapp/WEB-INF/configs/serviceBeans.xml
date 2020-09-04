@@ -12,7 +12,12 @@
         <property name="tourDAO" ref="tourDAO" />
         <property name="categoryDAO" ref="categoryDAO" />
     </bean>
-    
+
+    <bean id="tourDetailService" class="com.bookingTour.service.imp.TourDetailServiceImp">
+        <property name="tourDetailDAO" ref="tourDetailDAO"/>
+        <property name="tourDAO" ref="tourDAO"/>
+    </bean>
+
     <bean id="categoryService" class="com.bookingTour.service.imp.CategoryServiceImp">
         <property name="categoryDAO" ref="categoryDAO"/>
     </bean>

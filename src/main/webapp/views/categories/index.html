@@ -7,43 +7,35 @@
 <title>Categories</title>
 </head>
 <body>
-	<div class="welcome-slides owl-carousel">
-		<div class="single-welcome-slide bg-img bg-overlay mb-0 pt-4"
-			th:style=" 'background-image:url(' + @{/img/bg-img/17.jpg} +');' "
-			th:data-img-url="@{/img/bg-img/16.jpg}">
-			<div th:replace="~{categories/add :: AddForm(~{::categoryAdd})}"></div>
-			<div class="col-10 mx-auto card card-signin pt-4 px-6 mt-5">
-				<table class="table table-striped">
-					<thead>
+	<div class="single-welcome-slide bg-img bg-overlay mb-0 pt-3"
+		th:style=" 'background-image:url(' + @{/assets/img/bg-img/16.jpg} +');' "
+		th:data-img-url="@{/assets/img/bg-img/16.jpg}">
+		<div th:replace="~{categories/add :: AddForm(~{::categoryAdd})}"></div>
+		<div class="col-10 mx-auto card card-signin pt-4 px-6 mt-5">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Created at</th>
+					</tr>
+				</thead>
+				<tbody>
+					<th:block th:each="category,iter : ${categories.content}">
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Name</th>
-							<th scope="col">Created at</th>
+							<th scope="row" th:text="${iter.index + 1}"></th>
+							<td th:text="${category.name}"></td>
+							<td th:text="${category.createTime}"></td>
+							<td>
+								<div class="align-content-center">
+									<a th:href="@{'/categories/' + ${category.id} +'/edit'}"
+										class="btn btn-primary" th:data-id="${category.id}">Edit </a>
+								</div>
+							</td>
 						</tr>
-					</thead>
-					<tbody>
-						<th:block th:each="category,iter : ${categories.content}">
-							<tr>
-								<th scope="row" th:text="${iter.index + 1}"></th>
-								<td th:text="${category.name}"></td>
-								<td th:text="${category.createTime}"></td>
-								<td>
-
-									<div class="align-content-center">
-										<a th:href="@{'/categories/' + ${category.id} +'/edit'}" class="btn btn-primary"
-										   th:data-id="${category.id}">Edit
-
-										</a>
-								    </div>
-								</td>
-
-							</tr>
-
-						</th:block>
-					</tbody>
-				</table>
-			</div>
-
+					</th:block>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>

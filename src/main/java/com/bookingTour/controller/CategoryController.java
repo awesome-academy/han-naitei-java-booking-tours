@@ -69,13 +69,23 @@ public class CategoryController {
 
     @GetMapping(value = "/{id}")
     public String show(@PathVariable Long id, Model model) {
-        model.addAttribute("category", categoryService.findCategory(id));
+    	CategoryInfo category = categoryService.findCategory(id);
+    	if (category == null) {
+    		model.addAttribute("errorMsg", "Category not found");
+			return "templates/error";
+		}
+        model.addAttribute("category", category);
         return "categories/show";
     }
 
     @GetMapping(value = "{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("category", categoryService.findCategory(id));
+    	CategoryInfo category = categoryService.findCategory(id);
+    	if (category == null) {
+    		model.addAttribute("errorMsg", "Category not found");
+			return "templates/error";
+		}
+        model.addAttribute("category", category);
         return "categories/edit";
     }
 

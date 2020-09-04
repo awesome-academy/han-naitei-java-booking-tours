@@ -28,18 +28,14 @@
                     <label class="col-sm-2 col-form-label" for="category">
                         Category </label>
                     <div class="col-8 col-md-4">
-                        <select th:field="*{categoryId}" name="room" id="room" class="form-control">
-                            <option value="01">Family Tours</option>
-                            <option value="02">Couple Tours</option>
-                            <option value="03">Single Tours</option>
-                            <option value="04">Religious Tours</option>
-                            <option value="05">National Parks Tours</option>
+                        <select id="categoryId" name="categoryId">
+                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                         </select>
                     </div>
                     <label class="col-sm-3 col-form-label" for="capacity">
-                        Max Capacity: </label>
+                        Max Capacity</label>
                     <div class="col-3 col-md-3">
-                        <input th:field="*{capacity}" type="number" class="form-control" placeholder="1"
+                        <input th:field="*{capacity}" type="number" class="form-control" placeholder="2"
                                id="inputCapacity" min="2" max="30" >
                     </div>
                 </div>
@@ -56,12 +52,12 @@
                     <label class="col-sm-2 col-form-label" for="expectedDuration">
                         Expected Duration </label>
                     <div class="col-3 col-md-3">
-                        <input th:field="*{expectedDurationMin}" type="number" class="form-control" placeholder="0"
+                        <input th:field="*{expectedDurationMin}" type="number" class="form-control" placeholder="1"
                                id="inputDurationMin" min="1" max="30">
                     </div>
                     <p>-<p>
                     <div class="col-3 col-md-3">
-                        <input th:field="*{expectedDurationMax}" type="number" class="form-control" placeholder="1"
+                        <input th:field="*{expectedDurationMax}" type="number" class="form-control" placeholder="2"
                                id="inputDurationMax" min="2" max="30">
                     </div>
                 </div>

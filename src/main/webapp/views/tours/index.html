@@ -42,13 +42,9 @@
 									   name="tourName">
 							</div>
 							<div class="col-8 col-md-4">
-								<label for="category">Category</label>
-								<select th:field="*{categoryId}" name="category" id="category" class="form-control">
-									<option value="1">Family Tours</option>
-									<option value="2">Couple Tours</option>
-									<option value="3">Single Tours</option>
-									<option value="4">Religious Tours</option>
-									<option value="5">National Parks Tours</option>
+								<label for="categoryId">Category</label>
+								<select id="categoryId" name="categoryId" class="form-control">
+									<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
 								</select>
 							</div>
 							<div class="col-4 col-md-1">

@@ -14,7 +14,6 @@ public class User extends BaseEntity {
     private Integer role;
     private List<Payment> payments;
     private List<BookingRequest> bookingRequests;
-    private List<Rating> ratings;
     private List<Review> reviews;
     private List<Like> likes;
 
@@ -108,14 +107,6 @@ public class User extends BaseEntity {
 
     public void setBookingRequests(List<BookingRequest> bookingRequests) {
         this.bookingRequests = bookingRequests;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     public List<Review> getReviews() {

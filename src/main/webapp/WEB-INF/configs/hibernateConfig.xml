@@ -32,7 +32,6 @@
                 <value>mapping/comment.hbm.xml</value>
                 <value>mapping/like.hbm.xml</value>
                 <value>mapping/payment.hbm.xml</value>
-                <value>mapping/rating.hbm.xml</value>
                 <value>mapping/review.hbm.xml</value>
                 <value>mapping/tour.hbm.xml</value>
                 <value>mapping/tourDetail.hbm.xml</value>

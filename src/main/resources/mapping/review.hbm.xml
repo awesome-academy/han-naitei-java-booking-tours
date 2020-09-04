@@ -5,14 +5,15 @@
 <hibernate-mapping>
     <class name="com.bookingTour.entity.Review" table="reviews">
         <id name="id" column="id" type="long">
-            <generator class="native"></generator>
+            <generator class="native"/>
         </id>
 
-        <property name="content" column="content" type="java.lang.String" length="1023"></property>
+        <property name="ratingPoint" column="rating_point" type="java.lang.Integer"/>
+        <property name="content" column="content" type="java.lang.String" length="1023"/>
         <many-to-one name="user" class="com.bookingTour.entity.User"
-                     column="user_id" not-null="true" />
+                     column="user_id" not-null="true"/>
         <many-to-one name="tour" class="com.bookingTour.entity.Tour"
-                     column="tour_id" not-null="true" />
+                     column="tour_id" not-null="true"/>
 
         <list name="likes" cascade="all" lazy="true" inverse="true">
             <key column="review_id"/>
@@ -25,8 +26,8 @@
             <list-index column="id" base="1"/>
             <one-to-many class="com.bookingTour.entity.Comment"/>
         </list>
-        <property name="createTime" column="create_time" type="timestamp"></property>
-        <property name="updateTime" column="update_time" type="timestamp"></property>
+        <property name="createTime" column="create_time" type="timestamp"/>
+        <property name="updateTime" column="update_time" type="timestamp"/>
 
     </class>
 

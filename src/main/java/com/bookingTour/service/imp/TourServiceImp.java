@@ -27,6 +27,7 @@ public class TourServiceImp implements TourService {
     private CategoryDAO categoryDAO;
 
     @Override
+    @Transactional(readOnly = true)
     public TourInfo findTour(Long id) {
         logger.info("Checking the tour in the database");
         try {
@@ -163,6 +164,7 @@ public class TourServiceImp implements TourService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int count(TourInfo tourInfo) {
         logger.info("Counting the tour in the database");
         try {
@@ -187,7 +189,7 @@ public class TourServiceImp implements TourService {
     private String buildQuery(TourInfo condition){
         String query = " from Tour t where 1=1 ";
         if (condition.getCategoryId() != null)
-            query += " and t.categoryId = :categoryId ";
+            query += " and t.category.id = :categoryId ";
         if (condition.getName() != null && !condition.getName().isEmpty())
             query += " and t.name = :name ";
         if (condition.getAverageRate()!= null)

@@ -1,6 +1,8 @@
 package com.bookingTour.controller;
 
+import com.bookingTour.model.CategoryInfo;
 import com.bookingTour.model.TourInfo;
+import com.bookingTour.service.CategoryService;
 import com.bookingTour.service.TourService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -28,12 +31,17 @@ public class ToursController {
     @Autowired
     private TourService tourService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping(value = {"", "/index"})
     public String index(@RequestParam(name = "page", required = false) Optional<Integer> page, Locale locale,
                         Model model, HttpServletRequest request) {
         TourInfo tourInfo = new TourInfo();
         tourInfo.setPage(page.orElse(1));
         Page<TourInfo> tours = tourService.paginate(tourInfo);
+        List<CategoryInfo> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
         model.addAttribute("tours", tours);
         model.addAttribute("tourSearch", tourInfo);
         return "tours/index";
@@ -41,14 +49,18 @@ public class ToursController {
 
     @RequestMapping(value = "/search")
     public String search(@ModelAttribute(name = "tourSearch") TourInfo tourSearch, Model model) {
-        logger.info("list user page with search");
+        logger.info("list tour page with search");
         Page<TourInfo> tours = tourService.paginate(tourSearch);
+        List<CategoryInfo> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
         model.addAttribute("tours", tours);
         return "tours/index";
     }
 
     @GetMapping(value = {"/add"})
     public String add(Locale locale, Model model) {
+        List<CategoryInfo> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
         model.addAttribute("tour", new TourInfo());
         return "tours/add";
     }
@@ -59,17 +71,13 @@ public class ToursController {
             logger.info("Returning add tour page, validate failed");
             return "tours/add";
         }
-
         TourInfo tour = tourService.addTour(tourInfo);
-        if (tour.getId() != null) {
-            redirectAttributes.addFlashAttribute("css", "success");
-            redirectAttributes.addFlashAttribute("msg", "Tour is added!");
-        } else {
-            redirectAttributes.addFlashAttribute("css", "error");
-            redirectAttributes.addFlashAttribute("msg", "Add Tour fails!!!!");
+        if (tour == null) {
+            model.addAttribute("errorMsg", "Create Tour Failed");
+            return "templates/error";
         }
-        return"redirect: "+request.getContextPath()+"/tours/index";
-}
+        return "redirect: " + request.getContextPath() + "/tours/index";
+    }
 
     @GetMapping(value = "/{id}")
     public String show(@PathVariable Long id, Model model) {
@@ -85,12 +93,18 @@ public class ToursController {
 
     @PutMapping(value = "/{id}")
     public String update(@ModelAttribute("tour") @Validated TourInfo tourInfo,
-                         BindingResult bindingResult, Model model, HttpServletRequest request) throws Exception {
+                         BindingResult bindingResult, Model model, HttpServletRequest request, final RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             logger.info("Returning edit tour page, validate failed");
             return "tours/edit";
         }
-        TourInfo tour = tourService.editTour(tourInfo);
+        TourInfo tour = null;
+        try {
+            tour = tourService.editTour(tourInfo);
+        } catch (Exception e) {
+            model.addAttribute("errorMsg", "Update Tour Failed");
+            return "templates/error";
+        }
         return "redirect: " + request.getContextPath() + "/tours/" + tour.getId();
     }
 

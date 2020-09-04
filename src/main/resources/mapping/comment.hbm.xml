@@ -10,11 +10,11 @@
 
         <property name="content" column="content" type="java.lang.String" length="2047"></property>
         <many-to-one name="user" class="com.bookingTour.entity.User"
-                     column="user_id" not-null="true" insert="false" update="false"/>
+                     column="user_id" not-null="true" />
         <many-to-one name="review" class="com.bookingTour.entity.Review"
-                     column="review_id" not-null="true" insert="false" update="false"/>
+                     column="review_id" not-null="true" />
         <many-to-one name="parentComment" class="com.bookingTour.entity.Comment"
-                     column="reply_comment_id" not-null="true" insert="false" update="false"/>
+                     column="reply_comment_id" not-null="true" />
         <list name="subComments" lazy="true" inverse="true">
             <key column="reply_comment_id"/>
             <list-index column="id" base="1"/>

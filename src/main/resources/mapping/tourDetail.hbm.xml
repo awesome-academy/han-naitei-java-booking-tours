@@ -11,11 +11,11 @@
         <property name="duration" column="duration" type="java.lang.Integer"></property>
         <property name="price" column="price" type="java.lang.Double"></property>
         <many-to-one name="tour" class="com.bookingTour.entity.Tour"
-                     column="tour_id" not-null="true" insert="false" update="false"/>
+                     column="tour_id" not-null="true" />
         <list name="bookingRequests" cascade="all" lazy="true" inverse="true">
             <key column="tour_detail_id"/>
             <list-index column="id" base="1"/>
-            <one-to-many class="com.bookingTour.entity.Review"/>
+            <one-to-many class="com.bookingTour.entity.TourDetail"/>
         </list>
         <property name="createTime" column="create_time" type="timestamp"></property>
         <property name="updateTime" column="update_time" type="timestamp"></property>

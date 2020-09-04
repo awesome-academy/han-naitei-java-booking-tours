@@ -9,10 +9,10 @@
         </id>
 
         <many-to-one name="user" class="com.bookingTour.entity.User"
-                     column="user_id" not-null="true" insert="false" update="false"/>
+                     column="user_id" not-null="true" />
         <property name="status" column="status" type="java.lang.Integer"></property>
         <many-to-one name="tourDetail" class="com.bookingTour.entity.TourDetail"
-                     column="tour_detail_id" not-null="true" insert="false" update="false"/>
+                     column="tour_detail_id" not-null="true" />
         <property name="startDate" column="start_date" type="java.util.Date"></property>
         <property name="createTime" column="create_time" type="timestamp"></property>
         <property name="updateTime" column="update_time" type="timestamp"></property>

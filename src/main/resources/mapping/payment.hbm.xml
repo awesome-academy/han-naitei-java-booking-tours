@@ -12,7 +12,7 @@
         <property name="expiryDate" column="expiry_date" type="java.util.Date"></property>
         <property name="balance" column="balance" type="java.lang.Double"></property>
         <many-to-one name="user" class="com.bookingTour.entity.User"
-                     column="user_id" not-null="true" insert="false" update="false"/>
+                     column="user_id" not-null="true" />
 
         <property name="createTime" column="create_time" type="timestamp"></property>
         <property name="updateTime" column="update_time" type="timestamp"></property>

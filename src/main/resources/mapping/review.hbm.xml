@@ -10,9 +10,9 @@
 
         <property name="content" column="content" type="java.lang.String" length="1023"></property>
         <many-to-one name="user" class="com.bookingTour.entity.User"
-                     column="user_id" not-null="true" insert="false" update="false"/>
+                     column="user_id" not-null="true" />
         <many-to-one name="tour" class="com.bookingTour.entity.Tour"
-                     column="tour_id" not-null="true" insert="false" update="false"/>
+                     column="tour_id" not-null="true" />
 
         <list name="likes" cascade="all" lazy="true" inverse="true">
             <key column="review_id"/>

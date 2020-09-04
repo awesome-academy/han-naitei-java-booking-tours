@@ -5,16 +5,16 @@
 <hibernate-mapping>
     <class name="com.bookingTour.entity.Tour" table="tours">
         <id name="id" column="id" type="long">
-            <generator class="native"></generator>
+            <generator class="native"/>
         </id>
 
-        <property name="name" column="name" type="java.lang.String"></property>
-        <property name="description" column="description" type="java.lang.String"></property>
-        <property name="averageRate" column="average_rate" type="java.lang.Double"></property>
-        <property name="capacity" column="capacity" type="java.lang.Integer"></property>
-        <property name="startPoint" column="start_point" type="java.lang.String"></property>
-        <property name="expectedDurationMin" column="expected_duration_min" type="java.lang.Integer"></property>
-        <property name="expectedDurationMax" column="expected_duration_max" type="java.lang.Integer"></property>
+        <property name="name" column="name" type="java.lang.String"/>
+        <property name="description" column="description" type="java.lang.String"/>
+        <property name="averageRate" column="average_rate" type="java.lang.Double"/>
+        <property name="capacity" column="capacity" type="java.lang.Integer"/>
+        <property name="startPoint" column="start_point" type="java.lang.String"/>
+        <property name="expectedDurationMin" column="expected_duration_min" type="java.lang.Integer"/>
+        <property name="expectedDurationMax" column="expected_duration_max" type="java.lang.Integer"/>
         <many-to-one name="category" class="com.bookingTour.entity.Category" lazy="false"
                      column="category_id" not-null="true" />
         <list name="tourDetails" cascade="all" lazy="true" inverse="true">
@@ -23,19 +23,13 @@
             <one-to-many class="com.bookingTour.entity.TourDetail"/>
         </list>
 
-        <list name="ratings" cascade="all" lazy="true" inverse="true">
-            <key column="tour_id"/>
-            <list-index column="id" base="1"/>
-            <one-to-many class="com.bookingTour.entity.Rating"/>
-        </list>
-
         <list name="reviews" cascade="all" lazy="true" inverse="true">
             <key column="tour_id"/>
             <list-index column="id" base="1"/>
             <one-to-many class="com.bookingTour.entity.Review"/>
         </list>
-        <property name="createTime" column="create_time" type="timestamp"></property>
-        <property name="updateTime" column="update_time" type="timestamp"></property>
+        <property name="createTime" column="create_time" type="timestamp"/>
+        <property name="updateTime" column="update_time" type="timestamp"/>
 
     </class>
 </hibernate-mapping>

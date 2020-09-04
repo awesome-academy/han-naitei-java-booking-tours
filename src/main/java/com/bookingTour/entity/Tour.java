@@ -10,7 +10,6 @@ public class Tour extends BaseEntity {
     private Category category;
     private Double averageRate;
     private List<TourDetail> tourDetails;
-    private List<Rating> ratings;
     private List<Review> reviews;
     private Integer capacity;
     private String startPoint;
@@ -63,14 +62,6 @@ public class Tour extends BaseEntity {
 
     public void setTourDetails(List<TourDetail> tourDetails) {
         this.tourDetails = tourDetails;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     public List<Review> getReviews() {

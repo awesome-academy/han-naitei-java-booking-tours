@@ -5,6 +5,7 @@ import java.util.List;
 public class Review extends BaseEntity {
 
     private Long id;
+    private Integer ratingPoint;
     private String content;
     private User user;
     private Tour tour;
@@ -17,6 +18,14 @@ public class Review extends BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getRatingPoint() {
+        return ratingPoint;
+    }
+
+    public void setRatingPoint(Integer ratingPoint) {
+        this.ratingPoint = ratingPoint;
     }
 
     public String getContent() {

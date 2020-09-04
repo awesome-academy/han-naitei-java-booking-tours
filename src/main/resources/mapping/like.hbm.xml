@@ -9,9 +9,9 @@
         </id>
 
         <many-to-one name="user" class="com.bookingTour.entity.User"
-                     column="user_id" not-null="true" insert="false" update="false"/>
+                     column="user_id" not-null="true" />
         <many-to-one name="review" class="com.bookingTour.entity.Review"
-                     column="review_id" not-null="true" insert="false" update="false"/>
+                     column="review_id" not-null="true" />
         <property name="createTime" column="create_time" type="timestamp"></property>
         <property name="updateTime" column="update_time" type="timestamp"></property>
     </class>

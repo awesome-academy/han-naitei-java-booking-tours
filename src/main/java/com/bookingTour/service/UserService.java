@@ -2,10 +2,12 @@ package com.bookingTour.service;
 
 import com.bookingTour.model.UserModel;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService, PersistentTokenRepository {
     public UserModel findUser(Long id);
 
     public UserModel findUserByUserName(String userName);

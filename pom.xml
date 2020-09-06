@@ -25,6 +25,7 @@
         <lombok-version>1.18.12</lombok-version>
         <spring.data.version>2.3.3.RELEASE</spring.data.version>
         <spring.security.version>5.3.4.RELEASE</spring.security.version>
+        <thymeleaf-extras-springsecurity>3.0.4.RELEASE</thymeleaf-extras-springsecurity>
     </properties>
 
     <dependencies>
@@ -196,6 +197,13 @@
             <artifactId>commons-beanutils</artifactId>
             <version>1.8.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            <version>${thymeleaf-extras-springsecurity}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>SpringMVCDemo</finalName>

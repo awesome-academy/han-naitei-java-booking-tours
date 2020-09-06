@@ -19,22 +19,28 @@
                     <div class="card-body">
 
                         <h4 class="card-title text-center text-uppercase" th:text="#{user.signin}">Sign in</h4>
-                        <form class="form-horizontal" th:action="@{/users/signin}" th:method="POST" th:object="${user}">
-
+                        <form class="form-horizontal" th:action="@{/login}" th:method="POST" th:object="${user}">
+                            <div th:if="${param.error}" class="alert alert-error">
+                                <ul>
+                                    <li th:text="#{session.login.error}" th:class="error">Invalid email and password
+                                    </li>
+                                </ul>
+                            </div>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <div class="form-group">
-                                <input type="text" th:field="*{userName}" class="form-control"
+                                <input type="text" th:name="userName" th:field="*{userName}" class="form-control"
                                        required autofocus/>
                             </div>
 
                             <div class="form-group">
-                                <input type="password" th:field="*{password}"
+                                <input type="password" th:name="password" th:field="*{password}"
                                        class="form-control" required autofocus/>
                             </div>
 
                             <div class="form-group row justify-content-between mx-auto">
                                 <label for="remember-me" class="text-info">
-                                    <span>Remember me</span> 
-                                    <span> <input id="remember-me" name="remember-me" type="checkbox"></span>
+                                    <span>Remember me</span>
+                                    <span> <input id="remember-me" th:name="remember-me" type="checkbox"></span>
                                 </label>
                                 <a th:href="@{/users/signup}" th:text="#{user.signup}" class="text-info">Sign up</a>
                             </div>

@@ -1,5 +1,6 @@
 package com.bookingTour.entity;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class User extends BaseEntity {
@@ -16,6 +17,9 @@ public class User extends BaseEntity {
     private List<BookingRequest> bookingRequests;
     private List<Review> reviews;
     private List<Like> likes;
+    private String series;
+    private String token;
+    private Timestamp lastUsed;
 
     public User() {
     }
@@ -123,5 +127,29 @@ public class User extends BaseEntity {
 
     public void setLikes(List<Like> likes) {
         this.likes = likes;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Timestamp getLastUsed() {
+        return lastUsed;
+    }
+
+    public void setLastUsed(Timestamp lastUsed) {
+        this.lastUsed = lastUsed;
     }
 }

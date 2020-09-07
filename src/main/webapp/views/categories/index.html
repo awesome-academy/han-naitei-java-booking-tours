@@ -18,6 +18,7 @@
 						<th scope="col">#</th>
 						<th scope="col">Name</th>
 						<th scope="col">Created at</th>
+						<th scope="col">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,11 +27,15 @@
 							<th scope="row" th:text="${iter.index + 1}"></th>
 							<td th:text="${category.name}"></td>
 							<td th:text="${category.createTime}"></td>
-							<td>
-								<div class="align-content-center">
+							<td class="d-flex flex-row">
+								<div class="align-content-center mr-2">
 									<a th:href="@{'/categories/' + ${category.id} +'/edit'}"
 										class="btn btn-primary" th:data-id="${category.id}">Edit </a>
 								</div>
+								&nbsp;
+								<form th:method="DELETE" th:action="@{'/categories/' + ${category.id}}">
+									<input class="btn btn-danger" type="submit" value="Delete"/>
+								</form>
 							</td>
 						</tr>
 					</th:block>

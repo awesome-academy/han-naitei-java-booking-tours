@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html
+        th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Tour Details</title>
+</head>
+<body>
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area bg-img bg-overlay jarallax"
+     th:style=" 'background-image:url(' + @{/assets/img/bg-img/16.jpg} +');' ">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">Details for Tour [[${tourInfo.name}]] </h2>
+                    <nav aria-label="breadcrumb">
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="room-features-area d-flex flex-wrap mb-50">
+    <h6>
+        Duration:
+        <span>[[${tourInfo.expectedDurationMin}]]-[[${tourInfo.expectedDurationMax}]] days</span>
+    </h6>
+    <h6>
+        Capacity: <span>Max person [[${tourInfo.capacity}]]</span>
+    </h6>
+    <h6>
+        Starting Gate: <span>[[${tourInfo.startPoint}]]</span>
+    </h6>
+</div>
+    <div class="text-center">
+    Description: <p>[[${tourInfo.description}]]</p>
+    </div>
+</div>
+
+<div class="roberto-rooms-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="tourDetail,iter : ${tourDetails.content}">
+                        <tr th:style="${iter.odd}? 'background-color: #ccc; color: #000;'">
+                            <th scope="row" th:text="${iter.index + 1}"></th>
+                            <td th:text="${tourDetail.duration}"></td>
+                            <td th:text="${tourDetail.price}"></td>
+                            <td>
+                                <a class="btn btn-warning"
+                                   th:href="@{'/tourDetail/' + ${tourDetail.id} + '/edit'}">Edit</a>
+                                <a class="btn btn-danger" th:method="delete"
+                                   th:href="@{'/tourDetail/' + ${tourDetail.id} + '/delete'} ">Delete</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+
+                <nav class="roberto-pagination wow fadeInUp mb-100"
+                     data-wow-delay="1000ms">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" th:href="@{#}">1</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">2</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">3</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">Next
+                            <i class="fa fa-angle-right"></i>
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

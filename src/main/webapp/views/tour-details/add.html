@@ -13,7 +13,7 @@
          th:data-img-url="@{/assets/img/bg-img/16.jpg}">
         <div class="col-10 mx-auto card card-signin pt-4">
             <h4 class="card-title text-center">Create Tour Detail for [[${tourDetail.tour.name}]]</h4>
-            <form th:action="@{/tour-details}" th:object="${tourDetail}" class="form-horizontal "
+            <form th:action="@{'/tours/'+${tourDetail.tourId}+'/tour-details'}" th:object="${tourDetail}" class="form-horizontal "
                   method="post">
 
                 <input type="hidden" th:field="${tourDetail.tourId}"/>

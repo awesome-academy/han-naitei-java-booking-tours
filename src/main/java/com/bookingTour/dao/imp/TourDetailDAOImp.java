@@ -19,4 +19,13 @@ public class TourDetailDAOImp extends GenericDAOImp<TourDetail, Long> implements
         super(TourDetail.class);
     }
 
+    @Override
+    public Page<TourDetail> paginate(TourDetailInfo tourDetailInfo, String query, Map<String, Object> params) {
+        String countSql = "SELECT COUNT(*) " + query;
+        SearchQueryTemplate searchQueryTemplate = new SearchQueryTemplate(query, countSql, tourDetailInfo.getPageable());
+        searchQueryTemplate.addParameters(params);
+        searchQueryTemplate.addOrder(Sort.Direction.DESC, "createTime");
+        return paginate(searchQueryTemplate);
+    }
+
 }

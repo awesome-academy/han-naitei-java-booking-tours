@@ -4,7 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>New Tour Detail</title>
+    <title>Update Tour Detail</title>
 </head>
 <body>
 <div class="welcome-slides owl-carousel">
@@ -12,9 +12,9 @@
          th:style=" 'background-image:url(' + @{/assets/img/bg-img/17.jpg} +');' "
          th:data-img-url="@{/assets/img/bg-img/16.jpg}">
         <div class="col-10 mx-auto card card-signin pt-4">
-            <h4 class="card-title text-center">Create Tour Detail for [[${tourDetail.tour.name}]]</h4>
-            <form th:action="@{'/admin/tours/'+${tourDetail.tourId}+'/tour-details'}" th:object="${tourDetail}" class="form-horizontal "
-                  method="post">
+            <h4 class="card-title text-center">Update Tour Detail for [[${tourDetail.tour.name}]]</h4>
+            <form th:action="@{'/admin/tours/'+${tourDetail.tour.id}+'/tour-details/'+${tourDetail.id}}" th:object="${tourDetail}" class="form-horizontal "
+                  th:method="PUT">
                 <input type="hidden" th:field="${tourDetail.tourId}"/>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Tour

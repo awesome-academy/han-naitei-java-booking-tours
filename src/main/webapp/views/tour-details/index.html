@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
         th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
-        xmlns:th="http://www.thymeleaf.org"
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Tour Details</title>
@@ -35,22 +35,28 @@
         Starting Gate: <span>[[${tourInfo.startPoint}]]</span>
     </h6>
 </div>
-    <div class="text-center">
+<div class="text-center">
     Description: <p>[[${tourInfo.description}]]</p>
-    </div>
+</div>
 </div>
 
 <div class="roberto-rooms-area section-padding-100-0">
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-12">
+                <div sec:authorize="hasAuthority('ADMIN')" class="col-sm-3">
+                    <form th:method="GET"
+                          th:action="@{'/admin/tours/'+${tourInfo.id}+'/tour-details/add'}">
+                        <input class="btn btn-success" type="submit" value="Add"/>
+                    </form>
+                </div>
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Duration</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Action</th>
+                        <th sec:authorize="isAuthenticated()" scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,11 +65,22 @@
                             <th scope="row" th:text="${iter.index + 1}"></th>
                             <td th:text="${tourDetail.duration}"></td>
                             <td th:text="${tourDetail.price}"></td>
-                            <td>
-                                <a class="btn btn-warning"
-                                   th:href="@{'/tourDetail/' + ${tourDetail.id} + '/edit'}">Edit</a>
-                                <a class="btn btn-danger" th:method="delete"
-                                   th:href="@{'/tourDetail/' + ${tourDetail.id} + '/delete'} ">Delete</a>
+                            <td sec:authorize="hasAuthority('ADMIN')" class="d-flex flex-row">
+                                <form th:method="GET"
+                                      th:action="@{'/admin/tours/'+${tourInfo.id}+'/tour-details/' + ${tourDetail.id} + '/edit'}">
+                                    <input class="btn btn-warning" type="submit" value="Edit"/>
+                                </form>
+                                &nbsp;
+                                <form th:method="DELETE"
+                                      th:action="@{'/admin/tours/'+${tourInfo.id}+'/tour-details/' + ${tourDetail.id}}">
+                                    <input class="btn btn-danger" type="submit" value="Delete"/>
+                                </form>
+                            </td>
+                            <td sec:authorize="hasAuthority('USER')" class="d-flex flex-row">
+                                <form th:method="GET"
+                                      th:action="@{'/'+${(#authentication.getPrincipal()).getUser().getId()}+'/booking-requests/'+${tourDetail.id}+'/add'}">
+                                    <input class="btn btn-success" type="submit" value="Book this"/>
+                                </form>
                             </td>
                         </tr>
                     </th:block>

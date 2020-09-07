@@ -42,7 +42,7 @@ public class UsersController {
     public String show(@PathVariable Long id, Model model) {
         UserModel user = userServiceImp.findUser(id);
         if (user == null)
-            return "error";
+            return "templates/error";
         model.addAttribute("user", user);
         return "users/show";
     }
@@ -51,7 +51,7 @@ public class UsersController {
     public String edit(@PathVariable Long id, Model model) {
         UserModel user = userServiceImp.findUser(id);
         if (user == null)
-            return "error";
+            return "templates/error";
         model.addAttribute("user", user);
         return "users/edit";
     }
@@ -71,7 +71,7 @@ public class UsersController {
     public String changePassword(@PathVariable Long id, Model model) {
         UserModel user = userServiceImp.findUser(id);
         if (user == null)
-            return "error";
+            return "templates/error";
         model.addAttribute("user", user);
         return "users/password";
     }
@@ -85,5 +85,26 @@ public class UsersController {
         }
         UserModel user = userServiceImp.changePassword(userModel);
         return "redirect:/users/" + user.getId();
+    }
+
+    @GetMapping(value = {"/", "/list"})
+    public String list(Locale locale, Model model) {
+        model.addAttribute("users", userServiceImp.findAll());
+        return "users/list";
+    }
+
+    @GetMapping(value = "/{id}/delete")
+    public String delete(@PathVariable("id") Long id, final RedirectAttributes redirectAttributes) throws Exception {
+        UserModel user = userServiceImp.findUser(id);
+        if (user == null)
+            return "templates/error";
+        if (userServiceImp.deleteUser(user)) {
+            redirectAttributes.addFlashAttribute("css", "success");
+            redirectAttributes.addFlashAttribute("msg", "Delete user successfully!");
+        } else {
+            redirectAttributes.addFlashAttribute("css", "error");
+            redirectAttributes.addFlashAttribute("msg", "Delete user failed!");
+        }
+        return "redirect:/users/list";
     }
 }

@@ -1,100 +1,96 @@
 <!DOCTYPE html>
 <html th:fragment="layout (title, content)"
-	xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
 <body>
-	<footer th:fragment="footer" class="footer-area">
-		<!-- Main Footer Area -->
-		<div class="main-footer-area">
-			<div class="container">
-				<div class="row align-items-baseline justify-content-between">
-					<!-- Single Footer Widget Area -->
-					<div class="col-12 col-sm-6 col-lg-3">
-						<div class="single-footer-widget">
-							<!-- Footer Logo -->
-							<a th:href="@{#}" class="footer-logo"><img
-								th:src="@{/assets/img/core-img/logo2.png}" alt=""></a>
-						</div>
-					</div>
-
-					<!-- Single Footer Widget Area -->
-					<div class="col-12 col-sm-6 col-lg-3">
-						<div class="single-footer-widget mb-10">
-							<!-- Widget Title -->
-							<h5 class="widget-title">Our Blog</h5>
-
-							<!-- Single Blog Area -->
-							<div class="latest-blog-area">
-								<a th:href="@{#}" class="post-title">Freelance Design Tricks
-									How</a> <span class="post-date"><i class="fa fa-clock-o"
-									aria-hidden="true"></i> Jan 02, 2019</span>
-							</div>
-
-							<!-- Single Blog Area -->
-							<div class="latest-blog-area">
-								<a th:href="@{#}" class="post-title">Free Advertising For
-									Your Online</a> <span class="post-date"><i
-									class="fa fa-clock-o" aria-hidden="true"></i> Jan 02, 2019</span>
-							</div>
-						</div>
-					</div>
-
-					<!-- Single Footer Widget Area -->
-					<div class="col-12 col-sm-4 col-lg-2">
-						<div class="single-footer-widget mb-10">
-							<!-- Widget Title -->
-							<h5 class="widget-title">Links</h5>
-
-							<!-- Footer Nav -->
-							<ul class="footer-nav">
-								<li><a th:href="@{#}"><i class="fa fa-caret-right"
-										aria-hidden="true"></i> About Us</a></li>
-								<li><a th:href="@{#}"><i class="fa fa-caret-right"
-										aria-hidden="true"></i> Our Room</a></li>
-								<li><a th:href="@{#}"><i class="fa fa-caret-right"
-										aria-hidden="true"></i> Career</a></li>
-								<li><a th:href="@{#}"><i class="fa fa-caret-right"
-										aria-hidden="true"></i> FAQs</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<!-- Single Footer Widget Area -->
-					<div class="col-12 col-sm-8 col-lg-4">
-						<div class="single-footer-widget mb-10">
-							<!-- Widget Title -->
-							<h5 class="widget-title">Subscribe Newsletter</h5>
-							<span>Subscribe our newsletter gor get notification about
-								new updates.</span>
-
-							<!-- Newsletter Form -->
-							<form th:action="@{#}" class="nl-form">
-								<input type="email" class="form-control"
-									placeholder="Enter your email...">
-								<button type="submit">
-									<i class="fa fa-paper-plane" aria-hidden="true"></i>
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Copywrite Area -->
+<footer th:fragment="footer" class="footer-area">
+	<!-- Main Footer Area -->
+	<div class="main-footer-area">
 		<div class="container">
-			<div class="copywrite-content">
-				<div class="row align-items-center">
-					<div class="col-12 col-md-8">
-						<!-- Copywrite Text -->
-						<div class="copywrite-text">
-							<p>Contact us: zovivo@leuleu.com</p>
-						</div>
+			<div class="row align-items-baseline justify-content-between">
+				<!-- Single Footer Widget Area -->
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="single-footer-widget">
+						<!-- Footer Logo -->
+						<a th:href="@{/home}" class="footer-logo"><img
+								th:src="@{/assets/img/core-img/logo2.png}" alt=""></a>
+					</div>
+				</div>
+
+				<!-- Single Footer Widget Area -->
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="single-footer-widget mb-10">
+						<!-- Widget Title -->
+						<h5 class="widget-title">Our Owners</h5>
+
+						<ul class="footer-nav">
+							<li><a th:href="@{https://github.com/nguyenvietngocquang}" class="text-white-50">
+								Nguyen Viet Ngoc Quang</a></li>
+							<li><a th:href="@{https://github.com/zovivo}" class="text-white-50">
+								Tran Manh Cong</a></li>
+							<li><a th:href="@{https://github.com/Ti-amo}" class="text-white-50">
+								Phung The Hung</a></li>
+							<li><a th:href="@{https://github.com/nguyenhuyphan681998}" class="text-white-50">
+								Nguyen Huy Phan</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Single Footer Widget Area -->
+				<div class="col-12 col-sm-4 col-lg-2">
+					<div class="single-footer-widget mb-10">
+						<!-- Widget Title -->
+						<h5 class="widget-title">Links</h5>
+
+						<!-- Footer Nav -->
+						<ul class="footer-nav">
+							<li><a th:href="@{'/home'}"><i class="fa fa-caret-right"
+														   aria-hidden="true"></i> Home</a></li>
+							<li><a th:href="@{'/tours'}"><i class="fa fa-caret-right"
+															aria-hidden="true"></i> Tours</a></li>
+							<li><a th:href="@{'/about'}"><i class="fa fa-caret-right"
+															aria-hidden="true"></i> About us</a></li>
+							<li><a th:href="@{'/contact'}"><i class="fa fa-caret-right"
+															  aria-hidden="true"></i> Contact</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Single Footer Widget Area -->
+				<div class="col-12 col-sm-8 col-lg-4">
+					<div class="single-footer-widget mb-10">
+						<!-- Widget Title -->
+						<h5 class="widget-title">Subscribe Newsletter</h5>
+						<span>Subscribe our newsletter gor get notification about new updates.</span>
+
+						<!-- Newsletter Form -->
+						<form th:action="@{#}" class="nl-form">
+							<input type="email" class="form-control"
+								   placeholder="Enter your email...">
+							<button type="submit">
+								<i class="fa fa-paper-plane" aria-hidden="true"></i>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-	</footer>
+	</div>
+
+	<!-- Copywrite Area -->
+	<div class="container">
+		<div class="copywrite-content">
+			<div class="row align-items-center">
+				<div class="col-12 col-md-8">
+					<!-- Copywrite Text -->
+					<div class="copywrite-text">
+						<p>Copyright ©2020 All rights reserved</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
 </body>
 </html>

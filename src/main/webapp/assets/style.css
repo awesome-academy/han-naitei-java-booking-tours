@@ -35,8 +35,8 @@ Last Update: Feb 9, 2019
 --------------------------------------------- */
 /* Import Fonts & All CSS */
 @import
-	url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700")
-	;
+url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700")
+;
 
 @import url(css/bootstrap.min.css);
 
@@ -439,37 +439,20 @@ textarea:focus, input:focus {
 	left: 3.5em;
 }
 
-@
--webkit-keyframes load7 { 0%, 80%, 100% {
+@-webkit-keyframes load7 { 0%, 80%, 100% {
 	box-shadow: 0 2.5em 0 -1.3em;
 }
+	40% {
+		box-shadow: 0 2.5em 0 0;
+	}
+}
 
-40
-%
-{
-box-shadow
-:
-0
-2.5em
-0
-0;
-}
-}
-@
-keyframes load7 { 0%, 80%, 100% {
+@keyframes load7 { 0%, 80%, 100% {
 	box-shadow: 0 2.5em 0 -1.3em;
 }
-
-40
-%
-{
-box-shadow
-:
-0
-2.5em
-0
-0;
-}
+	40% {
+		box-shadow: 0 2.5em 0 0;
+	}
 }
 
 /* :: 4.0 Heading Area CSS */
@@ -734,7 +717,7 @@ box-shadow
 }
 
 .top-header-area .top-header-content>a:hover, .top-header-area .top-header-content>a:focus
-	{
+{
 	color: #afb4bf;
 }
 
@@ -757,7 +740,7 @@ box-shadow
 }
 
 .top-header-area .top-header-content .top-social-area a:hover,
-	.top-header-area .top-header-content .top-social-area a:focus {
+.top-header-area .top-header-content .top-social-area a:focus {
 	color: #1cc3b2;
 }
 
@@ -814,7 +797,7 @@ box-shadow
 		color: #2a303b;
 	}
 	.classy-nav-container .classy-navbar .classynav ul li a:hover,
-		.classy-nav-container .classy-navbar .classynav ul li a:focus {
+	.classy-nav-container .classy-navbar .classynav ul li a:focus {
 		color: #1cc3b2;
 	}
 }
@@ -825,20 +808,20 @@ box-shadow
 		color: #2a303b;
 	}
 	.classy-nav-container .classy-navbar .classynav ul li a:hover,
-		.classy-nav-container .classy-navbar .classynav ul li a:focus {
+	.classy-nav-container .classy-navbar .classynav ul li a:focus {
 		color: #1cc3b2;
 	}
 }
 
 .classy-nav-container .classy-navbar .classynav ul li a:focus,
-	.classy-nav-container .classy-navbar .classynav ul li a:hover {
+.classy-nav-container .classy-navbar .classynav ul li a:hover {
 	color: #afb4bf;
 	font-weight: 500;
 }
 
 .classy-nav-container .classy-navbar .classynav ul li.cn-dropdown-item ul li a,
-	.classy-nav-container .classy-navbar .classynav ul li.megamenu-item ul li a
-	{
+.classy-nav-container .classy-navbar .classynav ul li.megamenu-item ul li a
+{
 	font-size: 14px;
 	text-transform: capitalize;
 	height: 42px;
@@ -848,10 +831,10 @@ box-shadow
 }
 
 .classy-nav-container .classy-navbar .classynav ul li.cn-dropdown-item ul li a:focus,
-	.classy-nav-container .classy-navbar .classynav ul li.cn-dropdown-item ul li a:hover,
-	.classy-nav-container .classy-navbar .classynav ul li.megamenu-item ul li a:focus,
-	.classy-nav-container .classy-navbar .classynav ul li.megamenu-item ul li a:hover
-	{
+.classy-nav-container .classy-navbar .classynav ul li.cn-dropdown-item ul li a:hover,
+.classy-nav-container .classy-navbar .classynav ul li.megamenu-item ul li a:focus,
+.classy-nav-container .classy-navbar .classynav ul li.megamenu-item ul li a:hover
+{
 	color: #1cc3b2;
 }
 
@@ -884,12 +867,12 @@ box-shadow
 }
 
 .classynav ul li.has-down>a::after, .classynav ul li.has-down.active>a::after,
-	.classynav ul li.megamenu-item>a::after {
+.classynav ul li.megamenu-item>a::after {
 	color: #2a303b;
 }
 
 .breakpoint-off .classynav ul li .dropdown, .breakpoint-off .classynav ul li .megamenu
-	{
+{
 	width: 210px;
 	-webkit-box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
 	box-shadow: 0 2px 40px 8px rgba(15, 15, 15, 0.15);
@@ -941,7 +924,7 @@ box-shadow
 }
 
 .main-header-area .book-now-btn a:hover, .main-header-area .book-now-btn a:focus
-	{
+{
 	background-color: #2a303b;
 	color: #ffffff;
 }
@@ -966,7 +949,7 @@ box-shadow
 }
 
 .main-header-area .search-btn:hover, .main-header-area .search-btn:focus
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -1022,7 +1005,7 @@ box-shadow
 }
 
 .welcome-slides:hover .owl-prev, .welcome-slides:hover .owl-next,
-	.welcome-slides:focus .owl-prev, .welcome-slides:focus .owl-next {
+.welcome-slides:focus .owl-prev, .welcome-slides:focus .owl-next {
 	opacity: 1;
 	visibility: visible;
 }
@@ -1141,7 +1124,7 @@ box-shadow
 }
 
 .single-footer-widget .latest-blog-area .post-title:focus,
-	.single-footer-widget .latest-blog-area .post-title:hover {
+.single-footer-widget .latest-blog-area .post-title:hover {
 	color: #1cc3b2;
 }
 
@@ -1160,7 +1143,7 @@ box-shadow
 }
 
 .single-footer-widget .footer-nav li a:focus, .single-footer-widget .footer-nav li a:hover
-	{
+{
 	color: #ffffff;
 }
 
@@ -1206,7 +1189,7 @@ box-shadow
 }
 
 .single-footer-widget .nl-form button:focus, .single-footer-widget .nl-form button:hover
-	{
+{
 	background-color: #2a303b;
 }
 
@@ -1297,7 +1280,7 @@ box-shadow
 }
 
 .copywrite-content .social-info a:focus, .copywrite-content .social-info a:hover
-	{
+{
 	color: #ffffff;
 }
 
@@ -1506,13 +1489,13 @@ box-shadow
 }
 
 .roberto-testimonials-area .single-testimonial-slide .rating-title .rating
-	{
+{
 	display: block;
 	margin-bottom: 10px;
 }
 
 .roberto-testimonials-area .single-testimonial-slide .rating-title .rating i
-	{
+{
 	color: #f5b917;
 	font-size: 14px;
 }
@@ -1522,7 +1505,7 @@ box-shadow
 }
 
 .roberto-testimonials-area .single-testimonial-slide .rating-title h6 span
-	{
+{
 	color: #1cc3b2;
 	font-size: 14px;
 	font-weight: 400;
@@ -1814,7 +1797,7 @@ box-shadow
 }
 
 .rooms-slides .owl-prev:hover, .rooms-slides .owl-prev:focus,
-	.rooms-slides .owl-next:hover, .rooms-slides .owl-next:focus {
+.rooms-slides .owl-next:hover, .rooms-slides .owl-next:focus {
 	background-color: #1cc3b2 !important;
 	color: #ffffff;
 }
@@ -1957,7 +1940,7 @@ box-shadow
 }
 
 .single-room-area .room-content .view-detail-btn:hover,
-	.single-room-area .room-content .view-detail-btn:focus {
+.single-room-area .room-content .view-detail-btn:focus {
 	color: #000000;
 }
 
@@ -2047,8 +2030,8 @@ box-shadow
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default,
-	.ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover,
-	html .ui-button.ui-state-disabled:active {
+.ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
 	border: 1px solid #1cc3b2;
 	background: #1cc3b2;
 }
@@ -2240,14 +2223,14 @@ box-shadow
 }
 
 .room-review-area .single-room-review-area .reviwer-content .reviwer-title
-	{
+{
 	position: relative;
 	z-index: 1;
 	margin-bottom: 10px;
 }
 
 .room-review-area .single-room-review-area .reviwer-content .reviwer-title span
-	{
+{
 	font-size: 14px;
 	display: block;
 	margin-bottom: 10px;
@@ -2256,33 +2239,33 @@ box-shadow
 
 @media only screen and (max-width: 767px) {
 	.room-review-area .single-room-review-area .reviwer-content .reviwer-title span
-		{
+	{
 		font-size: 12px;
 	}
 }
 
 .room-review-area .single-room-review-area .reviwer-content .reviwer-title h6
-	{
+{
 	color: #1cc3b2;
 	margin-bottom: 0;
 }
 
 @media only screen and (max-width: 767px) {
 	.room-review-area .single-room-review-area .reviwer-content .reviwer-title h6
-		{
+	{
 		font-size: 14px;
 	}
 }
 
 .room-review-area .single-room-review-area .reviwer-content .reviwer-rating i
-	{
+{
 	color: #f5b917;
 	font-size: 14px;
 }
 
 @media only screen and (max-width: 767px) {
 	.room-review-area .single-room-review-area .reviwer-content .reviwer-rating i
-		{
+	{
 		font-size: 12px;
 	}
 }
@@ -2349,7 +2332,7 @@ box-shadow
 }
 
 .about-us-thumbnail .single-thumb:hover img, .about-us-thumbnail .single-thumb:focus img
-	{
+{
 	-webkit-transform: scale(1.15);
 	-ms-transform: scale(1.15);
 	transform: scale(1.15);
@@ -2383,7 +2366,7 @@ box-shadow
 }
 
 .single-service-area:hover .service-title, .single-service-area:focus .service-title
-	{
+{
 	background-color: #2a303b;
 }
 
@@ -2608,7 +2591,7 @@ box-shadow
 }
 
 .roberto--video--area .video-content-area .video-play-btn:hover,
-	.roberto--video--area .video-content-area .video-play-btn:focus {
+.roberto--video--area .video-content-area .video-play-btn:focus {
 	background-color: #1cc3b2;
 	color: #ffffff;
 }
@@ -2891,7 +2874,7 @@ box-shadow
 }
 
 .single-recent-post .post-content .post-title:hover, .single-recent-post .post-content .post-title:focus
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -2925,7 +2908,7 @@ box-shadow
 }
 
 .single-recent-post .post-content .post-meta a:hover,
-	.single-recent-post .post-content .post-meta a:focus {
+.single-recent-post .post-content .post-meta a:focus {
 	color: #000000;
 }
 
@@ -3042,12 +3025,12 @@ box-shadow
 }
 
 .breadcrumb-content .breadcrumb .breadcrumb-item a:hover,
-	.breadcrumb-content .breadcrumb .breadcrumb-item a:focus {
+.breadcrumb-content .breadcrumb .breadcrumb-item a:focus {
 	color: #1cc3b2;
 }
 
 .breadcrumb-content .breadcrumb .breadcrumb-item+.breadcrumb-item::before
-	{
+{
 	content: '\f105';
 	font-family: "FontAwesome";
 	color: #ffffff;
@@ -3090,7 +3073,7 @@ box-shadow
 }
 
 .single-post-area .post-meta a:hover, .single-post-area .post-meta a:focus
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -3102,7 +3085,7 @@ box-shadow
 }
 
 .single-post-area .post-title:hover, .single-post-area .post-title:focus
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -3117,7 +3100,7 @@ box-shadow
 }
 
 .single-post-area:hover .post-title, .single-post-area:focus .post-title
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -3198,7 +3181,7 @@ box-shadow
 }
 
 .single-blog-post .post-content .post-title:hover, .single-blog-post .post-content .post-title:focus
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -3238,7 +3221,7 @@ box-shadow
 }
 
 .single-blog-post .post-content .post-meta a:hover, .single-blog-post .post-content .post-meta a:focus
-	{
+{
 	color: #000000;
 }
 
@@ -3314,7 +3297,7 @@ box-shadow
 }
 
 .breadcrumb-post-content .post-meta a:hover, .breadcrumb-post-content .post-meta a:focus
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -3418,7 +3401,7 @@ box-shadow
 }
 
 .post-author-area .author-social-info a:hover, .post-author-area .author-social-info a:focus
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -3511,7 +3494,7 @@ box-shadow
 }
 
 .single-related-news .post-title:hover, .single-related-news .post-title:focus
-	{
+{
 	color: #1cc3b2;
 }
 
@@ -3602,7 +3585,7 @@ box-shadow
 }
 
 .comment_area .comment-content .comment-meta a.like, .comment_area .comment-content .comment-meta a.reply
-	{
+{
 	display: inline-block;
 	padding: 5px 25px 3px;
 	font-size: 12px;
@@ -3613,8 +3596,8 @@ box-shadow
 }
 
 .comment_area .comment-content .comment-meta a.like:focus, .comment_area .comment-content .comment-meta a.like:hover,
-	.comment_area .comment-content .comment-meta a.reply:focus,
-	.comment_area .comment-content .comment-meta a.reply:hover {
+.comment_area .comment-content .comment-meta a.reply:focus,
+.comment_area .comment-content .comment-meta a.reply:hover {
 	border-color: #1cc3b2;
 	background-color: #1cc3b2;
 	color: #ffffff;

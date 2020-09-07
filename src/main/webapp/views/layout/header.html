@@ -8,7 +8,7 @@
     <!-- Search Form -->
     <div class="search-form d-flex align-items-center">
         <div class="container">
-            <form th:action="@{/page/home}" method="get">
+            <form th:action="@{/home}" method="get">
                 <input type="search" name="search-form-input" id="searchFormInput"
                        placeholder="Type your keyword ...">
                 <button type="submit">
@@ -48,7 +48,7 @@
                 <nav class="classy-navbar justify-content-between" id="robertoNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" th:href="@{/}"><img
+                    <a class="nav-brand" th:href="@{/home}"><img
                             th:src="@{/img/core-img/logo.png}" alt=""></a>
 
                     <!-- Navbar Toggler -->
@@ -67,12 +67,10 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul id="nav">
-                                <li class="active"><a th:href="@{/page/home}">Home</a></li>
-                                <li><a th:href="@{/page/room}">Tours</a></li>
-                                <li><a th:href="@{/page/blog}">Destinations</a></li>
-                                <li><a th:href="@{/page/blog}">Reviews</a></li>
-                                <li><a th:href="@{#}">About us</a>
-                                <li><a th:href="@{/page/contact}">Contact</a></li>
+                                <li class="active"><a th:href="@{/home}">Home</a></li>
+                                <li><a th:href="@{/tours}">Tours</a></li>
+                                <li><a th:href="@{/about}">About us</a>
+                                <li><a th:href="@{/contact}">Contact</a></li>
                             </ul>
 
                             <!-- Search -->

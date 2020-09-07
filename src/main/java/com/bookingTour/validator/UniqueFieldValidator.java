@@ -3,7 +3,7 @@ package com.bookingTour.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.bookingTour.service.imp.UserServiceImp;
+import com.bookingTour.service.UserService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class UniqueFieldValidator implements ConstraintValidator<UniqueField, Ob
     private String message;
 
     @Autowired
-    UserServiceImp userServiceImp;
+    UserService userServiceImp;
 
     @Override
     public void initialize(final UniqueField constraintAnnotation) {

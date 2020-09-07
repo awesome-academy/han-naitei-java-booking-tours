@@ -4,8 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-    <bean id="userServiceImp" class="com.bookingTour.service.imp.UserServiceImp">
-        <property name="userDAOImp" ref="userDAOImp"/>
+    <bean id="userService" class="com.bookingTour.service.imp.UserServiceImp">
+        <property name="userDAO" ref="userDAOImp"/>
     </bean>
 
     <bean id="tourService" class="com.bookingTour.service.imp.TourServiceImp">

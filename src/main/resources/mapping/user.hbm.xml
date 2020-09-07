@@ -11,6 +11,9 @@
         <property name="userName" column="user_name" type="java.lang.String"/>
         <property name="email" column="email" type="java.lang.String"/>
         <property name="password" column="password" type="java.lang.String"/>
+        <property name="series" column="series" type="string"></property>
+        <property name="token" column="token" type="string"></property>
+        <property name="lastUsed" column="last_used" type="timestamp"></property>
         <property name="name" column="name" type="java.lang.String"/>
         <property name="avatar" column="avatar" type="java.lang.String"/>
         <property name="phoneNumber" column="phone_number" type="java.lang.String" length="11"/>

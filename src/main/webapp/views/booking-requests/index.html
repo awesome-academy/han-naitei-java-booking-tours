@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html
+        th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Booking Request</title>
+</head>
+<body>
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area bg-img bg-overlay jarallax"
+     th:style=" 'background-image:url(' + @{/assets/img/bg-img/16.jpg} +');' ">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">Booking Request</h2>
+                    <nav aria-label="breadcrumb">
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hotel-search-form-area">
+    <div class="container-fluid">
+        <div class="hotel-search-form">
+            <form th:method="POST"th:action="${#authorization.expression('hasAuthority(''ADMIN'')')} == true ?( @{'/admin/booking-requests/search'} ): @{'/'+${(#authentication.getPrincipal()).getUser().getId()}+'/booking-requests/search'}"
+                  th:object="${bookingRequestSearch}">
+                <div class="row justify-content-between align-items-end">
+                    <div class="col-8 col-md-3">
+                        <label for="tourName">Tour name: </label>
+                        <input th:field="*{tourName}" type="text" class="form-control" id="tourName">
+                    </div>
+                    <div sec:authorize="hasAuthority('ADMIN')" class="col-4 col-md-3">
+                        <label for="userName">User name:</label>
+                        <input th:field="*{userName}" type="text" class="form-control" id="userName">
+                    </div>
+                    <div class="col-4 col-md-2">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control" th:field="*{status}" >
+                            <option value=""></option>
+                            <option th:each="status : ${T(com.bookingTour.model.enu.Status).values()}"
+                                    th:value="${status}" th:text="${status.name()}"></option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <button type="submit" class="form-control btn roberto-btn w-100">Find booking request
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="roberto-rooms-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tour Name</th>
+                        <th sec:authorize="hasAuthority('ADMIN')" scope="col">User Name</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="bookingRequest,iter : ${bookingRequests.content}">
+                        <tr th:style="${iter.odd}? 'background-color: #ccc; color: #000;'">
+                            <th scope="row" th:text="${iter.index + 1}"></th>
+                            <td>
+                                <a th:href="@{'/tours/'+${bookingRequest.tourDetail.tour.id}}">[[${bookingRequest.tourDetail.tour.name}]]</a>
+                            </td>
+                            <td sec:authorize="hasAuthority('ADMIN')" th:text="${bookingRequest.user.userName}"></td>
+                            <td th:text="${bookingRequest.tourDetail.duration}"></td>
+                            <td th:text="${bookingRequest.tourDetail.price}"></td>
+                            <td th:text="${bookingRequest.status}"></td>
+                            <td th:text="${bookingRequest.startDate}"></td>
+                            <td class="d-flex flex-row"
+                                th:if="${bookingRequest.status.name() != 'APPROVED' and bookingRequest.status.name() != 'REJECTED' and #authorization.expression('hasAuthority(''USER'')') }">
+                                <form th:method="GET"
+                                      th:action="@{'/'+${(#authentication.getPrincipal()).getUser().getId()}+'/booking-requests/'+${bookingRequest.id}+'/edit'}">
+                                    <input class="btn btn-warning" type="submit" value="Edit"/>
+                                </form>
+                                &nbsp;
+                                <form th:method="DELETE"
+                                      th:action="@{'/'+${(#authentication.getPrincipal()).getUser().getId()}+'/booking-requests/'+${bookingRequest.id}} ">
+                                    <input class="btn btn-danger" type="submit" value="Delete"/>
+                                </form>
+                            </td>
+                            <td th:if="${#authorization.expression('hasAuthority(''ADMIN'')') and bookingRequest.status.name() != 'CANCELLED' }">
+                                <a class="btn btn-warning"
+                                   th:href="@{'/admin/booking-requests/'+${bookingRequest.id}+'/edit'}">Edit</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+
+                <nav class="roberto-pagination wow fadeInUp mb-100"
+                     data-wow-delay="1000ms">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" th:href="@{#}">1</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">2</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">3</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">Next
+                            <i class="fa fa-angle-right"></i>
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

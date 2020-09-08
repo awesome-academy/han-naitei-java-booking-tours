@@ -27,4 +27,10 @@
         <property name="tourDAO" ref="tourDAO" />
         <property name="userDAO" ref="userDAOImp" />
     </bean>
+
+    <bean id="bookingService" class="com.bookingTour.service.imp.BookingRequestServiceImp">
+        <property name="bookingRequestDAO" ref="bookingRequestDAO" />
+        <property name="tourDetailDAO" ref="tourDetailDAO" />
+        <property name="userDAO" ref="userDAOImp" />
+    </bean>
 </beans>

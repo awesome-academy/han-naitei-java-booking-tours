@@ -23,5 +23,9 @@
     <bean id="reviewDAO" class="com.bookingTour.dao.imp.ReviewDAOImp">
         <property name="hibernateTemplate" ref="hibernateTemplate" />
     </bean>
+
+    <bean id="bookingRequestDAO" class="com.bookingTour.dao.imp.BookingRequestDAOImp">
+        <property name="hibernateTemplate" ref="hibernateTemplate" />
+    </bean>
     
 </beans>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html th:fragment="layout (title, content)"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <head>
 </head>
 <body>
@@ -10,7 +11,7 @@
         <div class="container">
             <form th:action="@{/home}" method="get">
                 <input type="search" name="search-form-input" id="searchFormInput"
-                       placeholder="Type your keyword ...">
+                       th:placeholder="#{header.search}">
                 <button type="submit">
                     <i class="icon_search"></i>
                 </button>
@@ -24,9 +25,15 @@
             <div class="row justify-content-end">
                 <div class="col-8">
                     <div class="top-header-content">
-                        <div class="top-social-area ml-auto">
-                            <a th:href="@{'/users/signin'}" th:text="#{user.signin}">Sign in</a>
-                            <a th:href="@{'/users/signup'}" th:text="#{user.signup}">Sign up</a>
+                        <div class="top-social-area ml-auto row">
+                            <div sec:authorize="isAuthenticated()" class="mr-4">
+                                <a th:href="@{'/login'}"><span sec:authentication="name"></span></a>
+                                <a th:href="@{'/logout'}" th:text="#{user.logout}">Log out</a>
+                            </div>
+                            <div sec:authorize="!isAuthenticated()" class="mr-4">
+                                <a th:href="@{'/login'}" th:text="#{user.signin}">Sign in</a>
+                                <a th:href="@{'/users/signup'}" th:text="#{user.signup}">Sign up</a>
+                            </div>
                             <a th:href="@{'?locale=en'}"><img alt="EN" width="34"
                                                               th:src="@{https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/259/flag-united-states_1f1fa-1f1f8.png}"/></a>
                             <a th:href="@{'?locale=vi'}"><img alt="VI" width="34"
@@ -67,10 +74,14 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul id="nav">
-                                <li class="active"><a th:href="@{/home}">Home</a></li>
-                                <li><a th:href="@{/tours}">Tours</a></li>
-                                <li><a th:href="@{/about}">About us</a>
-                                <li><a th:href="@{/contact}">Contact</a></li>
+                                <li class="active"><a th:href="@{/home}" th:text="#{header.home}">Home</a></li>
+                                <li><a th:href="@{/tours}" th:text="#{header.tours}">Tours</a></li>
+                                <li sec:authorize="hasAuthority('ADMIN')">
+                                    <a th:href="@{/admin/categories}" th:text="#{header.categories}">Categories</a></li>
+                                <li sec:authorize="hasAuthority('ADMIN')">
+                                    <a th:href="@{/admin/users}" th:text="#{header.users}">Users</a></li>
+                                <li><a th:href="@{/about}" th:text="#{header.about}">About us</a></li>
+                                <li><a th:href="@{/contact}" th:text="#{header.contact}">Contact</a></li>
                             </ul>
 
                             <!-- Search -->
@@ -80,8 +91,10 @@
 
                             <!-- Book Now -->
                             <div class="book-now-btn ml-3 ml-lg-5">
-                                <a th:href="@{#}">Book Now <i
-                                        class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                <a th:href="@{/tours}">
+                                    <span th:text="#{header.book}">Book Now</span>
+                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- Nav End -->

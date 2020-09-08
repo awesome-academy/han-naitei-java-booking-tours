@@ -22,15 +22,15 @@ import org.springframework.web.accept.ContentNegotiationStrategy;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	@Qualifier("accessDeniedHandler")
     private AccessDeniedHandler accessDeniedHandler;
-	
+
 	@Autowired
 	@Qualifier("authenticationSuccessHandler")
     private AuthenticationSuccessHandler authenticationSuccessHandler;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// TODO Auto-generated method stub
 		super.setContentNegotationStrategy(contentNegotiationStrategy);
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
@@ -52,10 +52,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/assets/**").permitAll()
 			.antMatchers("/error").permitAll()
 			.antMatchers("/access_denied").permitAll()
+            .antMatchers("/").permitAll()
 			.antMatchers("/home").permitAll()
 	        .antMatchers("/login").permitAll()
+            .antMatchers("/about").permitAll()
+            .antMatchers("/contact").permitAll()
 	        .antMatchers("/users/signup").permitAll()
-			.antMatchers(HttpMethod.GET, "/users").hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
+			.antMatchers("/users").hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
 			.antMatchers("/tours**/**").permitAll()
 			.antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
 	        .anyRequest().hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
@@ -70,16 +73,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
 	        .and().csrf();
 	}
-	
+
 	@Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**", "/css/**", "/js/**", "/img/**", "/webjars/**", "/images/**");
     }
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
 	}
-
 
 }

@@ -8,6 +8,7 @@ public class ReviewInfo extends BaseModel {
 	private TourInfo tour;
 	private Long userId;
 	private Long tourId;
+	private String tourName;
 	
 	public ReviewInfo() {
 	}
@@ -59,6 +60,14 @@ public class ReviewInfo extends BaseModel {
 
 	public void setTourId(Long tourId) {
 		this.tourId = tourId;
+	}
+
+	public String getTourName() {
+		return tourName;
+	}
+
+	public void setTourName(String tourName) {
+		this.tourName = tourName;
 	}
 	
 }

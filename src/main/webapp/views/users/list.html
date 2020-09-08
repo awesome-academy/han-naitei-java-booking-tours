@@ -39,8 +39,6 @@
                         <td>
                             <a class="btn btn-primary" th:text="#{user.list.detail}"
                                th:href="@{'/users/' + ${user.id}}">Detail</a>
-                            <a class="btn btn-warning" th:text="#{user.list.edit}"
-                               th:href="@{'/users/' + ${user.id} + '/edit'}">Edit</a>
                             <a class="btn btn-danger" data-toggle="modal" data-target="#modal-warning"
                                th:text="#{user.list.delete}" th:attr="data-target='#modal-warning'+${user.id}">
                                 Delete</a>
@@ -61,7 +59,7 @@
                                                     data-dismiss="modal">Close
                                             </button>
                                             <a type="button" class="btn btn-primary"
-                                               th:href="@{/users/{id}/delete(id=${user.id})}">Confirm</a>
+                                               th:href="@{/admin/users/{id}/delete(id=${user.id})}">Confirm</a>
                                         </div>
                                     </div>
                                 </div>

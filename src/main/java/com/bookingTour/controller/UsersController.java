@@ -1,9 +1,11 @@
 package com.bookingTour.controller;
 
+import com.bookingTour.model.CustomUserDetails;
 import com.bookingTour.model.UserModel;
-import com.bookingTour.service.imp.UserServiceImp;
+import com.bookingTour.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +22,7 @@ public class UsersController {
     private static final Logger logger = Logger.getLogger(UsersController.class);
 
     @Autowired
-    private UserServiceImp userServiceImp;
+    private UserService userService;
 
     @GetMapping(value = "/signup")
     public String add(Locale locale, Model model) {
@@ -34,77 +36,85 @@ public class UsersController {
         if (bindingResult.hasErrors()) {
             return "auth/signup";
         }
-        userServiceImp.addUser(userModel);
+        userService.addUser(userModel);
         return "redirect:/users/signin";
     }
 
     @GetMapping(value = "/{id}")
-    public String show(@PathVariable Long id, Model model) {
-        UserModel user = userServiceImp.findUser(id);
+    public String show(@PathVariable Long id, Model model, Authentication authentication) {
+        UserModel user = userService.findUser(id);
         if (user == null)
             return "templates/error";
+        if (authentication != null) {
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            if (userDetails.getUser().getId().equals(id)) {
+                model.addAttribute("isCurrentUser", true);
+            } else {
+                model.addAttribute("isCurrentUser", false);
+            }
+        }
         model.addAttribute("user", user);
         return "users/show";
     }
 
     @GetMapping(value = "/{id}/edit")
-    public String edit(@PathVariable Long id, Model model) {
-        UserModel user = userServiceImp.findUser(id);
+    public String edit(@PathVariable Long id, Model model, Authentication authentication) {
+        UserModel user = userService.findUser(id);
         if (user == null)
             return "templates/error";
+        String checkAccess = checkAccess(id, authentication);
+        if (checkAccess != null)
+            return checkAccess;
         model.addAttribute("user", user);
         return "users/edit";
     }
 
     @PutMapping(value = "/{id}/edit")
-    public String update(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
-                         Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+    public String update(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult, Model model,
+                         final RedirectAttributes redirectAttributes, HttpServletRequest request, Authentication authentication) throws Exception {
         logger.info("result" + bindingResult);
         if (bindingResult.hasErrors()) {
             return "users/edit";
         }
-        UserModel user = userServiceImp.editUser(userModel);
+        String checkAccess = checkAccess(userModel.getId(), authentication);
+        if (checkAccess != null)
+            return checkAccess;
+        UserModel user = userService.editUser(userModel);
         return "redirect:/users/" + user.getId();
     }
 
     @GetMapping(value = "/{id}/password")
-    public String changePassword(@PathVariable Long id, Model model) {
-        UserModel user = userServiceImp.findUser(id);
+    public String changePassword(@PathVariable Long id, Model model, Authentication authentication) {
+        UserModel user = userService.findUser(id);
         if (user == null)
             return "templates/error";
+        String checkAccess = checkAccess(id, authentication);
+        if (checkAccess != null)
+            return checkAccess;
         model.addAttribute("user", user);
         return "users/password";
     }
 
     @PutMapping(value = "/{id}/password")
-    public String updatePassword(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
-                                 Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+    public String updatePassword(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult, Model model,
+                                 final RedirectAttributes redirectAttributes, HttpServletRequest request, Authentication authentication) throws Exception {
         logger.info("result" + bindingResult);
         if (bindingResult.hasErrors()) {
             return "users/password";
         }
-        UserModel user = userServiceImp.changePassword(userModel);
+        String checkAccess = checkAccess(userModel.getId(), authentication);
+        if (checkAccess != null)
+            return checkAccess;
+        UserModel user = userService.changePassword(userModel);
         return "redirect:/users/" + user.getId();
     }
 
-    @GetMapping(value = {"/", "/list"})
-    public String list(Locale locale, Model model) {
-        model.addAttribute("users", userServiceImp.findAll());
-        return "users/list";
+    public String checkAccess(Long id, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        if (!userDetails.getUser().getId().equals(id)) {
+            return "templates/access_denied";
+        }
+        return null;
     }
 
-    @GetMapping(value = "/{id}/delete")
-    public String delete(@PathVariable("id") Long id, final RedirectAttributes redirectAttributes) throws Exception {
-        UserModel user = userServiceImp.findUser(id);
-        if (user == null)
-            return "templates/error";
-        if (userServiceImp.deleteUser(user)) {
-            redirectAttributes.addFlashAttribute("css", "success");
-            redirectAttributes.addFlashAttribute("msg", "Delete user successfully!");
-        } else {
-            redirectAttributes.addFlashAttribute("css", "error");
-            redirectAttributes.addFlashAttribute("msg", "Delete user failed!");
-        }
-        return "redirect:/users/list";
-    }
 }

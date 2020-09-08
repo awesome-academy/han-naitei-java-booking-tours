@@ -14,18 +14,18 @@ public class StaticPagesController {
     @GetMapping(value = {"", "/", "/home"})
     public String home(Locale locale, Model model) {
         logger.info("Home page");
-        return "static_pages/home";
+        return "static-pages/home";
     }
 
     @GetMapping(value = "/about")
     public String about(Locale locale, Model model) {
         logger.info("About page");
-        return "static_pages/about";
+        return "static-pages/about";
     }
 
     @GetMapping(value = "/contact")
     public String contact(Locale locale, Model model) {
         logger.info("Contact page");
-        return "static_pages/contact";
+        return "static-pages/contact";
     }
 }

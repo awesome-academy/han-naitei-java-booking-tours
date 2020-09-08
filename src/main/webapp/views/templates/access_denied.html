@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
- <title th:text="#{error.accessdenined.title}">Access denied</title>
+    <title>Access Denied</title>
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/img/core-img/favicon.png}">
+    <link rel="stylesheet" th:href="@{/assets/style.css}">
 </head>
+
 <body>
- <div class="container">
-  <h1 th:text="#{error.accessdenined.message}">Access denied</h1>
- </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>Oops!</h1>
+                <h2>403 - Access Denied</h2>
+                <div class="error-details">
+                    <h4>Sorry, you are not allowed to access this page!</h4>
+                    <p th:text="${errorMsg}">Error Message</p>
+                </div>
+                <img th:src="@{/assets/img/core-img/403.png}"/>
+                <div class="error-actions">
+                    <a th:href="@{/home}" class="btn btn-primary btn-lg">
+                        <i class="fa fa-home" aria-hidden="true"></i> Take Me Home</a>
+                    <a th:href="@{/contact}" class="btn btn-secondary btn-lg">
+                        <i class="fa fa-envelope" aria-hidden="true"></i> Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>

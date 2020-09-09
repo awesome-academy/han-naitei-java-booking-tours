@@ -67,17 +67,6 @@ public class CategoryController {
         return "redirect: " + request.getContextPath() + "/categories";
     }
 
-    @GetMapping(value = "/{id}")
-    public String show(@PathVariable Long id, Model model) {
-    	CategoryInfo category = categoryService.findCategory(id);
-    	if (category == null) {
-    		model.addAttribute("errorMsg", "Category not found");
-			return "templates/error";
-		}
-        model.addAttribute("category", category);
-        return "categories/show";
-    }
-
     @GetMapping(value = "{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
     	CategoryInfo category = categoryService.findCategory(id);
@@ -97,7 +86,7 @@ public class CategoryController {
             return "categories/edit";
         }
         CategoryInfo category = categoryService.editCategory(categoryInfo);
-        return "redirect: " + request.getContextPath() + "/categories/" + category.getId();
+        return "redirect: " + request.getContextPath() + "/categories/index";
     }
 
     @DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE })

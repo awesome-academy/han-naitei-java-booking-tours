@@ -4,7 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>New Tour</title>
+    <title th:text="#{title.tours.create}">Create Tour</title>
 </head>
 
 <body>
@@ -12,19 +12,19 @@
      th:style=" 'background-image:url(' + @{/assets/img/bg-img/17.jpg} +');' "
      th:data-img-url="@{/assets/img/bg-img/16.jpg}">
     <div class="col-10 mx-auto card card-signin pt-4">
-        <h4 class="card-title text-center">Create New Tour</h4>
+        <h4 class="card-title text-center" th:text="#{title.tours.create}">Create Tour</h4>
         <form action="#" th:action="@{/admin/tours}" th:object="${tour}" class="form-horizontal "
               method="post">
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">
-                    Tour name</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label"
+                       th:text="#{tour.name}">Tour Name</label>
                 <div class="col-sm-10">
                     <input th:field="*{name}" type="text" class="form-control" id="inputEmail3">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="category">
+                <label class="col-sm-2 col-form-label" for="category" th:text="#{tour.category}">
                     Category </label>
                 <div class="col-8 col-md-4">
                     <select id="categoryId" name="categoryId">
@@ -32,7 +32,7 @@
                                 th:text="${category.name}"></option>
                     </select>
                 </div>
-                <label class="col-sm-3 col-form-label" for="capacity">
+                <label class="col-sm-3 col-form-label" for="capacity" th:text="#{tour.capacity}">
                     Max Capacity</label>
                 <div class="col-3 col-md-3">
                     <input name="capacity" th:value="2" type="number" class="form-control"
@@ -41,15 +41,16 @@
             </div>
 
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Start point</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label" th:text="#{tour.start.point}">
+                    Start Point</label>
                 <div class="col-sm-10">
                     <input th:field="*{startPoint}" type="text" class="form-control" id="inputEmail3">
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="expectedDuration">
-                    Expected Duration </label>
+                <label class="col-sm-2 col-form-label" for="expectedDuration" th:text="#{tour.duration}">
+                    Duration</label>
                 <div class="col-3 col-md-3">
                     <input name="expectedDurationMin" th:value="1" type="number" class="form-control"
                            id="inputDurationMin" min="1" max="30">
@@ -63,7 +64,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="description">
+                <label class="col-sm-2 col-form-label" for="description" th:text="#{tour.description}">
                     Description </label>
                 <div class="col-sm-10">
                     <textarea th:field="*{description}" class="form-control" name="paragraph_text" rows="10"></textarea>

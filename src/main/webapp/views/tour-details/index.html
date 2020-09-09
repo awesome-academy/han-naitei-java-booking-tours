@@ -4,7 +4,7 @@
         xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Tour Details</title>
+    <title th:text="#{title.tours.details}">Tour Details</title>
 </head>
 <body>
 <!-- Breadcrumb Area Start -->
@@ -14,7 +14,7 @@
         <div class="row h-100 align-items-center">
             <div class="col-12">
                 <div class="breadcrumb-content text-center">
-                    <h2 class="page-title">Details for Tour [[${tourInfo.name}]] </h2>
+                    <h2 class="page-title">Tour [[${tourInfo.name}]] </h2>
                     <nav aria-label="breadcrumb">
                     </nav>
                 </div>
@@ -32,7 +32,7 @@
         Capacity: <span>Max person [[${tourInfo.capacity}]]</span>
     </h6>
     <h6>
-        Starting Gate: <span>[[${tourInfo.startPoint}]]</span>
+        Start Point: <span>[[${tourInfo.startPoint}]]</span>
     </h6>
 </div>
 <div class="text-center">
@@ -54,9 +54,9 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">Price</th>
-                        <th sec:authorize="isAuthenticated()" scope="col">Action</th>
+                        <th scope="col" th:text="#{tour.duration}">Duration</th>
+                        <th scope="col" th:text="#{tour.price}">Price</th>
+                        <th sec:authorize="isAuthenticated()" scope="col" th:text="#{tour.action}">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,18 +68,18 @@
                             <td sec:authorize="hasAuthority('ADMIN')" class="d-flex flex-row">
                                 <form th:method="GET"
                                       th:action="@{'/admin/tours/'+${tourInfo.id}+'/tour-details/' + ${tourDetail.id} + '/edit'}">
-                                    <input class="btn btn-warning" type="submit" value="Edit"/>
+                                    <input class="btn btn-warning" type="submit" th:value="#{tour.edit}"/>
                                 </form>
                                 &nbsp;
                                 <form th:method="DELETE"
                                       th:action="@{'/admin/tours/'+${tourInfo.id}+'/tour-details/' + ${tourDetail.id}}">
-                                    <input class="btn btn-danger" type="submit" value="Delete"/>
+                                    <input class="btn btn-danger" type="submit" th:value="#{tour.delete}"/>
                                 </form>
                             </td>
                             <td sec:authorize="hasAuthority('USER')" class="d-flex flex-row">
                                 <form th:method="GET"
                                       th:action="@{'/'+${(#authentication.getPrincipal()).getUser().getId()}+'/booking-requests/'+${tourDetail.id}+'/add'}">
-                                    <input class="btn btn-success" type="submit" value="Book this"/>
+                                    <input class="btn btn-success" type="submit" th:value="#{tour.book}"/>
                                 </form>
                             </td>
                         </tr>

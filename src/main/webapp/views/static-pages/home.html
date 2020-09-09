@@ -4,7 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Home</title>
+    <title th:text="#{title.home}">Home</title>
 </head>
 
 <body>
@@ -403,12 +403,12 @@
             <div class="row align-items-center">
                 <div class="col-12 col-md-7">
                     <div class="cta-text mb-50">
-                        <h2>Contact us now!</h2>
-                        <h6>Contact (+84) 345-678-999 to book directly or for advice</h6>
+                        <h2 th:text="#{contact.us.now}">Contact us now!</h2>
+                        <h6 th:text="#{contact.us.message}">Contact (+84) 345-678-999 to book directly or for advice</h6>
                     </div>
                 </div>
                 <div class="col-12 col-md-5 text-right">
-                    <a th:href="@{/contact}" class="btn roberto-btn mb-50">Contact Now</a>
+                    <a th:href="@{/contact}" class="btn roberto-btn mb-50" th:text="#{contact.now}">Contact Now</a>
                 </div>
             </div>
         </div>

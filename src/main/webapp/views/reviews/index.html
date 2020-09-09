@@ -4,7 +4,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>Reviews</title>
+<title th:text="#{title.reviews}">Reviews</title>
 </head>
 <body>
 	<!-- Breadcrumb Area Start -->
@@ -14,11 +14,11 @@
 			<div class="row h-100 align-items-center">
 				<div class="col-12">
 					<div class="breadcrumb-content text-center">
-						<h2 class="page-title">Reviews Pages</h2>
+						<h2 class="page-title" th:text="#{title.reviews}">Reviews</h2>
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb justify-content-center">
-								<li class="breadcrumb-item"><a th:href="@{#}">Home</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Review</li>
+								<li class="breadcrumb-item"><a th:href="@{/home}" th:text="#{title.home}">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page" th:text="#{title.reviews}">Reviews</li>
 							</ol>
 						</nav>
 					</div>
@@ -37,13 +37,13 @@
 						th:object="${reviewSearch}">
 						<div class="row justify-content-between align-items-end">
 							<div class="col-8 col-md-3 col-lg-4">
-								<label for="tourName">Search by Tour name: </label> <input
-									th:field="${reviewSearch.tourName}" type="text"
+								<label for="tourName" th:text="#{review.search.name}">Search By Tour Name</label>
+								<input th:field="${reviewSearch.tourName}" type="text"
 									class="form-control" id="tourName" name="tourName">
 							</div>
 							<div class="col-12 col-md-3">
-								<button type="submit" class="form-control btn roberto-btn w-100">Find
-									reviews</button>
+								<button type="submit" class="form-control btn roberto-btn w-100"
+										th:text="#{review.search}">Search Reviews</button>
 							</div>
 						</div>
 					</form>

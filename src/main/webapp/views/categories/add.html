@@ -1,21 +1,21 @@
 	<div th:fragment="AddForm(categoryAdd)"
 	class="col-10 mx-auto card card-signin pt-4">
-	<h4 class="card-title text-center">Create New Category</h4>
+	<h4 class="card-title text-center" th:text="#{category.create.title}">Create Category</h4>
 	<form th:action="@{/admin/categories/}" th:object="${category}"
 		class="form-horizontal " method="post">
 		<div class="form-group row">
-			<label for="inputEmail3" class="col-sm-3 col-form-label">
-				Category name</label>
+			<label for="inputEmail3" class="col-sm-3 col-form-label"
+				   th:text="#{category.name.label}">Category Name</label>
 			<div class="col-sm-9">
 				<input type="text" th:field="*{name}" class="form-control"
-					id="inputEmail3" placeholder="Category Name" required="required">
+					id="inputEmail3" th:placeholder="#{category.name.label}" required="required">
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-2">
 				<button class="btn btn-lg btn-primary btn-block text-uppercase"
-					type="submit">Save Category</button>
+					type="submit" th:text="#{category.save}">Save</button>
 			</div>
 		</div>
 	</form>

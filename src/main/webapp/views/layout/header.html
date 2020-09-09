@@ -6,19 +6,6 @@
 </head>
 <body>
 <header th:fragment="header" class="header-area">
-    <!-- Search Form -->
-    <div class="search-form d-flex align-items-center">
-        <div class="container">
-            <form th:action="@{/home}" method="get">
-                <input type="search" name="search-form-input" id="searchFormInput"
-                       th:placeholder="#{header.search}">
-                <button type="submit">
-                    <i class="icon_search"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
     <!-- Top Header Area Start -->
     <div class="top-header-area">
         <div class="container">
@@ -78,24 +65,12 @@
                                 <li><a th:href="@{/tours}" th:text="#{header.tours}">Tours</a></li>
                                 <li sec:authorize="hasAuthority('ADMIN')">
                                     <a th:href="@{/admin/categories}" th:text="#{header.categories}">Categories</a></li>
+                                <li><a th:href="@{/reviews}" th:text="#{header.reviews}">Reviews</a></li>
                                 <li sec:authorize="hasAuthority('ADMIN')">
                                     <a th:href="@{/admin/users}" th:text="#{header.users}">Users</a></li>
                                 <li><a th:href="@{/about}" th:text="#{header.about}">About us</a></li>
                                 <li><a th:href="@{/contact}" th:text="#{header.contact}">Contact</a></li>
                             </ul>
-
-                            <!-- Search -->
-                            <div class="search-btn ml-4">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </div>
-
-                            <!-- Book Now -->
-                            <div class="book-now-btn ml-3 ml-lg-5">
-                                <a th:href="@{/tours}">
-                                    <span th:text="#{header.book}">Book Now</span>
-                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
                         </div>
                         <!-- Nav End -->
                     </div>

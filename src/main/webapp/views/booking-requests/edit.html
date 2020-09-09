@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+        th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Book Tour</title>
+</head>
+<body>
+<div class="welcome-slides owl-carousel">
+    <div class="single-welcome-slide bg-img bg-overlay mb-0 pt-4"
+         th:style=" 'background-image:url(' + @{/assets/img/bg-img/17.jpg} +');' "
+         th:data-img-url="@{/assets/img/bg-img/16.jpg}">
+        <div class="col-10 mx-auto card card-signin pt-4">
+            <h4 class="card-title text-center">Edit Booking request for Tour
+                [[${bookingRequest.tourDetail.tour.name}]]</h4>
+            <form th:action="${#authorization.expression('hasAuthority(''ADMIN'')')} == true ?( @{'/admin/booking-requests/'+${bookingRequest.id}} ): @{'/'+${bookingRequest.userId}+'/booking-requests/'+${bookingRequest.id}}"
+                  th:object="${bookingRequest}"
+                  class="form-horizontal " th:method="PUT">
+
+                <input type="hidden" th:field="*{tourDetailId}"/>
+                <input type="hidden" th:field="*{userId}"/>
+
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Tour name</label>
+                    <div class="col-sm-10">
+                        <input disabled="true" th:field="*{tourDetail.tour.name}" type="text" class="form-control"
+                               id="inputEmail3" placeholder="Tour Name">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="startPoint">
+                        Start Point</label>
+                    <div class="col-3 col-md-3">
+                        <input disabled="true" type="text" class="form-control"
+                               th:field="*{tourDetail.tour.startPoint}">
+                    </div>
+                    <label class="col-sm-3 col-form-label" for="capacity">
+                        Max Capacity</label>
+                    <div class="col-3 col-md-3">
+                        <input disabled="true" th:field="*{tourDetail.tour.capacity}" type="number" class="form-control"
+                               placeholder="2"
+                               id="inputCapacity" min="2" max="30">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="duration">
+                        Duration</label>
+                    <div class="col-3 col-md-3">
+                        <input disabled="true" type="number" class="form-control" th:field="*{tourDetail.duration}">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="price">
+                        Price</label>
+                    <div class="col-3 col-md-3">
+                        <input disabled="true" th:field="*{tourDetail.price}" type="number" class="form-control"
+                               placeholder="1" value="1" id="inputCapacity" min="1" max="100"/>
+                    </div>
+                    <p class="h3">$</p>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="startDate">
+                        StartDate</label>
+                    <div class="col-3 col-md-3" id="datepicker">
+                        <input th:disabled="${#authorization.expression('hasAuthority(''ADMIN'')')}" type="date"
+                               class="form-control" th:field="*{startDate}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="status">Status</label>
+                    <div class="col-3 col-md-3">
+                        <select th:if="${#authorization.expression('hasAuthority(''USER'')')}" name="status"
+                                id="status" th:field="*{status}">
+                            <option th:each="status : ${T(com.bookingTour.model.enu.Status).listForUser()}"
+                                    th:value="${status}" th:text="${status.name()}"></option>
+                        </select>
+                        <select th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" name="status"
+                                id="status" th:field="*{status}">
+                            <option th:each="status : ${T(com.bookingTour.model.enu.Status).listForAdmin()}"
+                                    th:value="${status}" th:text="${status.name()}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-4 mx-auto">
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                            type="submit">Update Booking Request
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

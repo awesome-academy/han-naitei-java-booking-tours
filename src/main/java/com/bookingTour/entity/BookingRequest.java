@@ -1,6 +1,6 @@
 package com.bookingTour.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class BookingRequest extends BaseEntity {
 
@@ -8,7 +8,7 @@ public class BookingRequest extends BaseEntity {
     private Integer status;
     private User user;
     private TourDetail tourDetail;
-    private Date startDate;
+    private Timestamp startDate;
 
     public Long getId() {
         return id;
@@ -42,11 +42,11 @@ public class BookingRequest extends BaseEntity {
         this.tourDetail = tourDetail;
     }
 
-    public Date getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 

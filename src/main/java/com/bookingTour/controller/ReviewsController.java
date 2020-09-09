@@ -1,5 +1,6 @@
 package com.bookingTour.controller;
 
+import com.bookingTour.model.CategoryInfo;
 import com.bookingTour.model.ReviewInfo;
 import com.bookingTour.service.ReviewService;
 
@@ -30,8 +31,8 @@ public class ReviewsController {
         ReviewInfo reviewInfo = new ReviewInfo();
         reviewInfo.setPage(page.orElse(1));
         Page<ReviewInfo> reviews = reviewService.paginate(reviewInfo);
-        model.addAttribute("reviewSearch", reviewInfo);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("reviewSearch", reviewInfo);
         return "reviews/index";
     }
     
@@ -43,4 +44,14 @@ public class ReviewsController {
         return "reviews/index";
     }
     
+    @GetMapping(value = "/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        ReviewInfo review = reviewService.findReview(id);
+    	if (review == null) {
+    		model.addAttribute("errorMsg", "Review not found");
+			return "templates/error";
+		}
+        model.addAttribute("review", review);
+        return "reviews/show";
+    }
 }

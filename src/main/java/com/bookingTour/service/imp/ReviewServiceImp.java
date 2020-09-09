@@ -103,8 +103,10 @@ public class ReviewServiceImp implements ReviewService {
             params.put("userId",condition.getUserId());
         if (condition.getTourId() != null)
             params.put("tourId",condition.getTourId());
-        if (condition.getTour().getName() != null && StringUtils.isNotBlank(condition.getTour().getName()))
-            params.put("tourName","%" +  condition.getTour().getName()  +"%");
+        if (condition.getContent() != null && StringUtils.isNotEmpty(condition.getContent()))
+            params.put("content",condition.getContent());
+		if (condition.getTourName() != null && StringUtils.isNotEmpty(condition.getTourName())) 
+			 params.put("tourName","%" + condition.getTour().getName() +"%");
         return params;
     }
 	
@@ -114,8 +116,10 @@ public class ReviewServiceImp implements ReviewService {
             query += " and r.user.id = :userId ";
         if (condition.getTourId() != null)
             query += " and r.tour.id = :tourId ";
-        if (condition.getTour().getName() != null && StringUtils.isNotBlank(condition.getTour().getName()))
-            query += " and r.tour.name like :tourName";
+        if (condition.getContent() != null && StringUtils.isNotEmpty(condition.getContent()))
+            query += " and r.content = :content ";
+		if (condition.getTourName() != null && StringUtils.isNotEmpty(condition.getTourName())) 
+			query += " and r.tour.name like :tourName";
         return query;
     }
 	

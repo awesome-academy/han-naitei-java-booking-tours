@@ -21,8 +21,9 @@ public class ReviewDAOImp extends GenericDAOImp<Review, Long> implements ReviewD
 
     @Override
     public Page<Review> paginate(ReviewInfo review, String query, Map<String, Object> params) {
-        String countSql = "SELECT COUNT(*) " + query;
-        SearchQueryTemplate searchQueryTemplate = new SearchQueryTemplate(query, countSql, review.getPageable());
+    	String sql = query;
+        String countSql = "SELECT COUNT(*) " + sql;
+        SearchQueryTemplate searchQueryTemplate = new SearchQueryTemplate(sql, countSql, review.getPageable());
         searchQueryTemplate.addParameters(params);
         searchQueryTemplate.addOrder(Sort.Direction.DESC, "createTime");
         return paginate(searchQueryTemplate);

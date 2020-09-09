@@ -115,6 +115,9 @@
                                th:data-id="${tour.id}"><span th:text="#{tour.view.details}">View Details</span>
                                 <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                             </a>
+                            <a class="btn btn-warning font-weight-bold mr-3"
+									th:href="@{'/reviews/'+ ${tour.id} +'/add'}"
+									th:data-id="${tour.id}">Review now</a>
                             <div sec:authorize="hasAuthority('ADMIN')">
                                 <a th:href="@{'/admin/tours/' + ${tour.id} +'/edit'}" class="btn view-detail-btn"
                                    th:data-id="${tour.id}"><span th:text="#{tour.edit}">Edit</span>

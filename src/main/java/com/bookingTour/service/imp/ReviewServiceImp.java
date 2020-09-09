@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bookingTour.dao.UserDAO;
+import com.bookingTour.entity.Category;
 import com.bookingTour.entity.Review;
 import com.bookingTour.entity.Tour;
 import com.bookingTour.model.TourInfo;
@@ -72,6 +73,37 @@ public class ReviewServiceImp implements ReviewService {
         }
         return reviewInfos;
 	}
+	
+	@Override
+    @Transactional
+    public ReviewInfo editReview(ReviewInfo reviewInfo) throws Exception {
+        logger.info("Updating the review in the database");
+        try {
+            Review review = reviewDAO.find(reviewInfo.getId(), true);
+            if (StringUtils.isNotBlank(reviewInfo.getContent())) {
+                review.setContent(reviewInfo.getContent());
+            }
+            reviewDAO.makePersistent(review);
+            return reviewInfo;
+        } catch (Exception e) {
+            logger.error("An error occurred while updating the review details to the database", e);
+            throw e;
+        }
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteReview(ReviewInfo reviewInfo) throws Exception {
+        logger.info("Deleting the review in the database");
+        try {
+            Review review = reviewDAO.find(reviewInfo.getId(), true);
+            reviewDAO.makeTransient(review);
+            return true;
+        } catch (Exception e) {
+            logger.error("An error occurred while delete review to the database", e);
+            throw e;
+        }
+    }
 
 	@Override
     @Transactional(readOnly = true)
@@ -121,6 +153,25 @@ public class ReviewServiceImp implements ReviewService {
 		if (condition.getTourName() != null && StringUtils.isNotEmpty(condition.getTourName())) 
 			query += " and r.tour.name like :tourName";
         return query;
+    }
+	
+	@Override
+    @Transactional
+    public ReviewInfo addReview(ReviewInfo reviewInfo) throws Exception {
+        logger.info("Adding review in the database");
+        try {
+            Review review = new Review();
+            review.setContent(reviewInfo.getContent());
+            review.setTour(tourDAO.find(reviewInfo.getTourId()));
+            review.setUser(userDAO.find(reviewInfo.getUserId()));
+            review = reviewDAO.makePersistent(review);
+            reviewInfo = new ReviewInfo();
+            BeanUtils.copyProperties(review, reviewInfo);
+            return reviewInfo;
+        } catch (Exception e) {
+            logger.error("An error occurred while adding the micropost details to the database", e);
+            throw e;
+        }
     }
 	
 	public void setReviewDAO(ReviewDAO reviewDAO) {

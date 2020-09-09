@@ -1,136 +1,191 @@
 <!DOCTYPE html>
 <html
-	th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+        th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>List Tour</title>
+    <title>List Tour</title>
 </head>
 <body>
-	<!-- Breadcrumb Area Start -->
-	<div class="breadcrumb-area bg-img bg-overlay jarallax"
-		 th:style=" 'background-image:url(' + @{/assets/img/bg-img/16.jpg} +');' ">
-		<div class="container h-100">
-			<div class="row h-100 align-items-center">
-				<div class="col-12">
-					<div class="breadcrumb-content text-center">
-						<h2 class="page-title">Our BigCity Tour</h2>
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb justify-content-center">
-								<li class="breadcrumb-item"><a th:href="@{/page/home}">Home</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Tours</li>
-							</ol>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Breadcrumb Area End -->
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area bg-img bg-overlay jarallax"
+     th:style=" 'background-image:url(' + @{/assets/img/bg-img/16.jpg} +');' ">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">Tours</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Tours</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End -->
 
-	<!-- About Us Area Start -->
-	<section class="roberto-about-area section-padding-100-0">
-		<!-- Hotel Search Form Area -->
-		<div class="hotel-search-form-area">
-			<div class="container-fluid">
-				<div class="hotel-search-form">
-					<form method="post" th:action="@{/tours/search}" th:object="${tourSearch}">
-						<div class="row justify-content-between align-items-end">
-							<div class="col-8 col-md-3 col-lg-4">
-								<label for="tourName">Your Tour name: </label>
-								<input th:field="*{name}" type="text" class="form-control" id="tourName"
-									   name="tourName">
-							</div>
-							<div class="col-8 col-md-4">
-								<label for="categoryId">Category</label>
-								<select id="categoryId" name="categoryId" class="form-control">
-									<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-								</select>
-							</div>
-							<div class="col-4 col-md-1">
-								<label for="rating">Average Rate</label>
-								<select th:field="*{averageRate}" name="rating" id="rating" class="form-control">
-									<option value="0"></option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-							</div>
-							<div class="col-12 col-md-3">
-								<button type="submit"
-										class="form-control btn roberto-btn w-100">Find tours
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- About Us Area End -->
+<!-- About Us Area Start -->
+<section class="roberto-about-area section-padding-100-0">
+    <!-- Hotel Search Form Area -->
+    <div class="hotel-search-form-area">
+        <div class="container-fluid">
+            <div class="hotel-search-form">
+                <form method="post" th:action="@{/tours/search}" th:object="${tourSearch}">
+                    <div class="row justify-content-between align-items-end">
+                        <div class="col-8 col-md-3 col-lg-4">
+                            <label for="tourName">Your Tour name: </label>
+                            <input th:field="*{name}" type="text" class="form-control" id="tourName"
+                                   name="tourName">
+                        </div>
+                        <div class="col-8 col-md-4">
+                            <label for="categoryId">Category</label>
+                            <select id="categoryId" name="categoryId" class="form-control">
+                                <option th:each="category : ${categories}" th:value="${category.id}"
+                                        th:text="${category.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col-4 col-md-1">
+                            <label for="rating">Average Rate</label>
+                            <select th:field="*{averageRate}" name="rating" id="rating" class="form-control">
+                                <option value="0"></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button type="submit"
+                                    class="form-control btn roberto-btn w-100">Find tours
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About Us Area End -->
 
-	<!-- Rooms Area Start -->
-	<div class="roberto-rooms-area section-padding-100-0">
-		<div class="container">
-			<div class="row">
-				<div class="col-12 col-lg-8">
-					<!-- Single Room Area -->
-					<th:block th:each="tour,iter : ${tours.content}">
-						<div class="single-room-area d-flex align-items-center mb-50 wow fadeInUp"
-							 data-wow-delay="100ms">
-							<!-- Room Thumbnail -->
-							<div class="room-thumbnail">
-								<img th:src="@{/assets/img/bg-img/43.jpg}" alt="">
-							</div>
-							<!-- Room Content -->
-							<div class="room-content">
-								<h2 th:text="${tour.name}"></h2>
-								<h4 th:text="${tour.category.name}"></h4>
-								<div class="room-feature">
-									<h6>
-										Duration:
-										<span>[[${tour.expectedDurationMin}]]-[[${tour.expectedDurationMax}]] days</span>
-									</h6>
-									<h6>
-										Capacity: <span>[[${tour.capacity}]]</span>
-									</h6>
-									<h6>
-										Starting Point: <span>[[${tour.startPoint}]]</span>
-									</h6>
-								</div>
-								<a th:href="@{'/tours/' + ${tour.id}}" class="btn view-detail-btn"
-								   th:data-id="${tour.id}">View
-									Details <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-								</a>
-								<a th:href="@{'/tours/' + ${tour.id} +'/edit'}" class="btn view-detail-btn"
-								   th:data-id="${tour.id}">Edit
-									<i class=" fa fa-long-arrow-right" aria-hidden="true"></i>
-								</a>
-								<form th:method="DELETE" th:action="@{'/tours/' + ${tour.id}}">
-									<input type="submit" value="Delete"/>
-								</form>
+<div th:if="${msg != null}" class="alert alert-dismissible"
+     th:class="${css == 'error' ? 'alert-error' : 'alert-success'}" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong><span th:text="${msg}"></span></strong>
+</div>
 
-							</div>
-						</div>
-					</th:block>
+<!-- Rooms Area Start -->
+<div class="roberto-rooms-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <!-- Single Room Area -->
+                <th:block th:each="tour,iter : ${tours.content}">
+                    <div class="single-room-area d-flex align-items-center mb-50 wow fadeInUp"
+                         data-wow-delay="100ms">
+                        <!-- Room Thumbnail -->
+                        <div class="room-thumbnail">
+                            <img th:src="@{/assets/img/bg-img/43.jpg}" alt="">
+                        </div>
+                        <!-- Room Content -->
+                        <div class="room-content">
+                            <h2 th:text="${tour.name}"></h2>
+                            <h4 th:text="${tour.category.name}"></h4>
+                            <div class="room-feature">
+                                <h6>
+                                    Duration:
+                                    <span>[[${tour.expectedDurationMin}]]-[[${tour.expectedDurationMax}]] days</span>
+                                </h6>
+                                <h6>
+                                    Capacity: <span>[[${tour.capacity}]]</span>
+                                </h6>
+                                <h6>
+                                    Starting Point: <span>[[${tour.startPoint}]]</span>
+                                </h6>
+                            </div>
+                            <a th:href="@{'/tours/' + ${tour.id}}" class="btn view-detail-btn"
+                               th:data-id="${tour.id}">View Details
+                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            <div sec:authorize="hasAuthority('ADMIN')">
+                                <a th:href="@{'/admin/tours/' + ${tour.id} +'/edit'}" class="btn view-detail-btn"
+                                   th:data-id="${tour.id}">Edit
+                                    <i class=" fa fa-long-arrow-right" aria-hidden="true"></i>
+                                </a>
+                                <br>
+                                <a class="btn btn-danger" data-toggle="modal" data-target="#modal-warning"
+                                   th:attr="data-target='#modal-warning'+${tour.id}">Delete</a>
+                                <div class="modal" th:id="modal-warning+${tour.id}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Delete Tour</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">×</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h5>Are you sure want to delete this tour?</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close
+                                                </button>
+                                                <form th:method="DELETE" th:action="@{'/admin/tours/' + ${tour.id}}">
+                                                    <input class="btn btn-primary" type="submit" value="Confirm"/>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-					<!-- Pagination -->
-					<nav class="roberto-pagination wow fadeInUp mb-100"
-						 data-wow-delay="1000ms">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" th:href="@{#}">1</a></li>
-							<li class="page-item"><a class="page-link" th:href="@{#}">2</a></li>
-							<li class="page-item"><a class="page-link" th:href="@{#}">3</a></li>
-							<li class="page-item"><a class="page-link" th:href="@{#}">Next
-								<i class="fa fa-angle-right"></i>
-							</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                    </div>
+                </th:block>
+
+                <!-- Pagination -->
+                <nav class="roberto-pagination wow fadeInUp mb-100"
+                     data-wow-delay="1000ms">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" th:href="@{#}">1</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">2</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">3</a></li>
+                        <li class="page-item"><a class="page-link" th:href="@{#}">Next
+                            <i class="fa fa-angle-right"></i>
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Rooms Area End -->
+
+<!-- Add Tour Start -->
+<section class="roberto-cta-area section-padding-0-100">
+    <div sec:authorize="hasAuthority('ADMIN')" class="container">
+        <div class="cta-content bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/1.jpg);">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-7">
+                    <div class="cta-text mb-50">
+                        <h2>Add new tour now!</h2>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 text-right">
+                    <a th:href="@{/admin/tours/add}" class="btn roberto-btn mb-50">Add Tour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Add Tour End -->
 </body>
 </html>

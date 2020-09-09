@@ -1,86 +1,83 @@
 <!DOCTYPE html>
 <html
-	th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+        th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>Edit Tour</title>
+    <title>Edit Tour</title>
 </head>
 <body>
-	<div class="welcome-slides owl-carousel">
-	<div class="single-welcome-slide bg-img bg-overlay mb-0 pt-4"
-		 th:style=" 'background-image:url(' + @{/assets/img/bg-img/17.jpg} +');' "
-		 th:data-img-url="@{/assets/img/bg-img/16.jpg}">
-		<div class="col-10 mx-auto card card-signin pt-4">
-			<h4 class="card-title text-center">Edit Tour</h4>
-			<form th:method="PUT" th:action="@{'/tours/' +${tour.id}}" th:object="${tour}" class="form-horizontal" >
-				<div class="form-group row">
-					<label for="inputEmail3" class="col-sm-2 col-form-label">Tour
-						name</label>
-					<div class="col-sm-10">
-						<input th:field="*{name}" type="text" class="form-control" id="inputEmail3"
-							   placeholder="Tour Name">
-					</div>
-				</div>
+<div class="single-welcome-slide bg-img bg-overlay mb-0 pt-4"
+     th:style=" 'background-image:url(' + @{/assets/img/bg-img/17.jpg} +');' "
+     th:data-img-url="@{/assets/img/bg-img/16.jpg}">
+    <div class="col-10 mx-auto card card-signin pt-4">
+        <h4 class="card-title text-center">Edit Tour</h4>
+        <form th:method="PUT" th:action="@{'/admin/tours/'+${tour.id}}" th:object="${tour}" class="form-horizontal">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Tour
+                    name</label>
+                <div class="col-sm-10">
+                    <input th:field="*{name}" th:value="${tour.name}" type="text" class="form-control" id="inputEmail3">
+                </div>
+            </div>
 
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-label" for="category">
-						Category </label>
-					<div class="col-8 col-md-4">
-						<select th:field="*{categoryId}" name="room" id="room" class="form-control">
-							<option value="01">Family Tours</option>
-							<option value="02">Couple Tours</option>
-							<option value="03">Single Tours</option>
-							<option value="04">Religious Tours</option>
-							<option value="05">National Parks Tours</option>
-						</select>
-					</div>
-					<label class="col-sm-3 col-form-label" for="capacity">
-						Max Capacity: </label>
-					<div class="col-3 col-md-3">
-						<input th:field="*{capacity}" type="number" class="form-control" placeholder="1"
-							   id="inputCapacity" min="2" max="30" >
-					</div>
-				</div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="category">
+                    Category </label>
+                <div class="col-8 col-md-4">
+                    <select id="categoryId" name="categoryId">
+                        <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.name}" th:selected="${category.id == tour.category.id}"></option>
+                    </select>
+                </div>
+                <label class="col-sm-3 col-form-label" for="capacity">
+                    Max Capacity: </label>
+                <div class="col-3 col-md-3">
+                    <input th:field="*{capacity}" th:value="${tour.capacity}" type="number"
+                           class="form-control" id="inputCapacity" min="2" max="30">
+                </div>
+            </div>
 
-				<div class="form-group row">
-					<label for="inputEmail3" class="col-sm-2 col-form-label">Start point</label>
-					<div class="col-sm-10">
-						<input th:field="*{startPoint}" type="text" class="form-control" id="inputEmail3"
-							   placeholder="Starting point">
-					</div>
-				</div>
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Start point</label>
+                <div class="col-sm-10">
+                    <input th:field="*{startPoint}" th:value="${tour.startPoint}" type="text" class="form-control"
+                           id="inputEmail3">
+                </div>
+            </div>
 
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-label" for="expectedDuration">
-						Expected Duration </label>
-					<div class="col-3 col-md-3">
-						<input th:field="*{expectedDurationMin}" type="number" class="form-control" placeholder="0"
-							   id="inputDurationMin" min="1" max="30">
-					</div>
-					<p>-<p>
-					<div class="col-3 col-md-3">
-						<input th:field="*{expectedDurationMax}" type="number" class="form-control" placeholder="1"
-							   id="inputDurationMax" min="2" max="30">
-					</div>
-				</div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="expectedDuration">
+                    Expected Duration </label>
+                <div class="col-3 col-md-3">
+                    <input th:field="*{expectedDurationMin}" th:value="${tour.expectedDurationMin}" type="number"
+                           class="form-control" id="inputDurationMin" min="1" max="30">
+                </div>
+                <p>-
+                <p>
+                <div class="col-3 col-md-3">
+                    <input th:field="*{expectedDurationMax}" th:value="${tour.expectedDurationMax}" type="number"
+                           class="form-control" id="inputDurationMax" min="2" max="30">
+                </div>
+            </div>
 
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-label" for="description">
-						Description </label>
-					<div class="col-sm-10">
-						<textarea th:field="*{description}" class="form-control" name="paragraph_text" rows="10"></textarea>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2">
-						<button class="btn btn-lg btn-primary btn-block text-uppercase"
-								type="submit">Save Tour</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="description">
+                    Description </label>
+                <div class="col-sm-10">
+                    <textarea th:field="*{description}" th:value="${tour.description}" class="form-control"
+                              name="paragraph_text" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="col-5 btn btn-primary"
+                        th:text="#{user.form.save}">Save
+                </button>
+                <a class="col-5 btn btn-danger" th:href="@{'/tours'}"
+                   th:text="#{user.form.cancel}">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

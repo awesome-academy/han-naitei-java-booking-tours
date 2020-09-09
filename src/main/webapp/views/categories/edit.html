@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html
         th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
@@ -9,17 +7,16 @@
     <title>Edit Category</title>
 </head>
 <body>
-<div class="welcome-slides owl-carousel">
-    <div class="single-welcome-slide bg-img bg-overlay mb-0 pt-4"
-         th:style=" 'background-image:url(' + @{/img/bg-img/17.jpg} +');' "
-         th:data-img-url="@{/img/bg-img/16.jpg}">
-        <div class="col-10 mx-auto card card-signin pt-4">
-        <h4 class="card-title text-center">Create New Category</h4>
-        <form th:method="PUT" th:action="@{'/categories/' +${category.id}}" th:object="${category}"
-              class="form-horizontal " method="post">
+<div class="single-welcome-slide bg-img bg-overlay mb-0 pt-4"
+     th:style=" 'background-image:url(' + @{/img/bg-img/17.jpg} +');' "
+     th:data-img-url="@{/img/bg-img/16.jpg}">
+    <div class="col-10 mx-auto card card-signin pt-4">
+        <h4 class="card-title text-center">Edit Category</h4>
+        <form th:method="PUT" th:action="@{'/admin/categories/' + ${category.id}}"
+              th:object="${category}" class="form-horizontal">
             <div class="form-group row">
-                <label for="inputEmail3" class="col-sm-2 col-form-label">Category
-                    name</label>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">
+                    Category name</label>
                 <div class="col-sm-10">
                     <input type="text" th:field="*{name}" class="form-control"
                            id="inputEmail3" placeholder="Category Name" required="required">
@@ -29,11 +26,11 @@
             <div class="form-group">
                 <div class="col-sm-offset-2">
                     <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                            type="submit">Save Category</button>
+                            type="submit">Save Category
+                    </button>
                 </div>
             </div>
-        </form>`
-        </div>
+        </form>
     </div>
 </div>
 </body>

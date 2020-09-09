@@ -44,7 +44,8 @@
                         </div>
                         <div class="col-8 col-md-4">
                             <label for="categoryId">Category</label>
-                            <select id="categoryId" name="categoryId" class="form-control">
+                            <select id="categoryId" th:field="*{categoryId}" name="categoryId" class="form-control">
+                                <option value=""></option>
                                 <option th:each="category : ${categories}" th:value="${category.id}"
                                         th:text="${category.name}"></option>
                             </select>
@@ -152,40 +153,67 @@
                 </th:block>
 
                 <!-- Pagination -->
-                <nav class="roberto-pagination wow fadeInUp mb-100"
-                     data-wow-delay="1000ms">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" th:href="@{#}">1</a></li>
-                        <li class="page-item"><a class="page-link" th:href="@{#}">2</a></li>
-                        <li class="page-item"><a class="page-link" th:href="@{#}">3</a></li>
-                        <li class="page-item"><a class="page-link" th:href="@{#}">Next
-                            <i class="fa fa-angle-right"></i>
-                        </a></li>
-                    </ul>
+                <nav class="roberto-pagination wow fadeInUp mb-100" data-wow-delay="200ms">
+                    <div th:if="${tours.totalPages > 0}" class="pagination">
+                        <ul class="pagination">
+                            <li class="next next_page page-item" th:attrappend="class=${tours.isFirst()} ? disabled">
+                                <form th:method="POST" th:object="${tourSearch}"
+                                      th:action="${tours.hasPrevious()} ? @{'/tours/search/'+'?page='+${tours.number}} : 'javascript: void(0);'">
+                                    <input type="hidden" th:field="*{name}">
+                                    <input type="hidden" th:field="*{categoryId}">
+                                    <input type="hidden" th:field="*{averageRate}">
+                                    <button type="submit" class="page-link">
+                                        <i class="fa fa-angle-left"></i> Previous
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="page-item" th:each="i: ${#numbers.sequence(1, tours.totalPages)}"
+                                th:class="${i==tours.number + 1} ? active">
+                                <form th:method="POST" th:object="${tourSearch}"
+                                      th:action="@{'/tours/search/'+'?page='+${i}}">
+                                    <input type="hidden" th:field="*{name}">
+                                    <input type="hidden" th:field="*{categoryId}">
+                                    <input type="hidden" th:field="*{averageRate}">
+                                    <button type="submit" class="page-link" th:text=${i}>
+                                    </button>
+                                </form>
+                            </li>
+                            <li class="next next_page page-item" th:attrappend="class=${tours.isLast()} ? disabled">
+                                <form th:method="POST" th:object="${tourSearch}"
+                                      th:action="${tours.hasNext()} ? @{'/tours/search/'+'?page='+${tours.number+2}} : 'javascript: void(0);'">
+                                    <input type="hidden" th:field="*{name}">
+                                    <input type="hidden" th:field="*{categoryId}">
+                                    <input type="hidden" th:field="*{averageRate}">
+                                    <button type="submit" class="page-link">
+                                        Next <i class="fa fa-angle-right"></i>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
+
+                <!-- Add Tour Start -->
+                <section class="roberto-cta-area section-padding-0-100">
+                    <div sec:authorize="hasAuthority('ADMIN')" class="container">
+                        <div class="cta-content bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/1.jpg);">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-7">
+                                    <div class="cta-text mb-50">
+                                        <h2>Add new tour now!</h2>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-5 text-right">
+                                    <a th:href="@{/admin/tours/add}" class="btn roberto-btn mb-50">Add Tour</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Add Tour End -->
             </div>
         </div>
     </div>
 </div>
-<!-- Rooms Area End -->
-
-<!-- Add Tour Start -->
-<section class="roberto-cta-area section-padding-0-100">
-    <div sec:authorize="hasAuthority('ADMIN')" class="container">
-        <div class="cta-content bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/1.jpg);">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-7">
-                    <div class="cta-text mb-50">
-                        <h2>Add new tour now!</h2>
-                    </div>
-                </div>
-                <div class="col-12 col-md-5 text-right">
-                    <a th:href="@{/admin/tours/add}" class="btn roberto-btn mb-50">Add Tour</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Add Tour End -->
 </body>
 </html>

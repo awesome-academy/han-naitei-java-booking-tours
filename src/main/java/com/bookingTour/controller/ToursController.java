@@ -42,9 +42,11 @@ public class ToursController {
         return "tours/index";
     }
 
-    @RequestMapping(value = "/search")
-    public String search(@ModelAttribute(name = "tourSearch") TourInfo tourSearch, Model model) {
+    @PostMapping(value = "/search")
+    public String search(@ModelAttribute(name = "tourSearch") TourInfo tourSearch,
+                         @RequestParam(name = "page", required = false) Optional<Integer> page, Model model) {
         logger.info("list tour page with search");
+        tourSearch.setPage(page.orElse(1));
         Page<TourInfo> tours = tourService.paginate(tourSearch);
         List<CategoryInfo> categories = categoryService.findAll();
         model.addAttribute("categories", categories);

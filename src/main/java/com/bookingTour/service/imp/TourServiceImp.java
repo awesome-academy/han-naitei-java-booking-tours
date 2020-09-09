@@ -180,7 +180,7 @@ public class TourServiceImp implements TourService {
         if (condition.getCategoryId() != null)
             params.put("categoryId",condition.getCategoryId());
         if (condition.getName() != null && !condition.getName().isEmpty())
-            params.put("name",condition.getName());
+            params.put("name","%"+condition.getName()+"%");
         if (condition.getAverageRate()!= null)
             params.put("averageRate",condition.getAverageRate());
         return params;
@@ -191,7 +191,7 @@ public class TourServiceImp implements TourService {
         if (condition.getCategoryId() != null)
             query += " and t.category.id = :categoryId ";
         if (condition.getName() != null && !condition.getName().isEmpty())
-            query += " and t.name = :name ";
+            query += " and t.name like :name ";
         if (condition.getAverageRate()!= null)
             query += " and t.averageRate = :averageRate";
         return query;

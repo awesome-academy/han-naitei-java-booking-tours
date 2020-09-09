@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html
-	th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+        th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>Categories</title>
+    <title>Categories</title>
 </head>
 <body>
-	<div class="single-welcome-slide bg-img bg-overlay mb-0 pt-3"
-		th:style=" 'background-image:url(' + @{/assets/img/bg-img/16.jpg} +');' "
-		th:data-img-url="@{/assets/img/bg-img/16.jpg}">
-		<div th:replace="~{categories/add :: AddForm(~{::categoryAdd})}"></div>
-		<div class="col-10 mx-auto card card-signin pt-4 px-6 mt-5">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Name</th>
-						<th scope="col">Created at</th>
-						<th scope="col">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<th:block th:each="category,iter : ${categories.content}">
-						<tr>
-							<th scope="row" th:text="${iter.index + 1}"></th>
-							<td th:text="${category.name}"></td>
-							<td th:text="${category.createTime}"></td>
-							<td class="d-flex flex-row">
-								<div class="align-content-center mr-2">
-									<a th:href="@{'/categories/' + ${category.id} +'/edit'}"
-										class="btn btn-primary" th:data-id="${category.id}">Edit </a>
-								</div>
-								&nbsp;
-								<form th:method="DELETE" th:action="@{'/categories/' + ${category.id}}">
-									<input class="btn btn-danger" type="submit" value="Delete"/>
-								</form>
-							</td>
-						</tr>
-					</th:block>
-				</tbody>
-			</table>
-		</div>
-	</div>
+
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area contact-breadcrumb bg-img bg-overlay jarallax"
+     th:style=" 'background-image:url(' + @{/assets/img/bg-img/18.jpg} +');' ">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center mt-100">
+                    <h2 class="page-title">Categories</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End -->
+
+<!-- About Us Area Start -->
+<section class="roberto-about-area section-padding-100-0">
+    <!-- Hotel Search Form Area -->
+    <div class="hotel-search-form-area">
+        <div th:replace="~{categories/add :: AddForm(~{::categoryAdd})}"></div>
+    </div>
+</section>
+<!-- About Us Area End -->
+
+<div class="single-welcome-slide bg-img bg-overlay mb-0 pt-3"
+     th:style=" 'background-image:url(' + @{/assets/img/bg-img/16.jpg} +');' "
+     th:data-img-url="@{/assets/img/bg-img/16.jpg}">
+    <div class="col-10 mx-auto card card-signin pt-4 px-6 mt-5">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Created at</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="category,iter : ${categories.content}">
+                <tr>
+                    <th scope="row" th:text="${iter.index + 1}"></th>
+                    <td th:text="${category.name}"></td>
+                    <td th:text="${category.createTime}"></td>
+                    <td class="d-flex flex-row">
+                        <div class="align-content-center mr-2">
+                            <a th:href="@{'/admin/categories/' + ${category.id} +'/edit'}"
+                               class="btn btn-primary" th:data-id="${category.id}">Edit</a>
+                        </div>
+                        <form th:method="DELETE" th:action="@{'/admin/categories/' + ${category.id}}">
+                            <input class="btn btn-danger" type="submit" value="Delete"/>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

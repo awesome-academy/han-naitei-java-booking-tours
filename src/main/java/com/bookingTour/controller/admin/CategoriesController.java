@@ -1,5 +1,4 @@
-
-package com.bookingTour.controller;
+package com.bookingTour.controller.admin;
 
 import com.bookingTour.model.CategoryInfo;
 import com.bookingTour.service.CategoryService;
@@ -7,9 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 import java.util.Optional;
 
-@Controller
-@RequestMapping("/categories")
-public class CategoryController {
+@Controller(value = "adminCategoriesController")
+@RequestMapping("/admin/categories")
+public class CategoriesController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategoriesController.class);
 
     @Autowired
     private CategoryService categoryService;
@@ -64,7 +61,7 @@ public class CategoryController {
             return "categories/create";
         }
         categoryService.addCategory(categoryInfo);
-        return "redirect: " + request.getContextPath() + "/categories";
+        return "redirect: " + request.getContextPath() + "/admin/categories";
     }
 
     @GetMapping(value = "{id}/edit")
@@ -86,7 +83,7 @@ public class CategoryController {
             return "categories/edit";
         }
         CategoryInfo category = categoryService.editCategory(categoryInfo);
-        return "redirect: " + request.getContextPath() + "/categories/index";
+        return "redirect: " + request.getContextPath() + "/admin/categories";
     }
 
     @DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_FORM_URLENCODED_VALUE, MediaType.APPLICATION_JSON_VALUE })
@@ -94,7 +91,7 @@ public class CategoryController {
                           HttpServletResponse response) throws Exception {
         logger.info("Deleting category: " + id);
         categoryService.deleteCategory(new CategoryInfo(id));
-        return "redirect: " + request.getContextPath() + "/categories/index";
+        return "redirect: " + request.getContextPath() + "/admin/categories";
     }
 
 }

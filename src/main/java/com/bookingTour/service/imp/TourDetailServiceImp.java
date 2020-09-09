@@ -2,18 +2,17 @@ package com.bookingTour.service.imp;
 
 import com.bookingTour.dao.TourDAO;
 import com.bookingTour.dao.TourDetailDAO;
+import com.bookingTour.entity.BookingRequest;
 import com.bookingTour.entity.Tour;
 import com.bookingTour.entity.TourDetail;
-import com.bookingTour.model.TourDetailInfo;
-import com.bookingTour.entity.TourDetail;
+import com.bookingTour.model.CategoryInfo;
 import com.bookingTour.model.TourDetailInfo;
 import com.bookingTour.model.TourInfo;
+import com.bookingTour.service.BookingRequestService;
 import com.bookingTour.service.TourDetailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +27,10 @@ public class TourDetailServiceImp implements TourDetailService {
 
     private TourDetailDAO tourDetailDAO;
     private TourDAO tourDAO;
+    private BookingRequestService bookingRequestService;
 
     @Override
+    @Transactional(readOnly = true)
     public TourDetailInfo findTourDetail(Long id) {
         logger.info("Checking the tourDetail in the database");
         try {
@@ -39,8 +40,12 @@ public class TourDetailServiceImp implements TourDetailService {
                 tourDetailInfo = new TourDetailInfo();
                 BeanUtils.copyProperties(tourDetail, tourDetailInfo);
                 TourInfo tourInfo = new TourInfo();
+                CategoryInfo categoryInfo = new CategoryInfo();
+                BeanUtils.copyProperties(tourDetail.getTour().getCategory(), categoryInfo);
+                tourInfo.setCategory(categoryInfo);
                 BeanUtils.copyProperties(tourDetail.getTour(), tourInfo);
                 tourDetailInfo.setTour(tourInfo);
+                tourDetailInfo.setTourId(tourInfo.getId());
             }
             return tourDetailInfo;
         } catch (Exception e) {
@@ -72,6 +77,45 @@ public class TourDetailServiceImp implements TourDetailService {
     }
 
     @Override
+    @Transactional
+    public TourDetailInfo editTourDetail(TourDetailInfo tourDetailInfo) throws Exception {
+        logger.info("Updating the tourDetail in the database");
+        try {
+            TourDetail tourDetail = tourDetailDAO.find(tourDetailInfo.getId(), true);
+            if (tourDetail.getDuration() != null) {
+                tourDetail.setDuration(tourDetailInfo.getDuration());
+            }
+            if (tourDetail.getPrice() != null) {
+                tourDetail.setPrice(tourDetailInfo.getPrice());
+            }
+            tourDetailDAO.makePersistent(tourDetail);
+            return tourDetailInfo;
+        } catch (Exception e) {
+            logger.error("An error occurred while updating the tourDetail to the database", e);
+            throw e;
+        }
+
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public boolean deleteTourDetail(TourDetailInfo tourDetailInfo) throws Exception {
+        logger.info("Deleting the tourDetail in the database");
+        try {
+            TourDetail tourDetail = tourDetailDAO.find(tourDetailInfo.getId(), true);
+            if (bookingRequestService.deleteBookingRequestByTourDetail(tourDetail))
+                tourDetailDAO.makeTransient(tourDetail);
+            else
+                return false;
+            return true;
+        } catch (Exception e) {
+            logger.error("An error occurred while deleting the tourDetail to the database", e);
+            throw e;
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<TourDetailInfo> findAll(TourDetailInfo tourDetailInfo) {
         logger.info("Fetching all tourDetail in the database");
         List<TourDetailInfo> tourDetailInfos = new ArrayList<TourDetailInfo>();
@@ -118,6 +162,10 @@ public class TourDetailServiceImp implements TourDetailService {
 
     public void setTourDAO(TourDAO tourDAO) {
         this.tourDAO = tourDAO;
+    }
+
+    public void setBookingRequestService(BookingRequestService bookingRequestService) {
+        this.bookingRequestService = bookingRequestService;
     }
 
     private HashMap<String, Object> buildParams(TourDetailInfo condition) {

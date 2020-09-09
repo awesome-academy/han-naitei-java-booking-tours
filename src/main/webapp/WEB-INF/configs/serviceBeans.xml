@@ -16,6 +16,7 @@
     <bean id="tourDetailService" class="com.bookingTour.service.imp.TourDetailServiceImp">
         <property name="tourDetailDAO" ref="tourDetailDAO"/>
         <property name="tourDAO" ref="tourDAO"/>
+        <property name="bookingRequestService" ref="bookingService"/>
     </bean>
 
     <bean id="categoryService" class="com.bookingTour.service.imp.CategoryServiceImp">

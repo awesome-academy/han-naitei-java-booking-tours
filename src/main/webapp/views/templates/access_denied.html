@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Access Denied</title>
+    <title th:text="#{title.access.denied}">Access Denied</title>
     <!-- Favicon -->
     <link rel="icon" th:href="@{/img/core-img/favicon.png}">
     <link rel="stylesheet" th:href="@{/assets/style.css}">
@@ -14,17 +14,21 @@
         <div class="col-md-12">
             <div class="error-template">
                 <h1>Oops!</h1>
-                <h2>403 - Access Denied</h2>
+                <h2>403 - <span th:text="#{error.access.denied}">Access Denied</span></h2>
                 <div class="error-details">
-                    <h4>Sorry, you are not allowed to access this page!</h4>
+                    <h4 th:text="#{error.ad.details}">Sorry, you are not allowed to access this page!</h4>
                     <p th:text="${errorMsg}">Error Message</p>
                 </div>
                 <img th:src="@{/assets/img/core-img/403.png}"/>
                 <div class="error-actions">
                     <a th:href="@{/home}" class="btn btn-primary btn-lg">
-                        <i class="fa fa-home" aria-hidden="true"></i> Take Me Home</a>
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <span th:text="#{error.take.me.home}">Take Me Home</span>
+                    </a>
                     <a th:href="@{/contact}" class="btn btn-secondary btn-lg">
-                        <i class="fa fa-envelope" aria-hidden="true"></i> Contact Support</a>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <span th:text="#{error.contact.support}">Contact Support</span>
+                    </a>
                 </div>
             </div>
         </div>

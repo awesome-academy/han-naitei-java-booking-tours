@@ -4,7 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>New Tour Detail</title>
+    <title th:text="#{title.tours.create.details}">Create Tour Details</title>
 </head>
 <body>
 <div class="welcome-slides owl-carousel">
@@ -12,26 +12,29 @@
          th:style=" 'background-image:url(' + @{/assets/img/bg-img/17.jpg} +');' "
          th:data-img-url="@{/assets/img/bg-img/16.jpg}">
         <div class="col-10 mx-auto card card-signin pt-4">
-            <h4 class="card-title text-center">Create Tour Detail for [[${tourDetail.tour.name}]]</h4>
+            <h4 class="card-title text-center">
+                <span th:text="#{title.tours.create.details}"></span>
+                [[${tourDetail.tour.name}]]</h4>
             <form th:action="@{'/admin/tours/'+${tourDetail.tourId}+'/tour-details'}" th:object="${tourDetail}" class="form-horizontal "
                   method="post">
                 <input type="hidden" th:field="${tourDetail.tourId}"/>
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Tour
-                        name</label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label"
+                           th:text="#{tour.name}">
+                        Tour Name</label>
                     <div class="col-sm-10">
                         <input disabled="true" th:field="*{tour.name}" type="text" class="form-control" id="inputEmail3"
-                               placeholder="Tour Name">
+                               th:placeholder="#{tour.name}">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="category">
+                    <label class="col-sm-2 col-form-label" for="category" th:text="#{tour.category}">
                         Category </label>
                     <div class="col-8 col-md-4">
                         <input disabled="true" th:field="*{tour.category.name}" type="text" class="form-control" >
                     </div>
-                    <label class="col-sm-3 col-form-label" for="capacity">
+                    <label class="col-sm-3 col-form-label" for="capacity" th:text="#{tour.category}">
                         Max Capacity</label>
                     <div class="col-3 col-md-3">
                         <input disabled="true" th:field="*{tour.capacity}" type="number" class="form-control" placeholder="2"
@@ -40,14 +43,14 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="duration">
+                    <label class="col-sm-2 col-form-label" for="duration" th:text="#{tour.duration}">
                         Duration</label>
                     <div class="col-3 col-md-3">
                         <input type="number" class="form-control" th:field="${tourDetail.duration}" value="1"
-                               id="inputDuration" th:attr="min=${tourDetail.tour.expectedDurationMin}, max=${tourDetail.tour.expectedDurationMax}
-                               ,placeholder=${tourDetail.tour.expectedDurationMin}">
+                               id="inputDuration" th:attr="min=${tourDetail.tour.expectedDurationMin}, max=${tourDetail.tour.expectedDurationMax},
+                               placeholder=${tourDetail.tour.expectedDurationMin}">
                     </div>
-                    <label class="col-sm-2 col-form-label" for="price">
+                    <label class="col-sm-2 col-form-label" for="price" th:text="#{tour.price}">
                         Price</label>
                     <div class="col-3 col-md-3">
                         <input th:field="${tourDetail.price}" type="number" class="form-control" placeholder="1" value="1" id="inputCapacity" min="1" max="100"/>
@@ -57,7 +60,7 @@
 
                 <div class="form-group col-3 mx-auto">
                     <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                            type="submit">Save Tour Detail
+                            type="submit" th:text="#{tour.save}">Save
                     </button>
                 </div>
 

@@ -4,7 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Categories</title>
+    <title th:text="#{title.categories}">Categories</title>
 </head>
 <body>
 
@@ -15,11 +15,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="breadcrumb-content text-center mt-100">
-                    <h2 class="page-title">Categories</h2>
+                    <h2 class="page-title" th:text="#{title.categories}">Categories</h2>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                            <li class="breadcrumb-item"><a th:href="@{/home}" th:text="#{title.home}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page" th:text="#{title.categories}">Categories</li>
                         </ol>
                     </nav>
                 </div>
@@ -46,9 +46,9 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Action</th>
+                <th scope="col" th:text="#{category.name}">Name</th>
+                <th scope="col" th:text="#{category.created.at}">Created At</th>
+                <th scope="col" th:text="#{category.action}">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -60,10 +60,10 @@
                     <td class="d-flex flex-row">
                         <div class="align-content-center mr-2">
                             <a th:href="@{'/admin/categories/' + ${category.id} +'/edit'}"
-                               class="btn btn-primary" th:data-id="${category.id}">Edit</a>
+                               class="btn btn-primary" th:data-id="${category.id}" th:text="#{category.edit}">Edit</a>
                         </div>
                         <form th:method="DELETE" th:action="@{'/admin/categories/' + ${category.id}}">
-                            <input class="btn btn-danger" type="submit" value="Delete"/>
+                            <input class="btn btn-danger" type="submit" th:value="#{category.delete}"/>
                         </form>
                     </td>
                 </tr>

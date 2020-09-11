@@ -70,20 +70,17 @@
 							<div class="post-content">
 								<!-- Post Meta -->
 								<div class="post-meta">
-									<a th:href="@{#}" class="post-author">
-										</a> <a
-										th:href="@{#}" class="post-tutorial">Event</a>
+									<a th:href="@{#}"
+										th:text="${#dates.format(review.updateTime, 'dd-MMM-yyyy')}"
+										class="post-tutorial">Event</a>
 								</div>
 								<!-- Post Title -->
-								<a th:href="@{#}" class="post-title" >
-								<span th:text="${review.content}">Cdc
-									Issues Health Alert Notice For Travelers To Usa From Hon</span></a>
-								<p>A round-the-world trip remains the world’s greatest
-									journey. For two out of every three people, this is the
-									ultimate travel experience, according to recent research...</p>
-								<a th:href="@{'/reviews/' + ${review.id}}" class="btn continue-btn"
-								   th:data-id="${review.id}">Read More...
-								</a>
+								<a th:href="@{#}" class="post-title"> <span
+									th:text="${review.user.userName}">User Name</span></a>
+								<p th:text="${review.content}">Content</p>
+								<a th:href="@{'/reviews/' + ${review.id}}"
+									class="btn continue-btn" th:data-id="${review.id}">Read
+									More... </a>
 							</div>
 						</div>
 					</th:block>

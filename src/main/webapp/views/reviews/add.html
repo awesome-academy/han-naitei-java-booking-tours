@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html
+	th:replace="~{layout/base-layout :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>New Review</title>
+</head>
+<body>
+    <div class="welcome-slides owl-carousel">
+    <div class="single-welcome-slide bg-img bg-overlay mb-0 pt-4"
+         th:style=" 'background-image:url(' + @{/img/bg-img/17.jpg} +');' "
+         th:data-img-url="@{/img/bg-img/16.jpg}">
+        <div class="col-10 mx-auto card card-signin pt-4">
+            <h4 class="card-title text-center">New Review</h4>
+            <form action="#" th:action="@{/reviews}" th:object="${review}" class="form-horizontal "
+                  method="post">
+                  <input type="hidden" th:field="*{userId}" >
+                  <input type="hidden" th:field="*{tourId}" >
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Your Review</label>
+                    <div class="col-sm-10">
+                               <textarea th:field="*{content}" class="form-control" name="paragraph_text" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2">
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                                type="submit">Save Review</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

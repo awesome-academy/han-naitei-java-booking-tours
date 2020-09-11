@@ -4,7 +4,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>Reviews</title>
+<title>Edit Review</title>
 </head>
 <body>
 	<th:block th:if="${review}">
@@ -39,31 +39,31 @@
 						<div class="post-thumbnail mb-50">
 							<img th:src="@{/img/bg-img/39.jpg}" alt="">
 						</div>
-						<!-- Blog Details Text -->
-						<div class="blog-details-text">
-							<p th:text="${review.content}">Content</p>
-						</div>
-
-						<!-- Post Author Area -->
-						<div
-							class="post-author-area d-flex align-items-center justify-content-between mb-50">
-							<ul class="popular-tags">
-								<li><a href="#" th:text="${review.tour.name}">Tour Name</a></li>
-								<li>by</li>
-								<li><a href="#" th:text="${review.user.userName}">User
-										Name</a></li>
-							</ul>
-
-							<div class="d-flex flex-row">
-								<a class="btn btn-warning font-weight-bold mr-3"
-									th:href="@{'/reviews/'+ ${review.id} +'/edit'}"
-									th:data-id="${review.id}">Edit Review</a>
-								<form th:method="DELETE"
-									th:action="@{'/reviews/' + ${review.id}}">
-									<input class="btn btn-danger" type="submit" value="Delete" />
-								</form>
+						<form th:method="PUT" th:action="@{'/reviews/' + ${review.id}}"
+							th:object="${review}" class="form-horizontal">
+							<input type="hidden" th:field="*{userId}"> <input
+								type="hidden" th:field="*{tourId}">
+							<div>
+								<textarea class="form-control" th:field="*{content}"></textarea>
 							</div>
-						</div>
+							<!-- Post Author Area -->
+							<div
+								class="post-author-area d-flex align-items-center justify-content-between mb-50">
+								<ul class="popular-tags">
+									<li><a href="#" th:text="${review.tour.name}">Tour
+											Name</a></li>
+									<li>by</li>
+									<li><a href="#" th:text="${review.user.userName}">User
+											Name</a></li>
+								</ul>
+
+								<div>
+									<button type="submit"
+										class="form-control btn btn-primary font-weight-bold">Save
+										Review</button>
+								</div>
+							</div>
+						</form>
 
 						<!-- Comments Area -->
 						<div class="comment_area mb-50 clearfix">

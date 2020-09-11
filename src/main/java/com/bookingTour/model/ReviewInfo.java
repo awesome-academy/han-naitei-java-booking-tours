@@ -1,9 +1,12 @@
 package com.bookingTour.model;
 
+import java.sql.Timestamp;
+
 public class ReviewInfo extends BaseModel {
 	
 	private Long id;
 	private String content;
+    private Timestamp updateTime;
 	private UserModel user;
 	private TourInfo tour;
 	private Long userId;
@@ -28,6 +31,14 @@ public class ReviewInfo extends BaseModel {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public UserModel getUser() {
